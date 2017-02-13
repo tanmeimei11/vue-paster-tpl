@@ -34,7 +34,7 @@
 
     <transition  name="fade">
       <div class="c-page-3" v-if="page === 3">
-        <Loginodal >{{"1111"}}</Loginodal>
+        <Loginodal ></Loginodal>
       </div>
     </transition>
   
