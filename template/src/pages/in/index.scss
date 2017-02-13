@@ -1,0 +1,252 @@
+@import '../../assets/css/reset.css';
+html, body, #page-index{
+    width: 100%;
+    // height: 100%;
+    overflow-x: hidden;
+    // overflow-y:auto;
+    .bc-btn{
+        background-image: url(../../assets/img/in_btn.png);
+    }
+    .bc-btn:before{
+        background-image: url(../../assets/img/in_pig.png);
+    }
+}
+body{
+ -webkit-overflow-scrolling : touch;
+}
+
+// 定位
+@mixin elePos($val){
+    width: nth($val,1);
+    height: nth($val,2);
+    position: absolute;
+    top: nth($val,3);
+    left: nth($val,4);
+    background-image: url(../../assets/img/#{nth($val,5)});
+    background-repeat: no-repeat;
+    background-size:contain;
+    z-index: 5;
+}
+// 动画
+@mixin aniInit($val){    
+    width: nth($val,1);
+    height: nth($val,2);
+    position: absolute;
+    top: nth($val,3);
+    left: nth($val,4);
+    background-image: url(../../assets/img/ani/#{nth($val,5)});
+    background-repeat: no-repeat;
+    background-size:cover;
+    z-index: 5;
+   
+    @if nth($val,6) == 'three' {
+       animation: #{nth($val,6)} #{nth($val,7)} steps(3,end) infinite;
+    } @else if nth($val,6) == 'four'{
+       animation: #{nth($val,6)} #{nth($val,7)} steps(4,end) infinite;
+    } @else {
+
+    } 
+}
+
+$star: (58px, 147px,  90px, 82px, 'star.png', 'three', 1s);
+$clound: (67px, 40px,  49px, 585px, 'clound.png', 'three', 1s);
+$cloundred: (121px, 100px,  309px, 0px, 'clound-red.png', 'three', 1s);
+$cloundgreen: (121px, 100px,  560px, 639px, 'clound-green.png', 'three', 1s);
+$swing: (208px, 366px,  0px, 606px, 'swing.png', 'three', 1s);
+$bagback: (122px, 136px, 760px, 625px, 'bagback.png', '', 1s);
+$personsnow: (80px, 117px,  1104px, 335px, 'personsnow.png', '', 1s);
+$personsit1: (114px, 179px,  200px, 183px, '1.png', '', 1s);
+$personsit2: (102px, 122px,  209px, 291px, 'sit2.png', '', 1s);
+$women2: (93px, 116px,  1114px, 17px, 'women2.png', '', 1s);
+$fuzi: (150px, 207px,  1080px, 493px, 'fuzi.png', '', 1s);
+
+@keyframes three{
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position: 150% 0;
+    }
+}
+
+@keyframes four{
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position: 100% 0;
+    }
+}
+@keyframes moveleft{
+    0%{
+        transform: translate(0,0)
+    }
+    100%{
+       transform: translate(-30%,0)
+    }
+}
+
+@keyframes moveright{
+    0%{
+        transform: translate(30%, 0)
+    }
+    100%{
+       transform: translate(60%,0)
+    }
+}
+@keyframes movetop{
+    0%{
+        transform: translate(-350%,0)
+    }
+    100%{
+       transform: translate(40%,0)
+    }
+}
+
+.in-top{
+    width: 100%;
+    overflow-x: hidden;
+    height: 1352px;
+    background-image: url(../../assets/img/in_bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    .it-gifs{
+        width: 624px;
+        height: 654px;
+        width: 584px;
+        height: 615px;
+        background-color: #fff;
+        position: absolute;
+        top: 462px;
+        left: 83px;
+        z-index: 4;
+        background-repeat: no-repeat;
+        background-size: cover; 
+    }
+    .gifs1{
+        animation: gifs1 3s steps(27,end) infinite;
+        background-image: url('//inimg05.jiuyan.info/in/2017/01/20/7F98DA7E-BEC3-CB17-25AC-78C2961AADB1.jpg')
+    }
+    .gifs2{
+        animation: gifs 5s steps(22,start) infinite;
+        background-image: url('//inimg02.jiuyan.info/in/2017/01/20/CBE07B86-6719-2E1A-A672-42C79B3B8FED.jpg')
+    }
+    .gifs3{
+        animation: gifs 5s steps(16,start) infinite;
+        background-image: url('//inimg05.jiuyan.info/in/2017/01/20/11284E7E-4839-9268-D098-310E3CC128A6.jpg')
+    }
+    .it-gifs:before{
+        content:"";
+        position: absolute;
+        width: 546px;
+        height: 579px;
+        top:0;
+        left: 0;
+        right: 0;
+        bottom:0;
+        margin: auto;
+        background-image: url(../../assets/img/kuang.png);
+        background-repeat: no-repeat;
+        background-size:cover; 
+        background-position: center;
+    }
+    
+    .s-star{
+        @include elePos($star)
+    }
+
+    .s-clound{
+        @include elePos($clound);
+        animation: movetop 20s infinite alternate linear;
+    }
+    .s-clound-red{
+        @include elePos($cloundred);
+        animation: moveleft 4s infinite alternate linear;
+    }
+    .s-clound-green{
+        @include elePos($cloundgreen);
+        z-index: 2;
+        animation: moveright 4s infinite alternate linear;
+    }
+
+    .s-swing{
+        @include elePos($swing);
+        transform-origin: 100% 30%;
+        animation: swing 4s linear infinite alternate; 
+    }
+
+    .s-bag-back{
+        @include aniInit($bagback);
+        transform: scale(1.05);
+    }
+
+    .s-person-snow{
+        @include aniInit($personsnow);
+    }
+
+    .s-person-sit1{
+        @include aniInit($personsit1);
+    }
+    .s-person-sit2{
+        @include aniInit($personsit2);
+    }
+
+    .s-women-2{
+        @include aniInit($women2)
+    } 
+    .s-fuzi{
+        @include aniInit($fuzi);
+        transform: scale(0.76);
+    }   
+}
+
+.in-page{
+    .red-bottom{
+        padding-top: 30px;
+        background-image:  url(../../assets/img/bg1.jpg);
+        background-repeat:  repeat-y;
+        background-size:  750px 1443px;
+    }
+    .rb-title{
+        display: none;
+    }
+}
+
+//过渡效果
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+
+@keyframes gifs{
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position: 100% 0;
+    }
+}
+@keyframes gifs1{
+    0%{
+        background-position: 0 0;
+    }
+    80%{
+        background-position: 100% 0;
+    }
+    100%{
+        background-position: 100% 0;
+    }
+}
+@keyframes swing{
+    0%{
+        transform: rotate(-5deg)
+    }
+    100%{
+        transform: rotate(5deg)
+    }
+}
+ 
+  
