@@ -6,5 +6,5 @@
       "message": "Project name"
     }
   },
-  "skipInterpolation": "src/**/*.vue"
+  "skipInterpolation": "template/**/*.vue"
 }
