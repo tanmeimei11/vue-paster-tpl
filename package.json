@@ -1,6 +1,17 @@
+
 {
   "name": "vue-paster-tpl",
-  "version": "1.0.0",
+  "version": "0.0.1",
+  "description": "vuejs 贴纸活动模板",
+  "main": "index.js",
+  "author": "huihui",
   "license": "MIT",
-  "description": "used for paster promo"
+  "keywords": [
+    "vue",
+    "multipage"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@githost.in66.cc:in-template/vue-paster-tpl.git"
+  }
 }
