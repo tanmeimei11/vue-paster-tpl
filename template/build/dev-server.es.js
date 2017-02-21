@@ -5,7 +5,7 @@ import Koa from 'koa'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
-import proxyMiddleware from 'http-proxy-middleware'
+import httpProxyMiddleware from 'http-proxy-middleware'
 import cfg from './webpack.dev.config'
 import {
   env
@@ -56,9 +56,8 @@ Object.keys(env.proxyTable).forEach(context => {
       target: options
     }
   }
-  app.use(async(ctx, next) => {
-    proxyMiddleware(options.filter || context, options)(ctx.req, ctx.res, next)
-  })
+  const proxyMiddleware = httpProxyMiddleware(options.filter || context, options)
+  app.use(async(ctx, next) => proxyMiddleware(ctx.req, ctx.res, next))
 })
 
 app.listen(port, function (err) {
