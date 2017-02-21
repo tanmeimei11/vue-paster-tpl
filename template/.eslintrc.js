@@ -12,9 +12,11 @@ module.exports = {
     'browser': true
   },
   globals: {
-    'lib' : true
+    'lib' : true,
+    'vue': true
   },
   rules: {
+    'no-new':0,
     'arrow-parens': 0,
     'generator-star-spacing': 0,
     "no-extra-parens":0,
