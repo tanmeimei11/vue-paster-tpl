@@ -1,7 +1,11 @@
+import {
+  PassThrough
+} from 'stream'
 import Koa from 'koa'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
+import proxyMiddleware from 'http-proxy-middleware'
 import cfg from './webpack.dev.config'
 import {
   env
@@ -40,8 +44,22 @@ const hotMiddleware = async(ctx, next) => {
   }, next)
 }
 
+
 app.use(devMiddleware)
 app.use(hotMiddleware)
+
+// proxy api requests
+Object.keys(env.proxyTable).forEach(context => {
+  var options = env.proxyTable[context]
+  if (typeof options === 'string') {
+    options = {
+      target: options
+    }
+  }
+  app.use(async(ctx, next) => {
+    proxyMiddleware(options.filter || context, options)(ctx.req, ctx.res, next)
+  })
+})
 
 app.listen(port, function (err) {
   if (err) {

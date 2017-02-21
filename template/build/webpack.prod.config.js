@@ -3,10 +3,13 @@ import Config from 'webpack-config'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import {
+  BundleAnalyzerPlugin
+} from 'webpack-bundle-analyzer'
+import {
   build
 } from '../config'
 
-export default new Config().extend({
+const cfg = new Config().extend({
   'build/webpack.base.config.js': config => {
     config.plugins = config.plugins || []
     Object.keys(config.entry).forEach(entry => {
@@ -24,13 +27,28 @@ export default new Config().extend({
     filename: 'js/[name].[chunkhash:7].js'
   },
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false
-    //   }
-    // }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      sourceMap: true
+    }),
     new ExtractTextPlugin({
       filename: 'css/[name].[contenthash:7].css'
     })
   ]
 })
+
+
+if (build.bundleAnalyzerReport) {
+  cfg.merge({
+    plugins: [new BundleAnalyzerPlugin()]
+  })
+}
+
+export default cfg

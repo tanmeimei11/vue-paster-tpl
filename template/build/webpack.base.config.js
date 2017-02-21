@@ -40,7 +40,6 @@ if (invalidEntry.length) {
 export default {
   entry: entryObj,
   output: {
-    libraryTarget: 'umd',
     path: resolve('dist'),
     filename: '[name].js',
     publicPath: '/'
@@ -75,7 +74,7 @@ export default {
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      include: [resolve('src'), resolve('test')]
+      include: [resolve('src'), resolve('test'), resolve('node_modules/i-ui')]
     },
     {
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
