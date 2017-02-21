@@ -4,6 +4,8 @@ import {
 } from 'chalk'
 import cfg from './webpack.prod.config'
 
+// console.log(process.env.npm_config_dir)
+
 if (test('-e', cfg.output.path)) {
   rm('-rf', cfg.output.path)
 }

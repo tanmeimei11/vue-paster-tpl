@@ -4,7 +4,7 @@ export const build = {
   entryTpl: 'tpl.pug',
   entryRule: ['entry.js', 'tpl.pug'],
   remUnit: 75,
-  bundleAnalyzerReport: false
+  bundleAnalyzerReport: process.env.npm_config_report
 }
 
 export const env = {
