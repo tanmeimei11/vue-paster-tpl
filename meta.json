@@ -3,7 +3,17 @@
     "name": {
       "type": "string",
       "required": true,
-      "message": "Project name"
+      "message": "项目名称"
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "message": "项目描述",
+      "default": "A vue-parster-tpl project"
+    },
+    "author": {
+      "type": "string",
+      "message": "作者"
     }
   },
   "skipInterpolation": "src/**/*.vue"
