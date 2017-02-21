@@ -1,5 +1,5 @@
 <template>
-   <div class=".page">
+   <div class="page">
    </div>
 
 </template>
@@ -10,6 +10,6 @@
 </script>
 <style lang="scss">
    .page{
-
+     background: #fff
    }
 </style>

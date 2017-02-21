@@ -5,6 +5,9 @@ import {
   join
 } from 'path'
 import {
+  yellow
+} from 'chalk'
+import {
   build
 } from '../config'
 import vueLoaderConfig from './vue-loader.conf'
@@ -26,12 +29,12 @@ ls(build.entryGlobs).forEach(file => {
 
 // 输出无效入口路劲
 if (invalidEntry.length) {
-  console.log(
+  console.log(yellow(
     `  Tip:
     下列目录必须包含 ${build.entryRule.join(',')} 文件
     ${invalidEntry.join('\n')}
     `
-  )
+  ))
 }
 
 export default {
@@ -49,7 +52,6 @@ export default {
       resolve('node_modules')
     ],
     alias: {
-      'vue$': 'vue/dist/vue.common.js',
       'src': resolve('src'),
       'assets': resolve('src/assets'),
       'components': resolve('src/components')

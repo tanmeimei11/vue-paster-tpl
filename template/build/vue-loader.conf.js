@@ -25,7 +25,7 @@ const generateLoaders = loader => {
   }
   if (isProduction) {
     return ExtractTextPlugin.extract({
-      loader: loaders,
+      use: loaders,
       fallback: 'vue-style-loader'
     })
   } else {
