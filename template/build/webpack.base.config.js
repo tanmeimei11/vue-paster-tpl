@@ -82,6 +82,10 @@ export default {
         limit: 10000,
         name: 'img/[name].[hash:7].[ext]'
       }
+    },
+    {
+      test: /\.pug$/,
+      loader: 'pug-loader'
     }
     ]
   }

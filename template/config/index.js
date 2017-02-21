@@ -5,7 +5,7 @@ export const env = {
 
 export const build = {
   entryGlobs: 'src/pages/**/entry.js',
-  entryTpl: 'tpl.ejs',
-  entryRule: ['entry.js', 'tpl.ejs'],
+  entryTpl: 'tpl.pug',
+  entryRule: ['entry.js', 'tpl.pug'],
   remUnit: 75
 }
