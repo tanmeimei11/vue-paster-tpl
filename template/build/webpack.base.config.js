@@ -1,21 +1,20 @@
+/* globals ls */
 import {
   dirname,
   basename,
-  relative,
-  join
+  relative
 } from 'path'
 import {
   yellow
 } from 'chalk'
 import {
-  build
+  build,
+  env
 } from '../config'
 import vueLoaderConfig from './vue-loader.conf'
 
 let entryObj = {}
 let invalidEntry = []
-
-const resolve = dir => join(__dirname, '..', dir)
 
 ls(build.entryGlobs).forEach(file => {
   let folder = dirname(file)
@@ -40,20 +39,20 @@ if (invalidEntry.length) {
 export default {
   entry: entryObj,
   output: {
-    path: resolve('dist'),
+    path: env.assetsPath('dist'),
     filename: '[name].js',
     publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     modules: [
-      resolve('src'),
-      resolve('node_modules')
+      env.assetsPath('src'),
+      env.assetsPath('node_modules')
     ],
     alias: {
-      'src': resolve('src'),
-      'assets': resolve('src/assets'),
-      'components': resolve('src/components')
+      'src': env.assetsPath('src'),
+      'assets': env.assetsPath('src/assets'),
+      'components': env.assetsPath('src/components')
     }
   },
   module: {
@@ -61,7 +60,7 @@ export default {
       test: /\.(js|vue)$/,
       loader: 'eslint-loader',
       enforce: 'pre',
-      include: [resolve('src'), resolve('test')],
+      include: [env.assetsPath('src'), env.assetsPath('test')],
       options: {
         formatter: require('eslint-friendly-formatter')
       }
@@ -74,7 +73,7 @@ export default {
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      include: [resolve('src'), resolve('test'), resolve('node_modules/i-ui')]
+      include: [env.assetsPath('src'), env.assetsPath('test'), env.assetsPath('node_modules/i-ui')]
     },
     {
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
