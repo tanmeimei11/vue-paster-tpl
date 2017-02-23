@@ -11,7 +11,7 @@ import {
   build,
   env
 } from '../config'
-import vueLoaderConfig from './vue-loader.conf'
+import { styleLoaders, default as cssLoaders } from './vue-loader.conf'
 
 let entryObj = {}
 let invalidEntry = []
@@ -68,7 +68,7 @@ export default {
     {
       test: /\.vue$/,
       loader: 'vue-loader',
-      options: vueLoaderConfig
+      options: cssLoaders
     },
     {
       test: /\.js$/,
@@ -87,6 +87,6 @@ export default {
       test: /\.pug$/,
       loader: 'pug-loader'
     }
-    ]
+    ].concat(styleLoaders())
   }
 }

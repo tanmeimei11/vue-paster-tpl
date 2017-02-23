@@ -34,15 +34,14 @@ const dataDpr = postcss.plugin('postcss-dataDpr', function (opts) {
 })
 
 var isProduction = process.env.NODE_ENV === 'production'
-const cssLoader = {
-  loader: 'css-loader',
-  options: {
-    minimize: isProduction,
-    sourceMap: !isProduction
-  }
-}
 const generateLoaders = loader => {
-  var loaders = [cssLoader]
+  var loaders = [{
+    loader: 'css-loader',
+    options: {
+      minimize: isProduction,
+      sourceMap: !isProduction
+    }
+  }]
   if (loader) {
     loaders.push({
       loader: loader + '-loader',
@@ -62,7 +61,7 @@ const generateLoaders = loader => {
   }
 }
 
-export default {
+const cssLoaders = {
   loaders: {
     css: generateLoaders(),
     postcss: generateLoaders(),
@@ -79,3 +78,20 @@ export default {
     })
   ]
 }
+
+
+export const styleLoaders = () => {
+  var output = []
+  var loaders = cssLoaders.loaders
+  for (var extension in loaders) {
+    var loader = loaders[extension]
+    output.push({
+      test: new RegExp('\\.' + extension + '$'),
+      loader: loader
+    })
+  }
+  return output
+}
+
+
+export default cssLoaders
