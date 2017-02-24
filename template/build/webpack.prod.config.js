@@ -27,16 +27,24 @@ const cfg = new Config().extend({
     filename: 'js/[name].[chunkhash:7].js'
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: JSON.stringify('production'),
+      DEBUG: false
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
     }),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
       },
-      sourceMap: true
+      compress: {
+        screw_ie8: true
+      },
+      comments: false
     }),
     new ExtractTextPlugin({
       filename: 'css/[name].[contenthash:7].css'

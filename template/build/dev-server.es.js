@@ -18,8 +18,10 @@ const port = process.env.PORT || env.port
 const koaDevMiddleware = webpackDevMiddleware(compiler, {
   stats: {
     colors: true,
+    modules: false,
+    children: false,
     chunks: false,
-    children: false
+    chunkModules: false
   }
 })
 const devMiddleware = async(ctx, next) => {
@@ -35,13 +37,7 @@ const koaHotMiddleware = webpackHotMiddleware(compiler)
 const hotMiddleware = async(ctx, next) => {
   let stream = new PassThrough()
   ctx.body = stream
-  await koaHotMiddleware(ctx.req, {
-    write: stream.write.bind(stream),
-    writeHead: (state, headers) => {
-      ctx.state = state
-      ctx.set(headers)
-    }
-  }, next)
+  await koaHotMiddleware(ctx.req, ctx.res, next)
 }
 
 

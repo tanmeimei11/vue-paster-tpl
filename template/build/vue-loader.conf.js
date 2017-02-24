@@ -22,7 +22,7 @@ const dataDpr = postcss.plugin('postcss-dataDpr', function (opts) {
   }
   return function (root, result) {
     root.walkComments(comment => {
-      let declare = comment.prev()
+      let declare = comment.next()
       if (/dpr/.test(comment.text) && declare && declare.type == 'decl') {
         root.append(createSelector(comment.parent.selector, declare.clone(), 2))
         root.append(createSelector(comment.parent.selector, declare.clone(), 3))
@@ -47,7 +47,8 @@ const generateLoaders = loader => {
       loader: loader + '-loader',
       options: {
         sourceMap: !isProduction,
-        includePaths: [env.assetsPath('src')]
+        includePaths: [env.assetsPath('src')],
+        data : cat(env.assetsPath('config/mixin.scss')).toString()
       }
     })
   }

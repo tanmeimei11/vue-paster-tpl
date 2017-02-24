@@ -73,7 +73,7 @@ export default {
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      include: [env.assetsPath('src'), env.assetsPath('test'), env.assetsPath('node_modules/i-ui')]
+      include: [env.assetsPath('src'), env.assetsPath('test'), env.assetsPath('node_modules')]
     },
     {
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

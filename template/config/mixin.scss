@@ -1,0 +1,68 @@
+/*
+[menthod] absolute 定位
+[param]  $left 左边
+[param]  $top 右边
+*/
+@mixin pos($left, $top) {
+  position: absolute;
+  left: $left;
+  top: $top;
+}
+
+/*
+[menthod] 大小
+[param]  $size 宽度 高度
+*/
+@mixin size($size){
+  $w:nth($size,1);
+  $h:$w;
+  @if (length($size)==2){
+    $h:nth($size,2);
+  }
+  width: $w;
+  height: $h;
+}
+
+/*
+[menthod] 箭头左
+[param] 宽度 高度 颜色
+*/
+@mixin arrowL($width,$height,$color){
+  border: $height solid transparent;
+  border-right: $width solid $color;
+  border-left: none;
+}
+
+/*
+[menthod] 箭头右
+[param] 宽度 高度 颜色
+*/
+@mixin arrowR($width,$height,$color){
+  border: $height solid transparent;
+  border-left: $width solid $color;
+  border-right: none;
+}
+
+
+/*
+[menthod] 箭头上
+[param] 宽度 高度 颜色
+*/
+@mixin arrowT($width,$height,$color){
+  border: $width solid transparent;
+  border-bottom: $height solid $color;
+  border-top: none;
+}
+
+
+/*
+[menthod] 箭头下
+[param] 宽度 高度 颜色
+*/
+@mixin arrowB($width,$height,$color){
+  border: $width solid transparent;
+  border-top: $height solid $color;
+  border-bottom: none;
+}
+
+

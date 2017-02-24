@@ -1,8 +1,5 @@
 {
   "presets": [
-    ["env", {
-      "modules": false,
-      "loose": true
-    }]
+    ["es2015", { "modules": false }]
   ]
 }

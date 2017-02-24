@@ -24,6 +24,7 @@ export default new Config().extend({
   },
   devtool: '#source-map',
   plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
