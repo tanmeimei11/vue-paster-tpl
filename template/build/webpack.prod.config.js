@@ -24,6 +24,7 @@ const cfg = new Config().extend({
   }
 }).merge({
   output: {
+    publicPath: './',
     filename: 'js/[name].[chunkhash:7].js'
   },
   plugins: [
