@@ -8,8 +8,8 @@ if (/^qa/.test(location.host)) {
 
 // 构建请求参数
 const buildParam = (build, ...params) => params.forEach(param => Object.keys(param).forEach(key => build(key, param[`${key}`])))
-// 构建请求方法
 
+// 构建请求方法
 const buildFetch = (urls) => {
   let urlObj = {}
   Object.keys(urls).forEach(urlKey => {
