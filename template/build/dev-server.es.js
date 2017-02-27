@@ -37,7 +37,13 @@ const koaHotMiddleware = webpackHotMiddleware(compiler)
 const hotMiddleware = async(ctx, next) => {
   let stream = new PassThrough()
   ctx.body = stream
-  await koaHotMiddleware(ctx.req, ctx.res, next)
+  await koaHotMiddleware(ctx.req, {
+    write: stream.write.bind(stream),
+    writeHead: (state, headers) => {
+      ctx.state = state
+      ctx.set(headers)
+    }
+  }, next)
 }
 
 
