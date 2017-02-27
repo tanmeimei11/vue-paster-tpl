@@ -53,7 +53,7 @@ export default {
       'src': env.assetsPath('src'),
       'assets': env.assetsPath('src/assets'),
       'components': env.assetsPath('src/components'),
-      'iConfig': env.assetsPath('src/config'),
+      'iConfig': env.assetsPath('src/iconfig')
     }
   },
   module: {
