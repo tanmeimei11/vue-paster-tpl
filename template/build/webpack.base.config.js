@@ -52,7 +52,8 @@ export default {
     alias: {
       'src': env.assetsPath('src'),
       'assets': env.assetsPath('src/assets'),
-      'components': env.assetsPath('src/components')
+      'components': env.assetsPath('src/components'),
+      'iConfig': env.assetsPath('src/config'),
     }
   },
   module: {
@@ -80,7 +81,8 @@ export default {
       loader: 'url-loader',
       query: {
         limit: 10000,
-        name: 'img/[name].[hash:7].[ext]'
+        name: 'img/[name].[hash:7].[ext]',
+        publicPath: '../'
       }
     },
     {
