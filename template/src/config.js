@@ -9,6 +9,7 @@ if (/^qa/.test(location.host)) {
 // 构建请求参数
 const buildParam = (build, ...params) => params.forEach(param => Object.keys(param).forEach(key => build(key, param[`${key}`])))
 // 构建请求方法
+
 const buildFetch = (urls) => {
   let urlObj = {}
   Object.keys(urls).forEach(urlKey => {
@@ -31,7 +32,15 @@ const buildFetch = (urls) => {
         headers.method = 'POST'
         headers.body = data
       }
-      return fetch(url, headers).then(res => res.json()).catch(error)
+      if (urlObj[`${urlKey}`].loading) return { then: () => {}, catch: () => {} }
+      urlObj[`${urlKey}`].loading = true
+      return fetch(url, headers).then(res => {
+        urlObj[`${urlKey}`].loading = false
+        return res
+      }, (err) => {
+        urlObj[`${urlKey}`].loading = false
+        throw err
+      }).then(res => res.json()).catch(error)
     }
   })
   return urlObj
