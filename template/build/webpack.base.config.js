@@ -12,7 +12,7 @@ import {
   env
 } from '../config'
 import { styleLoaders, default as cssLoaders } from './vue-loader.conf'
-
+import { aliasObject } from './utils'
 let entryObj = {}
 let invalidEntry = []
 
@@ -49,12 +49,7 @@ export default {
       env.assetsPath('src'),
       env.assetsPath('node_modules')
     ],
-    alias: {
-      'src': env.assetsPath('src'),
-      'assets': env.assetsPath('src/assets'),
-      'components': env.assetsPath('src/components'),
-      'iConfig': env.assetsPath('src/iconfig')
-    }
+    alias: aliasObject 
   },
   module: {
     rules: [{
