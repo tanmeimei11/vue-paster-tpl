@@ -3,12 +3,13 @@
 [param]  $left 左边
 [param]  $top 右边
 */
-@mixin pos($left, $top) {
-  position: absolute;
-  left: $left;
-  top: $top;
+@mixin pos($name, $position) {
+  position: $name;
+  top: nth($position,1);
+  right: nth($position,2);
+  bottom: nth($position,3);
+  left: nth($position,4);
 }
-
 /*
 [menthod] 大小
 [param]  $size 宽度 高度
@@ -64,5 +65,18 @@
   border-top: $height solid $color;
   border-bottom: none;
 }
+
+/*
+[menthod] 背景图定位
+[param] 宽度 高度 位置(top right bottom left) 背景图
+*/
+@mixin initImgPos($val){
+    @include size(nth($val,1) nth($val,2));
+    @include pos(absolute,nth($val,3) null null nth($val,4));
+    background-image: url(#{nth($val,5)});
+    background-repeat: no-repeat;
+    background-size:contain;
+}
+
 
 
