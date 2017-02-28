@@ -8,7 +8,6 @@ export default new Config().extend({
   'build/webpack.base.config.js': config => {
     config.plugins = config.plugins || []
     Object.keys(config.entry).forEach(entry => {
-      // config.entry[entry] = ['webpack-hot-middleware/client'].concat(config.entry[entry])
       config.plugins.push(
         new HtmlWebpackPlugin({
           chunks: ['vendor', entry],
