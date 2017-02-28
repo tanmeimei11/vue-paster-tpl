@@ -75,8 +75,21 @@
     @include pos(absolute,nth($val,3) null null nth($val,4));
     background-image: url(#{nth($val,5)});
     background-repeat: no-repeat;
-    background-size:contain;
+    background-size: contain;
+    background-position: center;
 }
+
+/*
+[menthod] contain的背景图
+[param] 
+*/
+@mixin bgContain($url){
+    background-image: url(#{$url});
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
 
 
 
