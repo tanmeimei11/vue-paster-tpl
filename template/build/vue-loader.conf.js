@@ -49,7 +49,7 @@ const cssLoaders = {
   postcss: [
     dataDpr(),
     autoprefixer({
-      browsers: ['last 2 versions']
+      browsers: ['last 7 versions']
     }),
     px2rem({
       remUnit: build.remUnit
