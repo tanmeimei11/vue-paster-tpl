@@ -25,7 +25,7 @@
 }
 
 /*
-[menthod] 箭头左
+[method] 箭头左
 [param] 宽度 高度 颜色
 */
 @mixin arrowL($width,$height,$color){
@@ -35,7 +35,7 @@
 }
 
 /*
-[menthod] 箭头右
+[method] 箭头右
 [param] 宽度 高度 颜色
 */
 @mixin arrowR($width,$height,$color){
@@ -46,7 +46,7 @@
 
 
 /*
-[menthod] 箭头上
+[method] 箭头上
 [param] 宽度 高度 颜色
 */
 @mixin arrowT($width,$height,$color){
@@ -57,7 +57,7 @@
 
 
 /*
-[menthod] 箭头下
+[method] 箭头下
 [param] 宽度 高度 颜色
 */
 @mixin arrowB($width,$height,$color){
@@ -67,7 +67,7 @@
 }
 
 /*
-[menthod] 背景图定位
+[method] 背景图定位
 [param] 宽度 高度 位置(top right bottom left) 背景图
 */
 @mixin initImgPos($val){
@@ -80,8 +80,8 @@
 }
 
 /*
-[menthod] contain的背景图
-[param] 
+[method] contain的背景图
+[param]
 */
 @mixin bgContain($url){
     background-image: url(#{$url});
