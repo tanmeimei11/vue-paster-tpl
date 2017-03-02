@@ -49,7 +49,7 @@ export default {
       env.assetsPath('src'),
       env.assetsPath('node_modules')
     ],
-    alias: aliasObject 
+    alias: aliasObject
   },
   module: {
     rules: [{

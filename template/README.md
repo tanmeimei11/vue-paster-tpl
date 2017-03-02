@@ -24,11 +24,11 @@ npm run build --report
 # Build an image [promo/vuetpl] from a Dockerfile
 docker build -t promo/vuetpl .
 
-# attach image [promo/vuetpl] 并且 [-d] 启用守护进程
+# run image [promo/vuetpl] 并且 [-d] 启用守护进程
 docker run -d -p 8090:8018 promo/vuetpl
 
 # 运行并且进入交互式
-docker run -t -i promo/vuetpl /bin/bash
+docker run -it promo/vuetpl bash
 
 # open
 http://<host>:8090

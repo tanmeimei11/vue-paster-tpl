@@ -8,9 +8,17 @@ export const iuiAlias = {
   'iUtil': env.assetsPath('i-ui/src/util')
 }
 
+
 export const aliasObject = Object.assign(iuiAlias, {
   'src': env.assetsPath('src'),
   'assets': env.assetsPath('src/assets'),
-  'components': env.assetsPath('src/components'),
+  'components': env.assetsPath('src/components')
 })
 
+
+/**
+ * a
+ */
+export const a = () => {
+  console.log(1)
+}

@@ -1,7 +1,15 @@
-// 构建请求参数
+/**
+ * 构建请求参数
+ * @param {function} build 回调方法
+ * @param {Object} params 请求对象
+ */
 const buildParam = (build, ...params) => params.forEach(param => Object.keys(param).forEach(key => build(key, param[`${key}`])))
 
-// 构建请求方法
+
+/**
+ * 构建请求方法
+ * @param {String} urls 请求地址
+ */
 const buildFetch = (urls) => {
   let urlObj = {}
   Object.keys(urls).forEach(urlKey => {
