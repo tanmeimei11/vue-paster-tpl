@@ -10,6 +10,9 @@ import track from 'iUtil/track'
  */
 export const initPage = (Vue, opts) => {
   icommon.initIn()
+  /**
+   * 设置分享信息
+   */
   share.config = {
     shareTitle: 'shareTitle', // 分享标题
     shareDesc: 'shareDesc', // 分享描述
@@ -17,9 +20,15 @@ export const initPage = (Vue, opts) => {
     shareImg: location.protocol + '//inimg02.jiuyan.info/in/2017/02/27/307746C7-A0AC-4D21-4D92-B480A77ADFA2.jpg',
     shareTrack: 'h5_promo_{{ name }}_index_share'
   }
+  /**
+   * 设置页面打开埋点
+   */
   track('h5_promo_{{ name }}_index_enter')
 
   Vue.use(Vue => {
+    /**
+     * 设置埋点指令
+     */
     Vue.directive('iTrack', iTrack)
     Object.defineProperties(Vue.prototype, {
       $toast: {

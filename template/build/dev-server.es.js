@@ -2,6 +2,7 @@
 //   PassThrough
 // } from 'stream'
 // import Koa from 'koa'
+import { networkInterfaces } from 'os'
 import express from 'express'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -12,7 +13,7 @@ import {
   env
 } from '../config'
 
-
+// console.log(networkInterfaces())
 
 const compiler = webpack(cfg)
 const port = process.env.PORT || env.port
@@ -66,7 +67,6 @@ const koaHotMiddleware = webpackHotMiddleware(compiler)
 // })
 /* E - Koa */
 
-
 /* S - Express */
 const app = express()
 Object.keys(env.proxyTable).forEach(function (context) {
@@ -88,6 +88,6 @@ app.listen(port, function (err) {
     return
   }
   koaDevMiddleware.waitUntilValid(function () {
-    console.log('> Listening at ' + port + '\n')
+    console.log(`> Listening at http://localhost:${port}\n`)
   })
 })

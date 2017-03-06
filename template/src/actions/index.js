@@ -23,7 +23,10 @@ const FetchApi = (baseParam, urls, error = (err) => {
     urlObj[`${urlKey}`] = (param, type = 'get') => {
       let url = `${host}${urls[`${urlKey}`]}`
       let options = {
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+          // 'X-Requested-With': 'XMLHttpRequest'
+        }
       }
       if (type === 'get') {
         url = buildGetParam(url, baseParam, param)
@@ -62,7 +65,6 @@ const baseParam = {
 
 /**
  *  请求地址
- *  URL.xxx({}).then
  */
 export const URL = FetchApi(baseParam, {
   xxx: `/test`

@@ -19,7 +19,7 @@ export default new Config().extend({
   }
 }).merge({
   entry: {
-    vendor: ['vue', 'webpack-hot-middleware/client']
+    vendor: ['vue', 'es6-promise', 'whatwg-fetch', 'webpack-hot-middleware/client']
   },
   devtool: '#source-map',
   plugins: [
