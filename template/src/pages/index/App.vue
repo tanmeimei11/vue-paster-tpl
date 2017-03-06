@@ -1,11 +1,14 @@
 <template>
    <div class="page">
+      Welcome
    </div>
-
 </template>
 <script>
   export default {
     created () {
+      this.$share = {
+        shareTitle: 'a'
+      }
     }
   }
 </script>
