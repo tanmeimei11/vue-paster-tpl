@@ -35,7 +35,6 @@ if (invalidEntry.length) {
     `
   ))
 }
-
 export default {
   entry: entryObj,
   output: {

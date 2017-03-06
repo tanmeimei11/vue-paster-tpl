@@ -5,7 +5,6 @@
  */
 const buildParam = (build, ...params) => params.forEach(param => Object.keys(param).forEach(key => build(key, param[`${key}`])))
 
-
 /**
  * 构建请求方法
  * @param {String} urls 请求地址
@@ -71,3 +70,4 @@ if (/^qa/.test(location.host)) {
 export const URL = buildFetch({
   xxx: `${host}/???`
 })
+
