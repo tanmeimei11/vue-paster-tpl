@@ -9,7 +9,7 @@ const error = () => {
 
 // 通用参数
 const baseParam = {
-  promo_name: '6'
+  promo_name: '{{ name }}'
 }
 
 var host = ''
