@@ -1,3 +1,5 @@
+# 构建 基于centos + node的 镜像
+# docker build -t promo/node .
 
 FROM centos:latest
 
