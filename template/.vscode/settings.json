@@ -2,6 +2,7 @@
 {
   "path-intellisense.mappings": {
     "assets": "${workspaceRoot}/src/assets",
+    "actions": "${workspaceRoot}/src/actions",
     "components": "${workspaceRoot}/src/components",
     "units": "${workspaceRoot}/src/units"
   }
