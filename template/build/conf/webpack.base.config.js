@@ -10,7 +10,7 @@ import {
 import {
   build,
   env
-} from '../config'
+} from '../../config'
 import { styleLoaders, default as cssLoaders } from './vue-loader.conf'
 import { aliasObject } from './utils'
 let entryObj = {}

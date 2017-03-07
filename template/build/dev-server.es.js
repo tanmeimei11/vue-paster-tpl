@@ -2,13 +2,12 @@
 //   PassThrough
 // } from 'stream'
 // import Koa from 'koa'
-import { networkInterfaces } from 'os'
 import express from 'express'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import httpProxyMiddleware from 'http-proxy-middleware'
-import cfg from './webpack.dev.config'
+import cfg from './conf/webpack.dev.config'
 import {
   env
 } from '../config'

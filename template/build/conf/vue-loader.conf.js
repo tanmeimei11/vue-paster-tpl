@@ -4,11 +4,11 @@ import autoprefixer from 'autoprefixer'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import {
   dataDpr
-} from './postcss-plugin'
+} from '../postcss-plugin'
 import {
   build,
   env
-} from '../config'
+} from '../../config'
 
 var isProduction = process.env.NODE_ENV === 'production'
 const generateLoaders = loader => {
@@ -57,7 +57,6 @@ const cssLoaders = {
   ]
 }
 
-
 export const styleLoaders = () => {
   var output = []
   var loaders = cssLoaders.loaders
@@ -70,6 +69,5 @@ export const styleLoaders = () => {
   }
   return output
 }
-
 
 export default cssLoaders

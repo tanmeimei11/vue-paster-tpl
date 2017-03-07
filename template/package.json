@@ -3,7 +3,8 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "publish": "node build/publish.js"
   },
   "dependencies": {
     "es6-promise": "^4.0.5",

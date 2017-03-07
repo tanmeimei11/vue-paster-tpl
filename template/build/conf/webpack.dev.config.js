@@ -3,9 +3,9 @@ import Config from 'webpack-config'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import {
   build
-} from '../config'
+} from '../../config'
 export default new Config().extend({
-  'build/webpack.base.config.js': config => {
+  'build/conf/webpack.base.config.js': config => {
     config.plugins = config.plugins || []
     Object.keys(config.entry).forEach(entry => {
       config.plugins.push(

@@ -1,4 +1,4 @@
-import { env } from '../config'
+import { env } from '../../config'
 export const iuiAlias = {
   'iConfig': env.assetsPath('src/iconfig'),
   'iComponents': 'i-ui/src/components',

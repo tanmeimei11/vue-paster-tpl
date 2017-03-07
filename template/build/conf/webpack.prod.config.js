@@ -7,10 +7,10 @@ import {
 } from 'webpack-bundle-analyzer'
 import {
   build
-} from '../config'
+} from '../../config'
 
 const cfg = new Config().extend({
-  'build/webpack.base.config.js': config => {
+  'build/conf/webpack.base.config.js': config => {
     config.plugins = config.plugins || []
     Object.keys(config.entry).forEach(entry => {
       config.plugins.push(
@@ -52,7 +52,6 @@ const cfg = new Config().extend({
     })
   ]
 })
-
 
 if (build.bundleAnalyzerReport) {
   cfg.merge({

@@ -3,7 +3,7 @@ import webpack from 'webpack'
 import {
   cyan
 } from 'chalk'
-import cfg from './webpack.prod.config'
+import cfg from './conf/webpack.prod.config'
 
 // console.log(process.env.npm_config_dir)
 
