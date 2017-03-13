@@ -20,7 +20,7 @@ const FetchApi = (baseParam, urls, error = (err) => {
   }
   let urlObj = {}
   Object.keys(urls).forEach(urlKey => {
-    urlObj[`${urlKey}`] = (param, type = 'get') => {
+    urlObj[`${urlKey}`] = (param = {}, type = 'get') => {
       let url = `${host}${urls[`${urlKey}`]}`
       let options = {
         credentials: 'include',
