@@ -1,12 +1,10 @@
 import { polyfill } from 'es6-promise'
 import Vue from 'vue'
-import { iAvatar } from 'i-ui'
 import App from './App.vue'
 import { initPage } from 'units/common'
 import 'whatwg-fetch'
 polyfill()
 
-Vue.use(iAvatar)
 initPage(Vue, {
   share: {
     shareTitle: 'shareTitle', // 分享标题
