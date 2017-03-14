@@ -10,7 +10,7 @@ import {
 } from '../../config'
 
 const cfg = new Config().extend({
-  'build/conf/webpack.base.config.js': config => {
+  'scripts/conf/webpack.base.config.js': config => {
     config.plugins = config.plugins || []
     Object.keys(config.entry).forEach(entry => {
       config.plugins.push(

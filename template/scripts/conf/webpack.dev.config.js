@@ -5,7 +5,7 @@ import {
   build
 } from '../../config'
 export default new Config().extend({
-  'build/conf/webpack.base.config.js': config => {
+  'scripts/conf/webpack.base.config.js': config => {
     config.plugins = config.plugins || []
     Object.keys(config.entry).forEach(entry => {
       config.plugins.push(

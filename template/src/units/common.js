@@ -1,6 +1,6 @@
 import hintMessage from 'units/hintMessage'
 import icommon from 'iUtil/common'
-import iTrack from 'iDirectives/iTrack'
+import { iTrack } from 'i-ui'
 import share from 'iUtil/share'
 import track from 'iUtil/track'
 /**
@@ -18,12 +18,12 @@ export const initPage = (Vue, opts) => {
    * 设置页面打开埋点
    */
   track('h5_promo_{{ name }}_index_enter')
+  /**
+    * 设置埋点指令
+  */
+  Vue.use(iTrack)
 
   Vue.use(Vue => {
-    /**
-     * 设置埋点指令
-     */
-    Vue.directive('iTrack', iTrack)
     Object.defineProperties(Vue.prototype, {
       $toast: {
         get () {
