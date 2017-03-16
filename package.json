@@ -1,7 +1,7 @@
 {
   "name": "vue-paster-tpl",
   "version": "0.0.2",
-  "description": "vuejs 贴纸活动模板",
+  "description": "vuejs 模板",
   "main": "index.js",
   "author": "xiangxiang",
   "license": "MIT",

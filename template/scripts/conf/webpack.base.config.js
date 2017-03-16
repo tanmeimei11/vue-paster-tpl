@@ -26,7 +26,7 @@ ls(build.entryGlobs).forEach(file => {
   }
 })
 
-// 输出无效入口路劲
+// 输出无效入口路径
 if (invalidEntry.length) {
   console.log(yellow(
     `  Tip:
