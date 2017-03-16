@@ -49,6 +49,9 @@ export const initPage = (Vue, opts = {}) => {
         }
       },
       $share: {
+        set (val) {
+          share.config = val
+        },
         get () {
           return Object.defineProperties({}.prototype, {
             shareTitle: {
