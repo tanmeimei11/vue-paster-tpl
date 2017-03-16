@@ -3,7 +3,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import { initPage } from 'units/common'
 import 'whatwg-fetch'
+import { iAvatar } from 'i-ui'
 polyfill()
+
+Vue.use(iAvatar)
 
 initPage(Vue, {
   share: {
