@@ -1,7 +1,5 @@
-// import {
-//   PassThrough
-// } from 'stream'
-// import Koa from 'koa'
+import { existsSync, createReadStream } from 'fs'
+import { createGzip } from 'zlib'
 import express from 'express'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -12,7 +10,6 @@ import {
   env
 } from '../config'
 
-// console.log(networkInterfaces())
 
 const compiler = webpack(cfg)
 const port = process.env.PORT || env.port
@@ -23,44 +20,6 @@ const koaDevMiddleware = webpackDevMiddleware(compiler, {
   }
 })
 const koaHotMiddleware = webpackHotMiddleware(compiler)
-
-/* S - Koa */
-// const app = new Koa()
-// const devMiddleware = async(ctx, next) => {
-//   await koaDevMiddleware(ctx.req, {
-//     end: (content) => {
-//       ctx.body = content
-//     },
-//     setHeader: ctx.set.bind(ctx)
-//   }, next)
-// }
-
-// const hotMiddleware = async(ctx, next) => {
-//   let stream = new PassThrough()
-//   ctx.body = stream
-//   await koaHotMiddleware(ctx.req, {
-//     write: stream.write.bind(stream),
-//     writeHead: (state, headers) => {
-//       ctx.state = state
-//       ctx.set(headers)
-//     }
-//   }, next)
-// }
-
-// app.use(devMiddleware)
-// app.use(hotMiddleware)
-
-// Object.keys(env.proxyTable).forEach(context => {
-//   var options = env.proxyTable[context]
-//   if (typeof options === 'string') {
-//     options = {
-//       target: options
-//     }
-//   }
-//   const proxyMiddleware = httpProxyMiddleware(options.filter || context, options)
-//   app.use(async(ctx, next) => proxyMiddleware(ctx.req, ctx.res, next))
-// })
-/* E - Koa */
 
 /* S - Express */
 const app = express()
@@ -76,7 +35,15 @@ app.use(koaDevMiddleware)
 app.use(koaHotMiddleware)
 
 /* E - Express */
-
+app.use(function (req, res, next) {
+  const jsonData = `${process.cwd()}/mock/${req.url.split('?')[0]}.json`
+  if (!existsSync(jsonData)) {
+    return next()
+  }
+  res.setHeader('Content-Type', 'application/json')
+  res.setHeader('Content-Encoding', 'gzip')
+  return createReadStream(jsonData).pipe(createGzip()).pipe(res)
+})
 app.listen(port, function (err) {
   if (err) {
     console.log(err)
