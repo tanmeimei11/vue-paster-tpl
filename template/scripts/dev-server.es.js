@@ -10,7 +10,6 @@ import {
   env
 } from '../config'
 
-
 const compiler = webpack(cfg)
 const port = process.env.PORT || env.port
 
