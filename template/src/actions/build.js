@@ -3,7 +3,7 @@
  * @param {function} forEach 回调方法
  * @param {Object} params 请求对象
  */
-export const forEachParam = (forEach, ...params) => params.forEach(param => Object.keys(param).forEach(key => forEach(key, param[`${key}`])))
+export const forEachParam = (forEach, ...params) => params.forEach(param => param && Object.keys(param).forEach(key => forEach(key, param[`${key}`])))
 
 /**
  * 构建get请求参数
@@ -15,6 +15,7 @@ export const buildGetParam = (url, ...params) => {
   forEachParam((key, val) => {
     query.push(`${encodeURIComponent(key)}=${encodeURIComponent(val)}`)
   }, ...params)
+  if (query.length === 0) return url
   return `${url}?${query.join('&')}`
 }
 

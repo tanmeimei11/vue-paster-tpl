@@ -20,7 +20,7 @@ export const initPage = (Vue, opts = {}) => {
   /**
    * 设置页面打开埋点
    */
-  track('h5_promo_{{ name }}_index_enter')
+  track(opts.track || 'h5_promo_{{ name }}_index_enter')
   /**
     * 设置埋点指令
   */
