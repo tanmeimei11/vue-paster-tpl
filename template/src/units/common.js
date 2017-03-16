@@ -3,17 +3,20 @@ import icommon from 'iUtil/common'
 import { iTrack } from 'i-ui'
 import share from 'iUtil/share'
 import track from 'iUtil/track'
+import awake from 'iUtil/jsBridge'
 /**
  * 页面初始化 (设置分享、设置公共方法)
  * @param {Vue} Vue
  * @param {Object} opts
  */
-export const initPage = (Vue, opts) => {
+export const initPage = (Vue, opts = {}) => {
   icommon.initIn()
   /**
    * 设置分享信息
    */
-  share.config = opts.share
+  if (opts.share) {
+    share.config = opts.share
+  }
   /**
    * 设置页面打开埋点
    */
@@ -33,6 +36,16 @@ export const initPage = (Vue, opts) => {
       $track: {
         get () {
           return track
+        }
+      },
+      $awake: {
+        get () {
+          return awake
+        }
+      },
+      $InApp: {
+        get () {
+          return icommon.InApp
         }
       },
       $share: {
