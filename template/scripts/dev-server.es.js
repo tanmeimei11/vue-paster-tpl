@@ -15,10 +15,19 @@ const port = process.env.PORT || env.port
 
 const koaDevMiddleware = webpackDevMiddleware(compiler, {
   stats: {
-    colors: true
+    colors: true,
+    chunks: false
   }
 })
+
 const koaHotMiddleware = webpackHotMiddleware(compiler)
+// force page reload when html-webpack-plugin template changes
+compiler.plugin('compilation', function(compilation) {
+  compilation.plugin('html-webpack-plugin-after-emit', function(data, cb) {
+    koaHotMiddleware.publish({ action: 'reload' })
+    cb()
+  })
+})
 
 /* S - Express */
 const app = express()
