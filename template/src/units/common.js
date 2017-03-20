@@ -35,7 +35,14 @@ export const initPage = (Vue, opts = {}) => {
       },
       $track: {
         get () {
-          return track
+          return search => {
+            let items = []
+            let [seed, query] = search.split('?')
+            if (query && query.length) {
+              items = query.split('&')
+            }
+            track(seed, items)
+          }
         }
       },
       $awake: {

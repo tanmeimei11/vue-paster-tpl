@@ -16,6 +16,7 @@
 # version 0.2
 # 拷贝工作目录的依赖包,并且进行安装，映射开发目录到容器
 # docker build -t promo/vuetpl .
+# npm install --production
 # docker run -it -v ${PWD}:/usr/src/app  promo/vuetpl bash
 # docker run -d -v ${PWD}:/usr/src/app -p 8090:8018 promo/vuetpl
 FROM promo/node:latest
