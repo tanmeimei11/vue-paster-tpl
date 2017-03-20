@@ -46,7 +46,8 @@ export default {
     extensions: ['.js', '.vue', '.json'],
     modules: [
       env.assetsPath('src'),
-      env.assetsPath('node_modules')
+      env.assetsPath('node_modules'),
+      env.assetsPath('../node_modules')
     ],
     alias: aliasObject
   },
