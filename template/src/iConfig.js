@@ -1,3 +1,4 @@
+// U: uri
 export const U_IN = '//www.in66.com'
 export const U_IN_QA = '//qa.in66.com'
 export const U_IN_APPLINKS = '//m.in66.com/applinks'
