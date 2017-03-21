@@ -1,6 +1,4 @@
-import {
-  join
-} from 'path'
+import { join } from 'path'
 
 export const build = {
   entryGlobs: 'src/pages/**/entry.js',

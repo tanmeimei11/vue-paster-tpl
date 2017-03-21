@@ -12,5 +12,6 @@
   "repository": {
     "type": "git",
     "url": "git+ssh://git@githost.in66.cc:in-template/vue-paster-tpl.git"
-  }
+  },
+  "devDependencies": {}
 }

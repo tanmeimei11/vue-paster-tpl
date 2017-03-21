@@ -1,6 +1,7 @@
 import webpack from 'webpack'
 import Config from 'webpack-config'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import { env } from '../../config'
 import {
   build
 } from '../../config'
@@ -19,7 +20,7 @@ export default new Config().extend({
   }
 }).merge({
   entry: {
-    vendor: ['vue', 'es6-promise', 'whatwg-fetch', 'webpack-hot-middleware/client']
+    vendor: ['vue', 'es6-promise', 'whatwg-fetch', env.assetsPath('scripts/dev-client.es.js')]
   },
   devtool: '#source-map',
   plugins: [
