@@ -1,6 +1,6 @@
 import { env } from '../../config'
 export const iuiAlias = {
-  'iConfig': env.assetsPath('src/iconfig'),
+  'iConfig': env.assetsPath('src/iConfig'),
   'iMixins': 'i-ui/src/minins',
   'iFiters': 'i-ui/src/fiters',
   'iUtil': 'i-ui/src/utils'
