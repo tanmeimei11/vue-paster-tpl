@@ -1,4 +1,5 @@
 import { buildGetParam, buildPostParam } from './build'
+import { U_IN, U_IN_QA } from 'iConfig'
 /**
  * 构建请求方法（每个请求每次只能执行一次）
  * @param {Object} baseParam
@@ -11,12 +12,12 @@ const FetchApi = (baseParam, urls, error = (err) => {
   /**
    * 如果是线上则访问 www.in66.com
    */
-  let host = process.env.NODE_ENV === 'production' ? '//www.in66.com' : ''
+  let host = process.env.NODE_ENV === 'production' ? U_IN : ''
   /**
    * 如果是qa访问 qa.in66.com
    */
   if (/^qa/.test(location.host)) {
-    host = '//qa.in66.com'
+    host = U_IN_QA
   }
   let urlObj = {}
   Object.keys(urls).forEach(urlKey => {
