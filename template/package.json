@@ -1,10 +1,11 @@
 {
   "private": true,
   "scripts": {
+    "dstart": "docker start {{name}} && docker exec {{name}} npm run start",
+    "dbuild": "docker start {{name}} && docker exec {{name}} npm run build",
     "start": "npm run dev",
     "dev": "node scripts/dev-server.js",
     "build": "node scripts/build.js",
-    "docker": "docker run -d -v ${PWD}:/usr/src/app -p 8090:8018 promo/vuetpl",
     "publish": "node scripts/publish.js"
   },
   "dependencies": {
