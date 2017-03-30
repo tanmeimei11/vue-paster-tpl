@@ -21,15 +21,14 @@ npm run build --report
 ## docker dev
 
 ``` bash
-# Build an image [promo/vuetpl] from a Dockerfile
-docker build -t promo/vuetpl .
+# build container
+docker run -v ${PWD}:/usr/src/app -p 8090:8018  --name {{name}} vuetpl sh
 
-# run image [promo/vuetpl] 并且 [-d] 启用守护进程
-docker run -d -v ${PWD}:/usr/src/app -p 8090:8018 promo/vuetpl
+# serve with hot reload at localhost:8090
+docker start {{name}} && docker exec {{name}} npm run start
 
-# 运行并且进入交互式
-docker run -it -v ${PWD}:/usr/src/app -p 8090:8018  --name {{name}} promo/vuetpl bash  
-
+# build for production with minification
+docker start {{name}} && docker exec {{name}} npm run build
 # open
 http://<host>:8090
 ```
