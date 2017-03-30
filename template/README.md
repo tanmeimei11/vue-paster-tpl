@@ -21,6 +21,9 @@ npm run build --report
 ## docker dev
 
 ``` bash
+# pull images
+docker pull registry.cn-hangzhou.aliyuncs.com/ddot/vuetpl
+
 # build container
 docker run -v ${PWD}:/usr/src/app -p 8090:8018  --name {{name}} vuetpl sh
 
