@@ -25,7 +25,7 @@ npm run build --report
 docker pull registry.cn-hangzhou.aliyuncs.com/ddot/vuetpl
 
 # build container
-docker run -v ${PWD}:/usr/src/app -p 8090:8018  --name {{name}} vuetpl sh
+docker run -v ${PWD}:/usr/src/app -p 8090:8018  --name {{name}} c94d71f7deff sh
 
 # serve with hot reload at localhost:8090
 docker start {{name}} && docker exec {{name}} npm run start
