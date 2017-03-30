@@ -1,4 +1,3 @@
-
 # version 0.1
 # 拷贝工作目录，重新安装依赖包，然后启动
 # docker build -t promo/vuetpl .

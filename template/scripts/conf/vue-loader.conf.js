@@ -25,7 +25,7 @@ const generateLoaders = loader => {
       options: {
         sourceMap: !isProduction,
         includePaths: [env.assetsPath('src')],
-        data: cat(env.assetsPath('config/mixin.scss')).toString()
+        data: "@import 'config/mixin';"
       }
     })
   }

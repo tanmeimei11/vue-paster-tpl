@@ -28,7 +28,7 @@ docker build -t promo/vuetpl .
 docker run -d -v ${PWD}:/usr/src/app -p 8090:8018 promo/vuetpl
 
 # 运行并且进入交互式
-docker run -it -v ${PWD}:/usr/src/app  promo/vuetpl bash
+docker run -it -v ${PWD}:/usr/src/app -p 8090:8018  --name {{name}} promo/vuetpl bash  
 
 # open
 http://<host>:8090

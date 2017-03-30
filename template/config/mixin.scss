@@ -1,5 +1,5 @@
 /*
-[menthod] absolute 定位
+[method] absolute 定位
 [param]  $left 左边
 [param]  $top 右边
 */
@@ -11,7 +11,7 @@
   left: nth($position,4);
 }
 /*
-[menthod] 大小
+[method] 大小
 [param]  $size 宽度 高度
 */
 @mixin size($size){

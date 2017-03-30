@@ -11,6 +11,7 @@
 </script>
 <style lang="scss">
    .page{
-     background: #fff
+     background: #fff; 
    }
 </style>
+ 
