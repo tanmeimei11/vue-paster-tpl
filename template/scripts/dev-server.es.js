@@ -9,6 +9,7 @@ import cfg from './conf/webpack.dev.config'
 import {
   env
 } from '../config'
+import mockMiddleware from 'mock-middlewares'
 
 const compiler = webpack(cfg)
 const port = process.env.PORT || env.port
@@ -42,16 +43,12 @@ Object.keys(env.proxyTable).forEach(function (context) {
 app.use(koaDevMiddleware)
 app.use(koaHotMiddleware)
 
-/* E - Express */
-app.use(function (req, res, next) {
-  const jsonData = `${process.cwd()}/mock/${req.url.split('?')[0]}.json`
-  if (!existsSync(jsonData)) {
-    return next()
-  }
-  res.setHeader('Content-Type', 'application/json')
-  res.setHeader('Content-Encoding', 'gzip')
-  return createReadStream(jsonData).pipe(createGzip()).pipe(res)
-})
+app.use(mockMiddleware({
+  basePath:__dirname,
+  mockFolder:'../mocks',
+  routeFile:'../route.js'
+}))
+
 app.listen(port, function (err) {
   if (err) {
     console.log(err)
