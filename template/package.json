@@ -11,11 +11,11 @@
   "dependencies": {
     "es6-promise": "^4.0.5",
     "i-ui": "0.1.14",
-    "imock-tool": "^0.3.0",
     "vue": "^2.2.1",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
+    "imock-tool": "^0.3.0",
     "autoprefixer": "^6.7.3",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.3.2",
