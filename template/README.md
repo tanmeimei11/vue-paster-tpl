@@ -21,17 +21,18 @@ npm run build --report
 ## docker dev
 
 ``` bash
-# pull images
+# pull images [*must*]
 docker pull registry.cn-hangzhou.aliyuncs.com/ddot/vuetpl
 
-# build container
-docker run -v ${PWD}:/usr/src/app -p 8090:8018  --name {{name}} c94d71f7deff sh
-
 # serve with hot reload at localhost:8090
-docker start {{name}} && docker exec {{name}} npm run start
+npm run dstart
 
 # build for production with minification
-docker start {{name}} && docker exec {{name}} npm run build
+npm run dbuild
+
 # open
 http://<host>:8090
+
+# build container and attach
+docker run -it -v ${PWD}:/usr/src/app -p 8090:8018  --name {{name}} c94d71f7deff sh
 ```

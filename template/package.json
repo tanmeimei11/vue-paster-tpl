@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "dstart": "docker start {{name}} && docker exec {{name}} npm run start",
-    "dbuild": "docker start {{name}} && docker exec {{name}} npm run build",
+    "dstart": "docker run -it --rm -v ${PWD}:/usr/src/app -p 8090:8018  c94d71f7deff npm run start",
+    "dbuild": "docker run -it --rm -v ${PWD}:/usr/src/app c94d71f7deff npm run build",
     "start": "npm run dev",
     "dev": "node scripts/dev-server.js",
     "build": "node scripts/build.js",
