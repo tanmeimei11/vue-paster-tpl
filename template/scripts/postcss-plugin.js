@@ -5,7 +5,7 @@ export const dataDpr = postcss.plugin('postcss-dataDpr', function (opts) {
   const createSelector = (selector, decl, dpr = 2) => {
     decl.value = decl.value.replace(/(\d)PX/, (reg, num) => `${num * dpr}PX`)
     return {
-      selector: `[data-dpr="${dpr}"] ${selector}`,
+      selector: selector.split(',').map(_selector => `[data-dpr="${dpr}"] ${_selector}`).join(','),
       nodes: [decl]
     }
   }
