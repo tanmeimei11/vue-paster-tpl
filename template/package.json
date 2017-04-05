@@ -10,8 +10,7 @@
   },
   "dependencies": {
     "es6-promise": "^4.0.5",
-    "i-ui": "0.1.14",
-    "vue": "^2.2.1",
+    "i-ui": "0.1.15",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
