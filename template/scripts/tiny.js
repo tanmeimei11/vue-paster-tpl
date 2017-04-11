@@ -5,4 +5,4 @@ require('babel-register')({
   'plugins': ['transform-runtime']
 })
 require('shelljs/global')
-require('./es/publish.es.js')
+require('./es/tiny.es.js')

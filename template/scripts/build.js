@@ -6,4 +6,4 @@ require('babel-register')({
 })
 process.env.NODE_ENV = 'production'
 require('shelljs/global')
-require('./build.es.js')
+require('./es/build.es.js')
