@@ -1,5 +1,11 @@
-import { buildGetParam, buildPostParam } from './build'
-import { U_IN, U_IN_QA } from 'iConfig'
+import {
+  buildGetParam,
+  buildPostParam
+} from './build'
+import {
+  U_IN,
+  U_IN_QA
+} from 'iConfig'
 /**
  * 构建请求方法（每个请求每次只能执行一次）
  * @param {Object} baseParam
@@ -68,5 +74,6 @@ const baseParam = {
  *  请求地址
  */
 export const URL = FetchApi(baseParam, {
-  xxx: `/test`
+  xxx: `/test`,
+  getUser: '/promo/userapi/currentuser'
 }, error)

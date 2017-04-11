@@ -1,4 +1,6 @@
-import { join } from 'path'
+import {
+  join
+} from 'path'
 
 export const build = {
   entryGlobs: 'src/pages/**/entry.js',
@@ -14,7 +16,7 @@ export const env = {
   autoOpenBrowser: true,
   proxyTable: {
     '/promo': {
-      target: 'http://qa.in66.com',
+      target: 'http://www.in66.com',
       secure: false,
       changeOrigin: true,
       onProxyReq (proxyReq, req, res) {

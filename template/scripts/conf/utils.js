@@ -1,4 +1,6 @@
-import { env } from '../../config'
+import {
+  env
+} from '../../config'
 export const iuiAlias = {
   'iConfig': env.assetsPath('src/iConfig'),
   'iMixins': 'i-ui/src/minins',
@@ -11,5 +13,6 @@ export const aliasObject = Object.assign(iuiAlias, {
   'assets': env.assetsPath('src/assets'),
   'actions': env.assetsPath('src/actions'),
   'components': env.assetsPath('src/components'),
-  'units': env.assetsPath('src/units')
+  'units': env.assetsPath('src/units'),
+  'store': env.assetsPath('src/store')
 })

@@ -1,13 +1,19 @@
-import { polyfill } from 'es6-promise'
+import {
+  polyfill
+} from 'es6-promise'
 import Vue from 'vue'
 import App from './App.vue'
-import { initPage } from 'units/common'
+import {
+  initPage
+} from 'units/common'
 import 'whatwg-fetch'
-import { iAvatar } from 'i-ui'
+import {
+  iAvatar
+} from 'i-ui'
+import store from 'store'
 polyfill()
 
 Vue.use(iAvatar)
-
 initPage(Vue, {
   share: {
     shareTitle: 'shareTitle', // 分享标题
@@ -19,5 +25,6 @@ initPage(Vue, {
 })
 
 new Vue({
+  store,
   render: h => h(App)
 }).$mount('#app')
