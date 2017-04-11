@@ -3,10 +3,11 @@
   "scripts": {
     "dstart": "docker run -it --rm -v ${PWD}:/usr/src/app -p 8090:8018  c94d71f7deff npm run start",
     "dbuild": "docker run -it --rm -v ${PWD}:/usr/src/app c94d71f7deff npm run build",
-    "tiny": "docker run -it --rm -v ${PWD}:/usr/src/app c94d71f7deff node scripts/tiny",
+    "dtiny": "docker run -it --rm -v ${PWD}:/usr/src/app c94d71f7deff node scripts/tiny",
     "start": "npm run dev",
     "dev": "node scripts/dev-server.js",
     "build": "node scripts/build.js",
+    "tiny": "node scripts/tiny.js",
     "publish": "node scripts/publish.js"
   },
   "dependencies": {
