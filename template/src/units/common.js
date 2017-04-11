@@ -25,7 +25,7 @@ export const initPage = (Vue, opts = {}) => {
     * 设置埋点指令
   */
   Vue.use(iTrack)
-
+  Vue.prototype.$eventHub = Vue.prototype.$eventHub || new Vue()
   Vue.use(Vue => {
     Object.defineProperties(Vue.prototype, {
       $toast: {
