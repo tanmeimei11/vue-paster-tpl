@@ -17,6 +17,7 @@
     },
     "vuex": {
       "type": "list",
+      "message": "状态管理机",
       "choices": [
         "yes",
         "no"
@@ -24,6 +25,9 @@
     }
   },
   "filters": {
-    "src/store/*.js":"vuex === 'yes'"
-  }
+    "src/store/*.js":"vuex === 'yes'",
+    "pages/index/**/*.*":"vuex === 'yes'",
+    "pages/demo/**/*.*":"vuex === 'yes'"
+  },
+  "skipInterpolation": "src/**/*.vue"
 }
