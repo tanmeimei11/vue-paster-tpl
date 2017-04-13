@@ -17,7 +17,7 @@
     },
     "vuex": {
       "type": "list",
-      "message": "状态管理机",
+      "message": "状态管理机(vuex)",
       "choices": [
         "yes",
         "no"
