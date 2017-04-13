@@ -26,8 +26,12 @@
   },
   "filters": {
     "src/store/*.js":"vuex === 'yes'",
-    "pages/index/**/*.*":"vuex === 'yes'",
-    "pages/demo/**/*.*":"vuex === 'yes'"
+    "pages/index/**/*.js":"vuex === 'yes'",
+    "pages/index/**/*.vue":"vuex === 'yes'",
+    "pages/index/**/*.pug":"vuex === 'yes'",
+    "pages/demo/**/*.js":"vuex === 'no'",
+    "pages/demo/**/*.vue":"vuex === 'no'",
+    "pages/demo/**/*.pug":"vuex === 'no'"
   },
   "skipInterpolation": "src/**/*.vue"
 }
