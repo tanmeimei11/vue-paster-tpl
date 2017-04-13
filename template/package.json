@@ -13,7 +13,9 @@
   "dependencies": {
     "es6-promise": "^4.0.5",
     "i-ui": "0.1.16",
+    {{#if_eq vuex "yes"}}
     "vuex": "^2.2.1",
+    {{/if_eq}}
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
