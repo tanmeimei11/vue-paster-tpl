@@ -14,7 +14,16 @@
     "author": {
       "type": "string",
       "message": "作者"
+    },
+    "vuex": {
+      "type": "list",
+      "choices": [
+        "yes",
+        "no"
+      ]
     }
   },
-  "skipInterpolation": "src/**/*.vue"
+  "filters": {
+    "src/store/*.js":"vuex === 'yes'"
+  }
 }

@@ -10,7 +10,9 @@ import 'whatwg-fetch'
 import {
   iAvatar
 } from 'i-ui'
+{{#if_eq vuex "yes"}}
 import store from 'store'
+{{/if_eq}}
 polyfill()
 
 Vue.use(iAvatar)
@@ -25,6 +27,8 @@ initPage(Vue, {
 })
 
 new Vue({
+  {{#if_eq vuex "yes"}}
   store,
+  {{/if_eq}}
   render: h => h(App)
 }).$mount('#app')
