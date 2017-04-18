@@ -11,11 +11,11 @@ ENV APP_HOME=/usr/src/app \
 ENV NODE_PATH=$MODULES_DIR/node_modules 
 
 # 拷贝工作目录的依赖包,并且进行安装
-#COPY package.json $MODULES_DIR/package.json
-#RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
-#RUN \
-#  cd $MODULES_DIR && \ 
-#  cnpm install 
+COPY package.json $MODULES_DIR/package.json
+RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
+RUN \
+  cd $MODULES_DIR && \ 
+  cnpm install 
 
 WORKDIR $APP_HOME
 EXPOSE 8018
