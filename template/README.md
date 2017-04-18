@@ -18,6 +18,19 @@ npm run build
 npm run build --report
 ```
 
+## Build Public (only mac)
+
+```bash
+# add git token 
+npm config set GIT_TOKEN <token>
+
+# add jenkis token 
+npm config set JENKINS_TOKEN <user>:<token>
+
+# publish (must not master/develop branch)
+npm run publish
+```
+
 ## docker dev
 
 ``` bash
