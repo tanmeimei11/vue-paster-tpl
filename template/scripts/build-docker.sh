@@ -1,11 +1,14 @@
 #!/bin/bash
-IMAGE_NAME=vuetpl:vue-paster-tpl
+IMAGE_NAME=vue:vue-paster-tpl
 DOCKERFILE=Dockerfile
 
 if [ ! -f "$DOCKERFILE"  ]; then
   echo 'no Dockerfile found' 
 fi
 
+CONTAINER_IDS=`docker ps -a| grep $IMAGE_NAME | awk {'print $1'}` 
+docker stop $CONTAINER_IDS
+#docker rm $CONTAINER_IDS
 docker rmi $IMAGE_NAME
 docker build . -t $IMAGE_NAME
 
