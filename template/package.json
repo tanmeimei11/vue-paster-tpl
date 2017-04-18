@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "es6-promise": "^4.0.5",
-    "i-ui": "0.1.16",
+    "i-ui": "0.1.17",
     "vuex": "^2.2.1",
     "whatwg-fetch": "^2.0.3"
   },
