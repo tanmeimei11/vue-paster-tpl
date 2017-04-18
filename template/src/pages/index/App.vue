@@ -3,10 +3,10 @@
     Welcome
     <iAvatar src="//inimg01.jiuyan.info/in/2015/12/06/50E0D236-8186-87D4-278E-184399C6B81D-1ndoVWb.jpg"></iAvatar>
     {{$store.state.count }}
-    <button @click="increment">加一\{{$store.state.increTimes}}</button>
-    <button @click="decrement">减一\{{$store.state.decreTimes}}</button>
+    <button @click="increment">加一{{$store.state.increTimes}}</button>
+    <button @click="decrement">减一{{$store.state.decreTimes}}</button>
     <div>
-      userid:\{{$store.state.user.id}} <br>name:\{{$store.state.user.name}}
+      userid:{{$store.state.user.id}} <br>name:{{$store.state.user.name}}
     </div>
   </div>
 </template>
