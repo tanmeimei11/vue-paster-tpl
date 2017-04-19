@@ -72,12 +72,22 @@ export default {
       include: [env.assetsPath('src'), env.assetsPath('test'), env.assetsPath('node_modules')]
     },
     {
+      // css文件引用方式， 
+      // 在js中引用使用require('!url-loader?limit=10000!../../assets/images/a1.png')
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
       loader: 'url-loader',
       query: {
         limit: 10000,
         name: 'img/[name].[hash:7].[ext]',
         publicPath: '../'
+      }
+    },
+    {
+      test: /\.(mp3|mp4)(\?.*)?$/,
+      loader: 'file-loader',
+      query: {
+        name: 'media/[name].[hash:7].[ext]'
+        publicPath: './'
       }
     },
     {

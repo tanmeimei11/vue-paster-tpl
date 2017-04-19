@@ -54,7 +54,11 @@ const cssLoaders = {
     px2rem({
       remUnit: build.remUnit
     })
-  ]
+  ],
+  transformToRequire: {
+    audio: 'src',
+    video: 'src'
+  }
 }
 
 export const styleLoaders = () => {

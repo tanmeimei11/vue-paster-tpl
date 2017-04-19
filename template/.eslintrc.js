@@ -20,6 +20,7 @@ module.exports = {
     'no-debugger':0,
     'arrow-parens': 0,
     'generator-star-spacing': 0,
-    "no-extra-parens":0
+    'no-trailing-spaces': 0,
+    'no-extra-parens':0
   }
 }
