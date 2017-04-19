@@ -21,7 +21,7 @@ npm run build --report
 ## Build Public (only mac)
 
 ```bash
-# add git token 
+# add gitlab token 
 npm config set GIT_TOKEN <token>
 
 # add jenkis token 
