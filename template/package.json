@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "dstart": "docker run -it --rm -v ${PWD}:/usr/src/app -p 8090:8018  inVue:vue-paster-tpl npm run start",
-    "dbuild": "docker run -it --rm -v ${PWD}:/usr/src/app inVue:vue-paster-tpl npm run build",
-    "dtiny": "docker run -it --rm -v ${PWD}:/usr/src/app inVue:vue-paster-tpl node scripts/tiny",
+    "dstart": "docker run -it --rm -v ${PWD}:/usr/src/app -p 8018:8018  vuetpl:0.0.1 npm run start",
+    "dbuild": "docker run -it --rm -v ${PWD}:/usr/src/app vuetpl:0.0.1 npm run build",
+    "dtiny": "docker run -it --rm -v ${PWD}:/usr/src/app vuetpl:0.0.1 node scripts/tiny",
     "publish": "docker run -it --rm -v ${PWD}:/usr/src/app -v ~/.npmrc:/root/.npmrc c94d71f7deff node scripts/publish.js",
     "start": "npm run dev",
     "dev": "node scripts/dev-server.js",
