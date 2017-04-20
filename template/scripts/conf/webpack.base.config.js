@@ -86,7 +86,7 @@ export default {
       test: /\.(mp3|mp4)(\?.*)?$/,
       loader: 'file-loader',
       query: {
-        name: 'media/[name].[hash:7].[ext]'
+        name: 'media/[name].[hash:7].[ext]',
         publicPath: './'
       }
     },

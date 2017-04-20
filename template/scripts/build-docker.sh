@@ -1,5 +1,5 @@
 #!/bin/bash
-IMAGE_NAME=vuetpl:0.0.1
+IMAGE_NAME=jiuyan/vuetpl:0.0.1
 DOCKERFILE=Dockerfile
 DOCKER_USERNAME=vuetpl
 DOCKER_PASSWOR=123qq123

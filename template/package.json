@@ -1,10 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "dstart": "docker run -it --rm -v ${PWD}:/usr/src/app -p 8018:8018  vuetpl:0.0.1 npm run start",
-    "dbuild": "docker run -it --rm -v ${PWD}:/usr/src/app vuetpl:0.0.1 npm run build",
-    "dtiny": "docker run -it --rm -v ${PWD}:/usr/src/app vuetpl:0.0.1 node scripts/tiny",
-    "publish": "docker run -it --rm -v ${PWD}:/usr/src/app -v ~/.npmrc:/root/.npmrc c94d71f7deff node scripts/publish.js",
+    "dstart": "docker run -it --rm -v ${PWD}:/usr/src/app -p 8018:8018  jiuyan/vuetpl:0.0.1 npm run start",
+    "dbuild": "docker run -it --rm -v ${PWD}:/usr/src/app jiuyan/vuetpl:0.0.1 npm run build",
+    "dtiny": "docker run -it --rm -v ${PWD}:/usr/src/app jiuyan/vuetpl:0.0.1 node scripts/tiny",
+    "publish": "docker run -it --rm -v ${PWD}:/usr/src/app -v ~/.npmrc:/root/.npmrc jiuyan/vuetpl:0.0.1 node scripts/publish.js",
     "start": "npm run dev",
     "dev": "node scripts/dev-server.js",
     "build": "node scripts/build.js",
@@ -23,7 +23,7 @@
     "babel-plugin-component": "^0.9.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.22.0",
-    "babel-preset-stage-2": "^6.22.0",
+    "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.23.0",
     "chalk": "^1.1.3",
     "css-loader": "^0.26.1",
