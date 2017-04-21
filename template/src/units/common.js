@@ -2,7 +2,7 @@ import hintMessage from 'units/hintMessage'
 import icommon from 'iUtil/common'
 import { iTrack } from 'i-ui'
 import share from 'iUtil/share'
-import track from 'iUtil/track'
+import { trackParam } from 'iUtil/track'
 import awake from 'iUtil/jsBridge'
 /**
  * 页面初始化 (设置分享、设置公共方法)
@@ -20,7 +20,7 @@ export const initPage = (Vue, opts = {}) => {
   /**
    * 设置页面打开埋点
    */
-  track(opts.track || 'h5_promo_{{ name }}_index_enter')
+  trackParam(opts.track || 'h5_promo_{{ name }}_index_enter')
   /**
     * 设置埋点指令
   */
@@ -35,14 +35,7 @@ export const initPage = (Vue, opts = {}) => {
       },
       $track: {
         get () {
-          return search => {
-            let items = []
-            let [seed, query] = search.split('?')
-            if (query && query.length) {
-              items = query.split('&')
-            }
-            track(seed, items)
-          }
+          return trackParam
         }
       },
       $awake: {
@@ -107,4 +100,3 @@ export const initPage = (Vue, opts = {}) => {
     })
   })
 }
-
