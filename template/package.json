@@ -4,7 +4,7 @@
     "dstart": "docker run -it --rm -v ${PWD}:/usr/src/app -p 8018:8018  jiuyan/vuetpl:0.0.1 npm run start",
     "dbuild": "docker run -it --rm -v ${PWD}:/usr/src/app jiuyan/vuetpl:0.0.1 npm run build",
     "dtiny": "docker run -it --rm -v ${PWD}:/usr/src/app jiuyan/vuetpl:0.0.1 node scripts/tiny",
-    "publish": "docker run -it --rm -v ${PWD}:/usr/src/app -v ~/.npmrc:/root/.npmrc jiuyan/vuetpl:0.0.1 node scripts/publish.js",
+    "publish": "git status | head -n 1  | awk '{print  $3}'  | xargs bash -c 'docker run -i --rm -v ${PWD}:/usr/src/app -v ~/.npmrc:/root/.npmrc jiuyan/vuetpl:0.0.1 node scripts/publish.js $0'",
     "start": "npm run dev",
     "dev": "node scripts/dev-server.js",
     "build": "node scripts/build.js",

@@ -45,10 +45,10 @@ let jenkisPost = body => new Promise((resolve, reject) => {
   req.write(bodyString)
   req.end()
 })
-const BRANCH = ''
 
+const BRANCH = process.argv.slice(-1)[0] 
 const jenkinsPromise = () => {
-  console.log(blue('开始发布....'))
+  console.log(blue(`开始发布....分支${BRANCH}`))
   jenkisPost({
     'parameter': [{
       'name': 'BRANCH',
@@ -75,5 +75,4 @@ const jenkinsPromise = () => {
     console.log(red(error))
   })
 }
-
 jenkinsPromise()
