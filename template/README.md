@@ -33,8 +33,10 @@ npm run publish
 
 ``` bash
 # pull images [*must*]
-docker pull registry.cn-hangzhou.aliyuncs.com/ddot/vuetpl
+docker pull jiuyan/vuetpl:0.0.1
 
+# install prod dependencies
+npm run --prod
 # serve with hot reload at localhost:8090
 npm run dstart
 
@@ -42,8 +44,5 @@ npm run dstart
 npm run dbuild
 
 # open
-http://<host>:8090
-
-# build container and attach
-docker run -it -v ${PWD}:/usr/src/app -p 8090:8018  --name {{name}} c94d71f7deff sh
+http://<host>:8018
 ```
