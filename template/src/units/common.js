@@ -1,4 +1,4 @@
-import hintMessage from 'units/hintMessage'
+import toast from 'iUtil/toast'
 import icommon from 'iUtil/common'
 import { iTrack } from 'i-ui'
 import share from 'iUtil/share'
@@ -25,12 +25,17 @@ export const initPage = (Vue, opts = {}) => {
     * 设置埋点指令
   */
   Vue.use(iTrack)
-  Vue.prototype.$eventHub = Vue.prototype.$eventHub || new Vue()
   Vue.use(Vue => {
+    let eventHub = new Vue()
     Object.defineProperties(Vue.prototype, {
+      $eventHub: {
+        get () {
+          return eventHub
+        }
+      },
       $toast: {
         get () {
-          return hintMessage
+          return toast
         }
       },
       $track: {

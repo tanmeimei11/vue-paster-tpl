@@ -1,7 +1,5 @@
 import 'whatwg-fetch'
-import {
-  URL
-} from 'actions/index'
+import API from 'actions/index'
 
 const actions = {
   increment: ({
@@ -13,7 +11,7 @@ const actions = {
   getUser ({
     commit
   }) {
-    URL.getUser()
+    API.getUser()
       .then((res) => {
         if (res.succ) {
           commit('getUser', res.data)

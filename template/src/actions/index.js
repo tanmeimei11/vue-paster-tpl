@@ -73,7 +73,9 @@ const baseParam = {
 /**
  *  请求地址
  */
-export const API = FetchApi(baseParam, {
+const API = FetchApi(baseParam, {
   xxx: `/test`,
   getUser: '/promo/userapi/currentuser'
 }, error)
+
+export default API
