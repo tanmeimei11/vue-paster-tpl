@@ -1,4 +1,15 @@
 import { buildGetParam, buildPostParam } from './build'
+import { U_IN, U_IN_QA } from 'iConfig'
+/**
+ * 如果是线上则访问 www.in66.com
+ */
+let host = process.env.NODE_ENV === 'production' ? U_IN : ''
+/**
+ * 如果是qa访问 qa.in66.com
+ */
+if (/^qa/.test(location.host)) {
+  host = U_IN_QA
+}
 /**
  * 根据当前 protocol 选择地址
  * @param {String} https https的地址
@@ -9,7 +20,7 @@ const isHttps = (https, http) => location.protocol === 'http:' ? http : https
 /**
  * 获取七牛token地址
  */
-const qnTokenUrl = '/promo/commonapi/qiniutoken'
+const qnTokenUrl = host + '/promo/commonapi/qiniutoken'
 
 /**
  * 七牛上传地址
