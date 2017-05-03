@@ -20,7 +20,7 @@ export default new Config().extend({
   }
 }).merge({
   entry: {
-    vendor: ['vue', 'core-js', 'whatwg-fetch', env.assetsPath('scripts/dev-client.es.js')]
+    vendor: ['vue', 'core-js/fn/promise', 'whatwg-fetch', env.assetsPath('scripts/dev-client.es.js')]
   },
   devtool: '#source-map',
   plugins: [
