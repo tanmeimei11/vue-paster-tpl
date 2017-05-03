@@ -1,17 +1,14 @@
-import {
-  polyfill
-} from 'es6-promise'
+import 'core-js/fn/promise'
+import 'whatwg-fetch'
 import Vue from 'vue'
 import App from './App.vue'
 import {
   initPage
 } from 'units/common'
-import 'whatwg-fetch'
 import {
   iAvatar
 } from 'i-ui'
 import store from 'store'
-polyfill()
 
 Vue.use(iAvatar)
 initPage(Vue, {

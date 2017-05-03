@@ -54,7 +54,14 @@ const FetchApi = (baseParam, urls, error = (err) => {
       }, err => {
         urlObj[`${urlKey}`].loading = false
         throw err
-      }).then(res => res.json()).catch(error)
+      }).then(res => res.json()).then(res => {
+        // 授权重定向
+        if (!res.succ && res.data && res.data.status === 302) {
+          location.href = res.data.location
+          throw res
+        }
+        return res
+      }).catch(error)
     }
   })
   return urlObj

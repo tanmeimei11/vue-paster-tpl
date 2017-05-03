@@ -57,6 +57,7 @@ export default {
       loader: 'eslint-loader',
       enforce: 'pre',
       include: [env.assetsPath('src'), env.assetsPath('test')],
+      exclude: [env.assetsPath('src/assets/libs')],
       options: {
         formatter: require('eslint-friendly-formatter')
       }
