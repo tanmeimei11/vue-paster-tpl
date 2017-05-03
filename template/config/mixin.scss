@@ -29,7 +29,7 @@
 [param] 宽度 高度 颜色
 */
 @mixin arrowL($width,$height,$color){
-  border: $height solid transparent;
+  border: $height/2 solid transparent;
   border-right: $width solid $color;
   border-left: none;
 }
@@ -39,7 +39,7 @@
 [param] 宽度 高度 颜色
 */
 @mixin arrowR($width,$height,$color){
-  border: $height solid transparent;
+  border: $height/2 solid transparent;
   border-left: $width solid $color;
   border-right: none;
 }
@@ -50,7 +50,7 @@
 [param] 宽度 高度 颜色
 */
 @mixin arrowT($width,$height,$color){
-  border: $width solid transparent;
+  border: $width/2 solid transparent;
   border-bottom: $height solid $color;
   border-top: none;
 }
@@ -61,7 +61,7 @@
 [param] 宽度 高度 颜色
 */
 @mixin arrowB($width,$height,$color){
-  border: $width solid transparent;
+  border: $width/2 solid transparent;
   border-top: $height solid $color;
   border-bottom: none;
 }
