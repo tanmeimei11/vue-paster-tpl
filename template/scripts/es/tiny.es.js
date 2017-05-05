@@ -55,7 +55,7 @@ const compress = (path, name, time) => {
             console.log(`CompressDone '${blue(relativeName)}'.....`)
           })
           writeS.on('close', () => {
-            let compressTime = statSync(`${prefixDir}/${name}`).mtime.getTime()
+            let compressTime = statSync(`${prefixDir}/${name}`).size
             let _tinyData = JSON.parse(cat(tinyPath))
             _tinyData[`${relativeName}`] = compressTime
             appendFileSync(tinyPath, JSON.stringify(_tinyData), {
@@ -70,5 +70,5 @@ const compress = (path, name, time) => {
 ls(build.imgCompress.regx).forEach(file => {
   let name = basename(file)
   if (!/.(png|jpg)$/.test(name)) return ''
-  compress(dirname(file), name, statSync(file).mtime.getTime())
+  compress(dirname(file), name, statSync(file).size)
 })
