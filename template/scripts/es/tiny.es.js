@@ -67,7 +67,7 @@ const compress = (path, name, time) => {
     }))
   }
 }
-ls(build.imgCompress.regx).forEach(file => {
+ls(build.imgRegx.compress).forEach(file => {
   let name = basename(file)
   if (!/.(png|jpg)$/.test(name)) return ''
   compress(dirname(file), name, statSync(file).size)

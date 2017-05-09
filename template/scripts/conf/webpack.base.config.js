@@ -11,8 +11,13 @@ import {
   build,
   env
 } from '../../config'
-import { styleLoaders, default as cssLoaders } from './vue-loader.conf'
-import { aliasObject } from './utils'
+import {
+  styleLoaders,
+  default as cssLoaders
+} from './vue-loader.conf'
+import {
+  aliasObject
+} from './utils'
 let entryObj = {}
 let invalidEntry = []
 
@@ -61,6 +66,11 @@ export default {
       options: {
         formatter: require('eslint-friendly-formatter')
       }
+    },
+    {
+      test: /\.js$/,
+      include: [env.assetsPath('src/assets/libs')],
+      use: 'imports-loader?this=>window&define=>false'
     },
     {
       test: /\.vue$/,

@@ -5,10 +5,10 @@ import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import httpProxyMiddleware from 'http-proxy-middleware'
-import cfg from './conf/webpack.dev.config'
+import cfg from '../conf/webpack.dev.config'
 import {
   env
-} from '../config'
+} from '../../config'
 
 const compiler = webpack(cfg)
 const port = process.env.PORT || env.port
@@ -22,8 +22,8 @@ const koaDevMiddleware = webpackDevMiddleware(compiler, {
 
 const koaHotMiddleware = webpackHotMiddleware(compiler)
 // force page reload when html-webpack-plugin template changes
-compiler.plugin('compilation', function(compilation) {
-  compilation.plugin('html-webpack-plugin-after-emit', function(data, cb) {
+compiler.plugin('compilation', function (compilation) {
+  compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
     koaHotMiddleware.publish({ action: 'reload' })
     cb()
   })

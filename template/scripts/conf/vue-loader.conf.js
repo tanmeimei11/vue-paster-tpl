@@ -4,12 +4,11 @@ import autoprefixer from 'autoprefixer'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import {
   dataDpr
-} from '../postcss-plugin'
+} from '../plugins/postcss-plugin'
 import {
   build,
   env
 } from '../../config'
-
 var isProduction = process.env.NODE_ENV === 'production'
 const generateLoaders = loader => {
   var loaders = [{
@@ -49,7 +48,7 @@ const cssLoaders = {
   postcss: [
     dataDpr(),
     autoprefixer({
-      browsers: ['last 7 versions']
+      browsers: ['last 2 versions', 'Android >= 4.0']
     }),
     px2rem({
       remUnit: build.remUnit

@@ -1,8 +1,9 @@
 #+++++++++++++++++++++++++++++++++++++++
 # version 0.1
 # Dockerfile for vue tpl  
-# BUILD-USING: docker build -t vuetpl . 
-# RUN-USING: docker run -it -v ${PWD}:/usr/src/app -p 8090:8018 --name {{name}} vuetpl sh
+# BUILD-USING: docker build -t jiuyan/vuetpl:0.0.2 . 
+# RUN-USING: docker run -it -v ${PWD}:/usr/src/app -p 8090:8018 --name {{name}} jiuyan/vuetpl:0.0.2 sh
+# PUSH-USING: docker push jiuyan/vuetpl:0.0.2
 #+++++++++++++++++++++++++++++++++++++++
 FROM node:7-alpine
 

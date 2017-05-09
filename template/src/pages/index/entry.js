@@ -5,12 +5,8 @@ import App from './App.vue'
 import {
   initPage
 } from 'units/common'
-import {
-  iAvatar
-} from 'i-ui'
 import store from 'store'
-
-Vue.use(iAvatar)
+import 'assets/libs/jweixin-1.0.0.js'
 initPage(Vue, {
   share: {
     shareTitle: 'shareTitle', // 分享标题

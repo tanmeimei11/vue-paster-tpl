@@ -2,10 +2,8 @@
   "presets": [
     ["es2015", { "modules": false }],"stage-0"
   ],
-  "plugins": [["component", [
-    {
-      "libraryName": "i-ui",
-      "styleLibraryName": "theme-default"
-    }
-  ]]]
+  "plugins": [ ["./scripts/plugins/iui-component",{
+    "libDir":"packages",
+    "libraryName":"i-ui"
+  }]]
 }
