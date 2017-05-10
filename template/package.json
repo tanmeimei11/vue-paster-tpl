@@ -4,11 +4,13 @@
     "dstart": "docker run -it --rm -v ${PWD}:/usr/src/app -p 8018:8018  jiuyan/vuetpl:0.0.2 npm run start",
     "dbuild": "docker run -it --rm -v ${PWD}:/usr/src/app jiuyan/vuetpl:0.0.2 npm run build",
     "dtiny": "docker run -it --rm -v ${PWD}:/usr/src/app jiuyan/vuetpl:0.0.2 npm run tiny",
+    "dqiniu": "docker run -it --rm -v ${PWD}:/usr/src/app jiuyan/vuetpl:0.0.2 npm run qiniu",
     "publish": "git status | head -n 1  | awk '{print  $3}'  | xargs bash -c 'docker run -i --rm -v ${PWD}:/usr/src/app -v ~/.npmrc:/root/.npmrc jiuyan/vuetpl:0.0.2 node scripts/exec.js publish $0'",
     "start": "npm run dev",
     "dev": "node scripts/exec.js dev-server",
     "build": "node scripts/exec.js build",
-    "tiny": "node scripts/exec.js tiny"
+    "tiny": "node scripts/exec.js tiny",
+    "qiniu": "node scripts/exec.js qiniu"
   },
   "dependencies": {
     "core-js": "^2.4.1",

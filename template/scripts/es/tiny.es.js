@@ -16,6 +16,7 @@ import {
   appendFileSync,
   statSync
 } from 'fs'
+import getEtag from '../plugins/qiniuHash.js'
 import {
   build
 } from '../../config'
@@ -28,7 +29,7 @@ const option = {
     'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1'
   }
 }
-const compress = (path, name, time) => {
+const compress = (path, name, hash) => {
   let prefixDir = `/usr/src/app/${path}`
   let relativeName = `${path}/${name}`
   let tinyPath = `${prefixDir}/tiny.json`
@@ -38,7 +39,7 @@ const compress = (path, name, time) => {
     })
   }
   var tiny = JSON.parse(cat(tinyPath))
-  if (relativeName in tiny && tiny[`${relativeName}`] === time) {
+  if (relativeName in tiny && tiny[`${relativeName}`] === hash) {
     console.log(`CompressDone '${blue(relativeName)}'.....`)
   } else {
     console.log(`StartUpload '${blue(relativeName)}'.....`)
@@ -55,10 +56,10 @@ const compress = (path, name, time) => {
             console.log(`CompressDone '${blue(relativeName)}'.....`)
           })
           writeS.on('close', () => {
-            let compressTime = statSync(`${prefixDir}/${name}`).size
+            let compressHash = getEtag(`${prefixDir}/${name}`)
             let _tinyData = JSON.parse(cat(tinyPath))
-            _tinyData[`${relativeName}`] = compressTime
-            appendFileSync(tinyPath, JSON.stringify(_tinyData), {
+            _tinyData[`${relativeName}`] = compressHash
+            appendFileSync(tinyPath, JSON.stringify(_tinyData, null, '\t'), {
               flag: 'w'
             })
           })
@@ -70,5 +71,5 @@ const compress = (path, name, time) => {
 ls(build.imgRegx.compress).forEach(file => {
   let name = basename(file)
   if (!/.(png|jpg)$/.test(name)) return ''
-  compress(dirname(file), name, statSync(file).size)
+  compress(dirname(file), name, getEtag(file))
 })

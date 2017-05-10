@@ -8,6 +8,10 @@ vue-paster-tpl
 *   [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware)
 *   [templates](https://github.com/vuejs/vue-cli#official-templates)
 
+## 配置说明、命令说明
+
+* `npm run tiny` 压缩文件夹，配置压缩文件夹 `config/index.js` 的 `build.imgRegx.compress`,默认`assets/img`
+* `npm run qiniu` 上传文件夹，配置上传文件夹 `config/index.js` 的 `build.imgRegx.qiniu` ,默认`assets/qiniu`
 
 ## Build Setup
 
@@ -15,7 +19,7 @@ vue-paster-tpl
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:8018
 npm run dev
 
 # build for production with minification
@@ -27,7 +31,7 @@ npm run build
 ``` bash
 # install prod dependencies
 npm install --prod
-# serve with hot reload at localhost:8090
+# serve with hot reload at localhost:8018
 npm run dstart
 
 # build for production with minification
