@@ -81,7 +81,6 @@ const baseParam = {
  *  请求地址
  */
 const API = FetchApi(baseParam, {
-  xxx: `/test`,
   getUser: '/promo/userapi/currentuser'
 }, error)
 
