@@ -97,7 +97,5 @@ const qiniuYun = (path, name, hash) => {
   }
 }
 ls(build.imgRegx.qiniu).forEach(file => {
-  let name = basename(file)
-  if (!/.(png|jpg)$/.test(name)) return ''
-  qiniuYun(dirname(file), name, getEtag(file))
+  qiniuYun(dirname(file), basename(file), getEtag(file))
 })

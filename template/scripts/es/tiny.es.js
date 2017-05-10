@@ -69,7 +69,5 @@ const compress = (path, name, hash) => {
   }
 }
 ls(build.imgRegx.compress).forEach(file => {
-  let name = basename(file)
-  if (!/.(png|jpg)$/.test(name)) return ''
-  compress(dirname(file), name, getEtag(file))
+  compress(dirname(file), basename(file), getEtag(file))
 })

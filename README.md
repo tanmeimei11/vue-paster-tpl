@@ -10,8 +10,8 @@ vue-paster-tpl
 
 ## 配置说明、命令说明
 
-* `npm run tiny` 压缩文件夹，配置压缩文件夹 `config/index.js` 的 `build.imgRegx.compress`,默认`assets/img`
-* `npm run qiniu` 上传文件夹，配置上传文件夹 `config/index.js` 的 `build.imgRegx.qiniu` ,默认`assets/qiniu`
+* `npm run tiny` 压缩文件夹，配置压缩文件夹 `config/index.js` 的 `build.imgRegx.compress`,默认`assets/img`文件夹
+* `npm run qiniu` 上传文件夹，配置上传文件夹 `config/index.js` 的 `build.imgRegx.qiniu` ,默认`assets/qiniu`文件夹
 
 ## Build Setup
 
