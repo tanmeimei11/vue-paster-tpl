@@ -39,7 +39,6 @@ const mutations = {
     state.decreTimes++
   },
   getUser (state, user) {
-    console.log('11')
     state.user = {
       id: user.id,
       name: user.nick

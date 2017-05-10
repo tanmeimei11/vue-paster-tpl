@@ -4,12 +4,12 @@ vue-paster-tpl
 ## 技术栈
 
 *   [webpack2](http://www.css88.com/doc/webpack2/)
-*   [koa2](http://koajs.com/)
 *   [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware)
 *   [templates](https://github.com/vuejs/vue-cli#official-templates)
 
-## 配置说明、命令说明
+## 命令说明
 
+* `npm run publish` 在Jenkins上发布当前分支 *仅支持mac、安装了docker 并且需要配置 JENKINS_TOKEN*
 * `npm run tiny` 压缩文件夹，配置压缩文件夹 `config/index.js` 的 `build.imgRegx.compress`,默认`assets/img`文件夹
 * `npm run qiniu` 上传文件夹，配置上传文件夹 `config/index.js` 的 `build.imgRegx.qiniu` ,默认`assets/qiniu`文件夹
 
@@ -20,7 +20,7 @@ vue-paster-tpl
 npm install
 
 # serve with hot reload at localhost:8018
-npm run dev
+npm run start
 
 # build for production with minification
 npm run build

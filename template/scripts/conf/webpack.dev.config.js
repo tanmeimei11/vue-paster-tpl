@@ -21,6 +21,10 @@ export default new Config().extend({
   },
   devtool: '#source-map',
   plugins: [
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: JSON.stringify('development'),
+      DEBUG: true
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({

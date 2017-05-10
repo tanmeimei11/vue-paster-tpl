@@ -43,15 +43,6 @@ app.use(koaDevMiddleware)
 app.use(koaHotMiddleware)
 
 /* E - Express */
-app.use(function (req, res, next) {
-  const jsonData = `${process.cwd()}/mock/${req.url.split('?')[0]}.json`
-  if (!existsSync(jsonData)) {
-    return next()
-  }
-  res.setHeader('Content-Type', 'application/json')
-  res.setHeader('Content-Encoding', 'gzip')
-  return createReadStream(jsonData).pipe(createGzip()).pipe(res)
-})
 app.listen(port, function (err) {
   if (err) {
     console.log(err)
