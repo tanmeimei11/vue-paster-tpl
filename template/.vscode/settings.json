@@ -4,6 +4,9 @@
     "assets": "${workspaceRoot}/src/assets",
     "actions": "${workspaceRoot}/src/actions",
     "components": "${workspaceRoot}/src/components",
-    "units": "${workspaceRoot}/src/units"
+    "units": "${workspaceRoot}/src/units",
+    "stores": "${workspaceRoot}/src/stores",
+    "mixins": "${workspaceRoot}/src/mixins",
+    "mocks": "${workspaceRoot}/src/mocks"
   }
 }

@@ -5,7 +5,7 @@ import App from './App.vue'
 import {
   initPage
 } from 'units/common'
-import store from 'store'
+import store from 'stores'
 import 'assets/libs/jweixin-1.0.0.js'
 // import 'mocks'
 
