@@ -1,8 +1,7 @@
 <template>
   <div class="page">
-    Welcome
-    {{$store.state.count}}
-    <button @click="increment" >加一{{$store.state.increTimes}}</button>
+    Welcome {{$store.state.count}}
+    <button @click="increment">加一{{$store.state.increTimes}}</button>
     <button @click="decrement">减一{{$store.state.decreTimes}}</button>
     <div>
       userid:{{$store.state.user.id}} <br>name:{{$store.state.user.name}}
