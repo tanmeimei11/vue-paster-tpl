@@ -6,7 +6,7 @@ import mockMap from './config.js'
  * @param {String} url 请求地址
  * @param {Object} options 参数
  */
-const parseUrl = (url, options) => {
+const parseUrl = (url, options = {}) => {
   let anchor = document.createElement('a')
   anchor.href = url
   let querys = anchor.search.slice(1)
