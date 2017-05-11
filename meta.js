@@ -1,4 +1,4 @@
-{
+module.exports = {
   "prompts": {
     "name": {
       "type": "string",
@@ -29,5 +29,6 @@
     "src/pages/index/**/*.*":"vuex === 'yes'",
     "src/pages/demo/**/*.*":"vuex === 'no'"
   },
-  "skipInterpolation": "src/**/*.vue"
+  "skipInterpolation": "src/**/*.vue",
+  "completeMessage": "To get started:\n\n  cd {{destDirName}}"
 }
