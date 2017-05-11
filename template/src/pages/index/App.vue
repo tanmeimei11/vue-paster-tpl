@@ -1,5 +1,5 @@
 <template>
-  <div class="page" @click="diaryOpen(1)">
+  <div class="page" @click="diaryOpen('1aVMwEbE')">
     Welcome {{$store.state.count}}
     <button @click="increment">加一{{$store.state.increTimes}}</button>
     <button @click="decrement">减一{{$store.state.decreTimes}}</button>
@@ -16,7 +16,7 @@
     diary
   } from 'mixins/protocol'
   export default {
-    mixins: [diary],
+    mixins: [ diary ],
     methods: mapActions([
       'increment',
       'decrement'
