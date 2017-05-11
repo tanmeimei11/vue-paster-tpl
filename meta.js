@@ -25,10 +25,17 @@ module.exports = {
     }
   },
   "filters": {
-    "src/store/*.js":"vuex === 'yes'",
-    "src/pages/index/**/*.*":"vuex === 'yes'",
-    "src/pages/demo/**/*.*":"vuex === 'no'"
+    "src/store/*.js": "vuex === 'yes'",
+    "src/pages/index/**/*.*": "vuex === 'yes'",
+    "src/pages/demo/**/*.*": "vuex === 'no'"
   },
   "skipInterpolation": "src/**/*.vue",
-  "completeMessage": "To get started:\n\n  cd {{destDirName}}"
+  complete(data, {
+    logger,
+    chalk
+  }) {
+    if (!data.inPlace) {
+      logger.log(`cd ${chalk.yellow(data.destDirName)}`)
+    }
+  }
 }
