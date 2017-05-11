@@ -1,9 +1,10 @@
 import toast from 'iUtil/toast'
 import icommon from 'iUtil/common'
 import { iTrack } from 'i-ui'
-import share from 'iUtil/share'
 import { trackParam } from 'iUtil/track'
+import share from 'iUtil/share'
 import awake from 'iUtil/jsBridge'
+import 'iScss/base.scss'
 /**
  * 页面初始化 (设置分享、设置公共方法)
  * @param {Vue} Vue
