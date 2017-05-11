@@ -7,6 +7,7 @@
     <div>
       userid:{{$store.state.user.id}} <br>name:{{$store.state.user.name}}
     </div>
+    <Console></Console>
   </div>
 </template>
 <script>
