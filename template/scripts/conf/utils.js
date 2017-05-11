@@ -15,6 +15,7 @@ export const aliasObject = Object.assign(iuiAlias, {
   'components': env.assetsPath('src/components'),
   'units': env.assetsPath('src/units'),
   'stores': env.assetsPath('src/stores'),
+  'directives': env.assetsPath('src/directives'),
   'mixins': env.assetsPath('src/mixins'),
   'mocks': env.assetsPath('src/mocks')
 })

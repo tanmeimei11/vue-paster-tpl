@@ -1,8 +1,9 @@
 <template>
-  <div class="page" @click="diaryOpen('1aVMwEbE')">
+  <div class="page">
     Welcome {{$store.state.count}}
-    <button @click="increment">加一{{$store.state.increTimes}}</button>
+    <button class="add" @click="increment">加一{{$store.state.increTimes}}</button>
     <button @click="decrement">减一{{$store.state.decreTimes}}</button>
+    <button @click="diaryOpen('1aVMwEbE')">in记</button>
     <div>
       userid:{{$store.state.user.id}} <br>name:{{$store.state.user.name}}
     </div>
@@ -16,11 +17,13 @@
     diary
   } from 'mixins/protocol'
   export default {
-    mixins: [ diary ],
-    methods: mapActions([
-      'increment',
-      'decrement'
-    ]),
+    mixins: [diary],
+    methods: {
+      ...mapActions([
+        'increment',
+        'decrement'
+      ])
+    },
     created () {
       this.$store.dispatch('getUser')
     }

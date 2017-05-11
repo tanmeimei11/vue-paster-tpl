@@ -65,6 +65,7 @@ const qiniuToken = () => new Promise((resolve, reject) => {
 })
 
 const qiniuYun = (path, name, hash) => {
+  if (/.(json|gitkeep)$/.test(name)) return ''
   let prefixDir = `/usr/src/app/${path}`
   let relativeName = `${path}/${name}`
   let qiniuPath = `${prefixDir}/qiniu.json`

@@ -13,8 +13,7 @@ import {
 import {
   createReadStream,
   createWriteStream,
-  appendFileSync,
-  statSync
+  appendFileSync
 } from 'fs'
 import getEtag from '../plugins/qiniuHash.js'
 import {
@@ -30,6 +29,7 @@ const option = {
   }
 }
 const compress = (path, name, hash) => {
+  if (/.(json|gitkeep)$/.test(name)) return ''
   let prefixDir = `/usr/src/app/${path}`
   let relativeName = `${path}/${name}`
   let tinyPath = `${prefixDir}/tiny.json`

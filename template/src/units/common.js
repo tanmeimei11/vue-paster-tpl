@@ -9,8 +9,12 @@ import awake from 'iUtil/jsBridge'
  * @param {Vue} Vue
  * @param {Object} opts
  */
-export const initPage = (Vue, opts = {}) => {
+export const initPage = (Vue, opts) => {
   icommon.initIn()
+  opts = {
+    trackBase: `h5_promo_{{ name }}_${(location.pathname.split('/').slice(-1)[0].replace(/.html$/, '') || 'index')}`,
+    ...opts
+  }
   /**
    * 设置分享信息
    */
@@ -20,7 +24,7 @@ export const initPage = (Vue, opts = {}) => {
   /**
    * 设置页面打开埋点
    */
-  trackParam(opts.track || 'h5_promo_{{ name }}_index_enter')
+  trackParam(opts.track || `${opts.trackBase}_enter`)
   /**
     * 设置埋点指令
   */

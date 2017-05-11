@@ -7,6 +7,7 @@
     "units": "${workspaceRoot}/src/units",
     "stores": "${workspaceRoot}/src/stores",
     "mixins": "${workspaceRoot}/src/mixins",
+    "directives": "${workspaceRoot}/src/directives",
     "mocks": "${workspaceRoot}/src/mocks"
   }
 }
