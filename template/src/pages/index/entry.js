@@ -7,7 +7,7 @@ import {
 } from 'units/common'
 import store from 'store'
 import 'assets/libs/jweixin-1.0.0.js'
-import 'mocks'
+// import 'mocks'
 
 initPage(Vue, {
   share: {
