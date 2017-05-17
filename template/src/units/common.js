@@ -13,7 +13,7 @@ import 'iScss/base.scss'
 export const initPage = (Vue, opts) => {
   icommon.initIn()
   // 设置埋点的公共前缀
-  window._trackPrefix = `h5_promo_{{ name }}_${(location.pathname.split('/').slice(-1)[0].replace(/.html$/, '') || 'index')}`
+  window._trackPrefix = `h5_promo_{{ name }}_${(location.pathname.split('/').slice(-1)[0].replace(/.html$/, '') || 'index')}_`
   /**
    * 设置分享信息
    */
@@ -23,7 +23,7 @@ export const initPage = (Vue, opts) => {
   /**
    * 设置页面打开埋点
    */
-  trackParam(`_enter`)
+  trackParam(`enter`)
   /**
     * 设置埋点指令
   */
