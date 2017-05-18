@@ -1,0 +1,91 @@
+/**
+ * 设置canvas大小
+ * @param {canvas} canvas 
+ * @param {Number} width 不存在取样式宽度
+ * @param {Number} height 不存在先取宽，若无再取样式高度
+ */
+export function setSize (canvas, width, height) {
+  let style = window.getComputedStyle(canvas)
+  canvas.width = width || parseInt(style.width)
+  canvas.height = height || width || parseInt(style.height)
+}
+
+/**
+ * 画圆角矩形
+ * @param {Context} ctx Canvas的Context上下文
+ * @param {Number} x 左上角的X轴
+ * @param {Number} y 左上角的Y轴
+ * @param {Number} w 宽度
+ * @param {Number} h 高度
+ * @param {Number} r 圆角的半径
+ */
+export function drawRoundRect (ctx, x, y, w, h, r) {
+  if (w < 2 * r) r = w / 2
+  if (h < 2 * r) r = h / 2
+  ctx.beginPath()
+  ctx.moveTo(x + r, y)
+  ctx.arcTo(x + w, y, x + w, y + h, r)
+  ctx.arcTo(x + w, y + h, x, y + h, r)
+  ctx.arcTo(x, y + h, x, y, r)
+  ctx.arcTo(x, y, x + w, y, r)
+  ctx.closePath()
+}
+
+/**
+ * 画圆角矩形图片
+ * @param {Context} ctx Canvas的Context上下文
+ * @param {Image} img 图片素材
+ * @param {Number} x 左上角的X轴
+ * @param {Number} y 左上角的Y轴
+ * @param {Number} w 宽度
+ * @param {Number} h 高度
+ * @param {Number} r 圆角的半径
+ */
+export function drawRoundRectImage (ctx, img, x, y, w, h, r) {
+  ctx.save()
+  drawRoundRect(ctx, x, y, w, h, r)
+  ctx.clip()
+  ctx.drawImage(img,
+    0, 0, img.naturalWidth || img.width, img.naturalHeight || img.height,
+    x, y, w, h)
+  ctx.restore()
+}
+
+/**
+ * 下载图片
+ * @param {String} url  图片地址
+ */
+export function downloadImage (url) {
+  return new Promise((resolve, reject) => {
+    var img = new Image()
+    // cross domain (除了base64 和 当前域名)
+    if (/^data:image/.test(url) || RegExp(`^//${location.host}`).test(url)) {} else {
+      img.crossOrigin = ''
+    }
+    img.onload = () => resolve(img)
+    img.onerror = () => reject(img)
+    img.src = url.replace(/^https?:/, location.protocol)
+  })
+}
+
+/**
+ * 设置上下文为级联
+ * @param {Context} ctx Canvas的Context上下文
+ */
+export function setContextCascade (ctx) {
+  [
+    'beginPath', 'arc', 'arcTo', 'lineTo',
+    'moveTo', 'closePath', 'fill', 'stroke', 'fillRect',
+    'drawImage', 'save', 'restore', 'clip',
+    'scale', 'rotate', 'translate', 'transform'
+  ].forEach(method => {
+    let oldMethod = ctx[`${method}`]
+    if (!ctx[`${method}`].cascade) {
+      ctx[`${method}`].cascade = true
+      ctx[`${method}`] = (...arg) => {
+        oldMethod.apply(ctx, arg)
+        return ctx
+      }
+    }
+  })
+}
