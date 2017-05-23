@@ -58,8 +58,10 @@ export function drawRoundRectImage (ctx, img, x, y, w, h, r) {
 export function downloadImage (url) {
   return new Promise((resolve, reject) => {
     var img = new Image()
+    let anchor = document.createElement('a')
+    anchor.href = url
     // cross domain (除了base64 和 当前域名)
-    if (/^data:image/.test(url) || RegExp(`^//${location.host}`).test(url)) {} else {
+    if (/^data:image/.test(url) || location.host === anchor.host) {} else {
       img.crossOrigin = ''
     }
     img.onload = () => resolve(img)
