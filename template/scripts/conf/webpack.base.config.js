@@ -102,6 +102,14 @@ export default {
       }
     },
     {
+      test: /\.(eot|woff|ttf|eot)$/,
+      loader: 'file-loader',
+      query: {
+        name: 'fonts/[name].[hash:7].[ext]',
+        publicPath: '../'
+      }
+    },
+    {
       test: /\.pug$/,
       loader: 'pug-loader'
     }
