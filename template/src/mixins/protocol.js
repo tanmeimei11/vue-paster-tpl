@@ -13,7 +13,7 @@ export const diary = {
           awake(`in://diary/other?userid=${author}`)
         }
       } else {
-        location.href = `${location.protocol}//www.in66.com/user?uid=${author}`
+        location.href = `${location.protocol}//h5.in66.com/inpromo/inweb/in-share/in.html?uid=${author}`
       }
     }
   }
