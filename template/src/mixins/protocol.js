@@ -49,7 +49,7 @@ export const photo = {
           awake(`in://photodetail?pid=${photoId}`)
         }
       } else {
-        location.href = `${location.protocol}//www.in66.com/p/${photoId}`
+        location.href = `${location.protocol}//h5.in66.com/inpromo/inweb/in-share/share.html?pid=${photoId}`
       }
     }
   }
