@@ -24,11 +24,6 @@ module.exports = {
       ]
     }
   },
-  "filters": {
-    "src/store/*.js": "vuex === 'yes'",
-    "src/pages/index/**/*.*": "vuex === 'yes'",
-    "src/pages/demo/**/*.*": "vuex === 'no'"
-  },
   "skipInterpolation": "src/**/*.vue",
   complete(data, {
     logger,

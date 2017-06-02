@@ -15,9 +15,12 @@
   } from 'vuex'
   import {
     diary
-  } from 'mixins/protocol'
+  } from 'iMixins/inProtocol'
+  import {
+    track
+  } from 'iMixins/inPromo'
   export default {
-    mixins: [diary],
+    mixins: [diary, track],
     methods: {
       ...mapActions([
         'increment',
@@ -26,6 +29,8 @@
     },
     created () {
       this.$store.dispatch('getUser')
+      this.$utils.track('aa')
+      this.$track('aaa111aa')
     }
   }
 

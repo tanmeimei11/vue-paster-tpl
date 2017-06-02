@@ -3,9 +3,10 @@ import {
 } from '../../config'
 export const iuiAlias = {
   'iConfig': env.assetsPath('src/iConfig'),
-  'iMixins': 'i-ui/src/minins',
+  'iMixins': 'i-ui/src/mixins',
   'iScss': 'i-ui/src/scss',
   'iFiters': 'i-ui/src/fiters',
+  'iExtends': 'i-ui/src/extends',
   'iUtil': 'i-ui/src/utils'
 }
 
