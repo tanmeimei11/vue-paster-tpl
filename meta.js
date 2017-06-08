@@ -25,5 +25,5 @@ module.exports = {
     }
   },
   "skipInterpolation": "src/**/*.vue",
-  'completeMessage':'开始:\n\n  cd {{destDirName}}\n 如果不是活动要去掉 import \'assets/libs/growingio.js\''
+  'completeMessage':'cd {{destDirName}}\n 如果不是活动要去掉 import \'assets/libs/growingio.js\''
 }
