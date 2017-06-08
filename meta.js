@@ -29,6 +29,7 @@ module.exports = {
     logger,
     chalk
   }) {
+    logger.log('如果不是活动要去掉 import \'assets/libs/growingio.js\'')
     if (!data.inPlace) {
       logger.log(`cd ${chalk.yellow(data.destDirName)}`)
     }
