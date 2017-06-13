@@ -31,7 +31,7 @@ export const initMethod = Vue => {
     },
     $InApp: {
       get () {
-        return icommon.InApp
+        return icommon.isInApp
       }
     }
   })
