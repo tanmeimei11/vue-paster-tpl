@@ -44,7 +44,7 @@
 @mixin initImgPos($val){
     @include size(nth($val,1) nth($val,2));
     @include pos(absolute,nth($val,3) null null nth($val,4));
-    @include bgContain(nth($val,5))
+    @include bg(nth($val,5))
 }
 // contain的背景图
 @mixin bg($url,$size:contain){
