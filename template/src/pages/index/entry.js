@@ -12,14 +12,18 @@ import 'assets/libs/growingio.js'
 {{/if_eq}}
 // 设置全局vue方法,也可以不用
 import { initMethod, SHARE_CONFIG, TRACK_PREFIX } from 'units/common' 
-{{#if_eq vuex "yes"}}import store from 'stores'{{/if_eq}}
+{{#if_eq vuex "yes"}}
+import store from 'stores'
+{{/if_eq}}
 // import 'mocks'
 
 // 设置埋点的公共前缀
 window._trackPrefix = TRACK_PREFIX
 
 new InVue({
-  {{#if_eq vuex "yes"}}store,{{/if_eq}}
+  {{#if_eq vuex "yes"}}
+  store,
+  {{/if_eq}}
   plugins: [iTrack, initMethod], // 类似vue.use
   track: 'enter', // 设置页面打开埋点
   share: {
