@@ -8,8 +8,8 @@ export const build = {
   entryRule: ['entry.js', 'tpl.pug'],
   remUnit: 75,
   imgRegx: {
-    compress: ['src/assets/img/**.*'],
-    qiniu: ['src/assets/qiniu/**.*']
+    compress: ['src/assets/img/**/**.*'],
+    qiniu: ['src/assets/qiniu/**/**.*']
   },
   bundleAnalyzerReport: process.env.npm_config_report
 }
