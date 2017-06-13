@@ -22,7 +22,20 @@ module.exports = {
         "yes",
         "no"
       ]
+    }, 
+    "growingIO": {
+      "type": "list",
+      "message": "GrowingIO(埋点)",
+      "choices": [
+        "yes",
+        "no"
+      ]
     }
+  },
+  "filters": {
+    "src/store/*.js": "vuex === 'yes'",
+    "src/pages/index/**/*.*": "vuex === 'yes'",
+    "src/pages/example/**/*.*": "vuex === 'no'"
   },
   "skipInterpolation": "src/**/*.vue",
   'completeMessage':'cd {{destDirName}}\n 如果不是活动要去掉 import \'assets/libs/growingio.js\''
