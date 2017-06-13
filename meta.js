@@ -33,10 +33,8 @@ module.exports = {
     }
   },
   "filters": {
-    "src/store/*.js": "vuex === 'yes'",
-    "src/pages/index/**/*.*": "vuex === 'yes'",
-    "src/pages/example/**/*.*": "vuex === 'no'"
+    "src/stores/*.js": "vuex === 'yes'"
   },
   "skipInterpolation": "src/**/*.vue",
-  'completeMessage':'cd {{destDirName}}\n 如果不是活动要去掉 import \'assets/libs/growingio.js\''
+  'completeMessage':'cd {{destDirName}}\n'
 }

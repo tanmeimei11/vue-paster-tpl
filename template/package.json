@@ -15,7 +15,7 @@
   "dependencies": {
     "core-js": "^2.4.1",
     "i-ui": "0.1.27",
-    {{#if_eq vuex "yes"}};
+    {{#if_eq vuex "yes"}}
     "vuex": "^2.2.1",
     {{/if_eq}}
     "whatwg-fetch": "^2.0.3"
