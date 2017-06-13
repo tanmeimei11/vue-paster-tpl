@@ -6,8 +6,10 @@ import 'iScss/base.scss'
 import App from './App.vue'
 // 微信分享的sdk
 import 'assets/libs/jweixin-1.0.0.js' 
-// 活动必须的growingio埋点,其他的不用
-{{#if_eq growingIO "yes"}}import 'assets/libs/growingio.js'{{/if_eq}}
+{{#if_eq growingIO "yes"}}
+// 活动必须的growingio埋点
+import 'assets/libs/growingio.js'
+{{/if_eq}}
 // 设置全局vue方法,也可以不用
 import { initMethod, SHARE_CONFIG, TRACK_PREFIX } from 'units/common' 
 {{#if_eq vuex "yes"}}import store from 'stores'{{/if_eq}}
