@@ -1,6 +1,4 @@
-
-import mockMap from './config.js'
-
+let mockMap = {}
 /**
  * 解析url
  * @param {String} url 请求地址
@@ -55,7 +53,7 @@ const isObjectValueEqual = (a, b) => {
 /**
  * 判断是否包含
  */
-export const mockRegex = parseData => {
+const mockRegex = parseData => {
   if (parseData.pathname in mockMap) {
     let info = mockMap[`${parseData.pathname}`]
     if (!~Object.prototype.toString.call(info).indexOf('Array')) {
@@ -98,5 +96,6 @@ const injectFetch = oldFetch => (url, options) => {
 }
 
 if (process.env.NODE_ENV !== 'production') {
+  mockMap = require('./config.js').default
   window.fetch = injectFetch(window.fetch)
 }
