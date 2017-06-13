@@ -47,7 +47,7 @@
     @include bgContain(nth($val,5))
 }
 // contain的背景图
-@mixin bg($url,$size:'contain'){
+@mixin bg($url,$size:contain){
     background: url(#{$url}) no-repeat center/#{$size};
 }
 
