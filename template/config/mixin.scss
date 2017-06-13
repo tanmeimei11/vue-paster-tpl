@@ -1,8 +1,4 @@
-/*
-[method] absolute 定位
-[param]  $left 左边
-[param]  $top 右边
-*/
+// $name 定位类型  $position 上 右 下 左
 @mixin pos($name, $position) {
   position: $name;
   top: nth($position,1);
@@ -10,10 +6,7 @@
   bottom: nth($position,3);
   left: nth($position,4);
 }
-/*
-[method] 大小
-[param]  $size 宽度 高度
-*/
+// 大小 $size 宽度 高度
 @mixin size($size){
   $w:nth($size,1);
   $h:$w;
@@ -23,71 +16,39 @@
   width: $w;
   height: $h;
 }
-
-/*
-[method] 箭头左
-[param] 宽度 高度 颜色
-*/
+// 箭头左 宽度 高度 颜色
 @mixin arrowL($width,$height,$color){
   border: $height/2 solid transparent;
   border-right: $width solid $color;
   border-left: none;
 }
-
-/*
-[method] 箭头右
-[param] 宽度 高度 颜色
-*/
+// 箭头右 宽度 高度 颜色
 @mixin arrowR($width,$height,$color){
   border: $height/2 solid transparent;
   border-left: $width solid $color;
   border-right: none;
 }
-
-
-/*
-[method] 箭头上
-[param] 宽度 高度 颜色
-*/
+// 箭头上 宽度 高度 颜色
 @mixin arrowT($width,$height,$color){
   border: $width/2 solid transparent;
   border-bottom: $height solid $color;
   border-top: none;
 }
-
-
-/*
-[method] 箭头下
-[param] 宽度 高度 颜色
-*/
+// 箭头下 宽度 高度 颜色
 @mixin arrowB($width,$height,$color){
   border: $width/2 solid transparent;
   border-top: $height solid $color;
   border-bottom: none;
 }
-
-/*
-[method] 背景图定位
-[param] 宽度 高度 位置(top right bottom left) 背景图
-*/
+// 背景图定位 宽度 高度 位置(top right bottom left) 背景图
 @mixin initImgPos($val){
     @include size(nth($val,1) nth($val,2));
     @include pos(absolute,nth($val,3) null null nth($val,4));
-    background-image: url(#{nth($val,5)});
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+    @include bgContain(nth($val,5))
 }
-
-/*
-[method] contain的背景图
-[param]
-*/
-@mixin bgContain($url){
-    background-image: url(#{$url});
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+// contain的背景图
+@mixin bg($url,$size:'contain'){
+    background: url(#{$url}) no-repeat center/#{$size};
 }
 
 
