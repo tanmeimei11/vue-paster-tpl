@@ -35,6 +35,13 @@ module.exports = {
   "filters": {
     "src/stores/*.js": "vuex === 'yes'"
   },
+  "metalsmith": function (metalsmith, opts, helpers) {
+    function customMetalsmithPlugin (files, metalsmith, done) {
+      console.log(files)
+      done(null, files)
+    }
+    metalsmith.use(customMetalsmithPlugin)
+  },
   "skipInterpolation": "src/**/*.vue",
   'completeMessage':'cd {{destDirName}}\n'
 }
