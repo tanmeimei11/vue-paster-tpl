@@ -39,6 +39,6 @@ new InVue({
 // 设置分享图的方法 如果本地方法
 // shareImg : `{{ name }}/${require('../../assets/img/share.jpg')}`
 // 修改分享的方法 mixin ,可以直接修改某个字段 this.$utils.share.???=???
-// import { share } from 'iMixins/inProtocol'
+// import { share } from 'iMixins/inPromo'
 // 修改分享的方法  share.config.??? = ???
 // import share  from 'iUtil/share' 
