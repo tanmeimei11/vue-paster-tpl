@@ -50,7 +50,22 @@
 @mixin bg($url,$size:contain){
     background: url(#{$url}) no-repeat center/#{$size};
 }
-
-
+// 多背景 地址前置 地址后缀 张数 高度 最后一个高度
+@mixin bgs($urlPrefix, $urlSuffix, $len, $h, $lastH, $w:750px) {
+  $bg: '';
+  @for $i from 1 through $len {
+    $url: url(#{$urlPrefix}#{$i}#{$urlSuffix}) no-repeat;
+    @if $i==1 {
+      $bg: $url center 0px, ;
+    }
+    @else if $i==$len {
+      $bg:append($bg, $url center #{($i - 1)*$h}/$w $lastH);
+    }
+    @else {
+      $bg:append($bg, $url center #{($i - 1)*$h}/$w $h);
+    }
+  }
+  background:$bg;
+}
 
 
