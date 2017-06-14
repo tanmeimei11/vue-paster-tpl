@@ -8,6 +8,11 @@
     "stores": "${workspaceRoot}/src/stores",
     "mixins": "${workspaceRoot}/src/mixins",
     "directives": "${workspaceRoot}/src/directives",
-    "mocks": "${workspaceRoot}/src/mocks"
+    "mocks": "${workspaceRoot}/src/mocks",
+    "iMixins": "${workspaceRoot}/node_modules/i-ui/src/mixins",
+    "iScss": "${workspaceRoot}/node_modules/i-ui/src/scss",
+    "iFiters": "${workspaceRoot}/node_modules/i-ui/src/fiters",
+    "iExtends": "${workspaceRoot}/node_modules/i-ui/src/extends",
+    "iUtil": "${workspaceRoot}/node_modules/i-ui/src/utils"
   }
 }
