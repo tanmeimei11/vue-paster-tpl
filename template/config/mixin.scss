@@ -56,7 +56,7 @@
   @for $i from 1 through $len {
     $url: url(#{$urlPrefix}#{$i}#{$urlSuffix}) no-repeat;
     @if $i==1 {
-      $bg: $url center 0px, ;
+      $bg: $url center 0px/$w $h, ;
     }
     @else if $i==$len {
       $bg:append($bg, $url center #{($i - 1)*$h}/$w $lastH);
