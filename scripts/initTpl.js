@@ -65,4 +65,6 @@ metalsmith
     .clean(false)
     .source('.') // start from template root instead of `./src` which is Metalsmith's default for `source`
     .destination(name)
-    .build(function (err) {})
+    .build(function (err) {
+        console.log('done')
+    })

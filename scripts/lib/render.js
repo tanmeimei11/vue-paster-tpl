@@ -1,6 +1,6 @@
 const render = require('consolidate').handlebars.render
 const async = require('async')
-
+var match = require('minimatch')
 module.exports = function (skipInterpolation) {
     return function (files, metalsmith, done) {
         var keys = Object.keys(files)
