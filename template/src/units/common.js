@@ -45,4 +45,4 @@ export const SHARE_CONFIG = {
   shareTrack: 'share'
 }
 
-export const TRACK_PREFIX = `h5_promo_pr-zhenhunjie_${(location.pathname.split('/').slice(-1)[0].replace(/.html$/, '') || 'index')}_`
+export const TRACK_PREFIX = `h5_promo_{{ name }}_${(location.pathname.split('/').slice(-1)[0].replace(/.html$/, '') || 'index')}_`

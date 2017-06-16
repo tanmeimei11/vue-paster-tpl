@@ -19,6 +19,7 @@
   "devDependencies": {
     "async": "^2.4.1",
     "consolidate": "^0.14.5",
+    "cross-spawn": "^5.1.0",
     "handlebars": "^4.0.10",
     "inquirer": "^3.1.0",
     "metalsmith": "^2.3.0",

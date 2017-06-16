@@ -1,6 +1,13 @@
 vue-paster-tpl
 ==
 
+## 模版测试
+```shell
+ npm test 
+ cd tests
+ npm start
+```
+
 ## 技术栈
 
 *   [webpack2](http://www.css88.com/doc/webpack2/)
