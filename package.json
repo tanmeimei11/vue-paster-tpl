@@ -17,7 +17,11 @@
     "url": "git+ssh://git@githost.in66.cc:in-template/vue-paster-tpl.git"
   },
   "devDependencies": {
+    "async": "^2.4.1",
+    "consolidate": "^0.14.5",
     "handlebars": "^4.0.10",
-    "metalsmith": "^2.3.0"
+    "inquirer": "^3.1.0",
+    "metalsmith": "^2.3.0",
+    "minimatch": "^3.0.4"
   }
 }
