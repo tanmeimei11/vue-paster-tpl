@@ -9,8 +9,15 @@
     "vue",
     "multipage"
   ],
+  "scripts": {
+    "test": "node ./scripts/initTpl.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@githost.in66.cc:in-template/vue-paster-tpl.git"
+  },
+  "devDependencies": {
+    "handlebars": "^4.0.10",
+    "metalsmith": "^2.3.0"
   }
 }

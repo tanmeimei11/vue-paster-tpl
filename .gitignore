@@ -1,6 +1,6 @@
 .DS_Store
 *.log
-
+node_modules
 template/node_modules
 template/dist
 npm-debug.log
