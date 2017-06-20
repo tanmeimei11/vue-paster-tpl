@@ -4,6 +4,8 @@ import { iTrack } from 'i-ui'
 import InVue from 'iExtends/InVue.js'
 import 'iScss/base.scss'
 import App from './App.vue'
+// 灰灰的sdk
+import 'assets/libs/web-analytics'
 // 微信分享的sdk
 import 'assets/libs/jweixin-1.0.0.js' 
 {{#if_eq growingIO "yes"}}
