@@ -22,7 +22,7 @@ module.exports = {
         "yes",
         "no"
       ]
-    }, 
+    },
     "growingIO": {
       "type": "list",
       "message": "GrowingIO(埋点)",
@@ -33,8 +33,9 @@ module.exports = {
     }
   },
   "filters": {
+    "node_modules/**": false,
     "src/stores/*.js": "vuex === 'yes'"
   },
   "skipInterpolation": "src/**/*.vue",
-  'completeMessage':'cd {{destDirName}}\n'
+  'completeMessage': 'cd {{destDirName}}\n'
 }

@@ -1,4 +1,8 @@
 {
+  "name": "{{ name }}",
+  "version": "1.0.0",
+  "description": "{{ description }}",
+  "author": "{{ author }}",
   "private": true,
   "scripts": {
     "dstart": "docker run -it --rm -v ${PWD}:/usr/src/app -p 8018:8018  jiuyan/vuetpl:0.0.2 npm run start",
@@ -14,7 +18,7 @@
   },
   "dependencies": {
     "core-js": "^2.4.1",
-    "i-ui": "0.1.27",
+    "i-ui": "0.1.28",
     {{#if_eq vuex "yes"}}
     "vuex": "^2.2.1",
     {{/if_eq}}
