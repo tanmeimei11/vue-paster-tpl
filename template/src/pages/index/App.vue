@@ -14,11 +14,17 @@
     api 
   } from 'mixins/api'
 
+  import { mapActions } from 'vuex'
   export default {
     mixins: [diary, track, api],
+    methods: mapActions([
+      'getUser'
+    ]),
     created () {
       this.$track('aaa111aa')
-      this.$api.getUser()
+      // this.$api.getUser({page: 1, page_size: 3})
+      // this.polling({name: 'getUser'})
+      // this.getUser()
     }
   }
 

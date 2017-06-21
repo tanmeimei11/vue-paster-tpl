@@ -1,5 +1,4 @@
-import API from 'actions'
-
+import { api } from '../units/fetchApi'
 const state = {
   count: 0,
   increTimes: 0,
@@ -16,9 +15,9 @@ const actions = {
     commit
   }) => commit('decrement'),
   getUser ({
-    commit
+    commit, a
   }) {
-    API.getUser()
+    api.getUser()
       .then((res) => {
         if (res.succ) {
           commit('getUser', res.data)

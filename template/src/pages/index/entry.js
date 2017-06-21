@@ -13,14 +13,15 @@ import 'assets/libs/jweixin-1.0.0.js'
 import 'assets/libs/growingio.js'
 {{/if_eq}}
 // 设置全局vue方法,也可以不用
-import { initMethod, SHARE_CONFIG, TRACK_PREFIX } from 'units/common' 
+import { initMethod } from 'units/common' 
+import { shareMap, trackPrefix } from 'config' 
 {{#if_eq vuex "yes"}}
 import store from 'stores'
 {{/if_eq}}
 import 'mocks'
 
 // 设置埋点的公共前缀
-window._trackPrefix = TRACK_PREFIX
+window._trackPrefix = trackPrefix 
 
 new InVue({
   {{#if_eq vuex "yes"}}
@@ -29,11 +30,11 @@ new InVue({
   plugins: [iTrack, initMethod], // 类似vue.use
   track: 'enter', // 设置页面打开埋点
   share: {
-    shareTitle: SHARE_CONFIG.shareTitle, // 分享标题
-    shareDesc: SHARE_CONFIG.shareDesc, // 分享描述
-    shareLink: SHARE_CONFIG.shareLink,
-    shareImg: SHARE_CONFIG.shareImg,
-    shareTrack: SHARE_CONFIG.shareTrack
+    shareTitle: shareMap.shareTitle, // 分享标题
+    shareDesc: shareMap.shareDesc, // 分享描述
+    shareLink: shareMap.shareLink,
+    shareImg: shareMap.shareImg,
+    shareTrack: shareMap.shareTrack
   },
   api: {
     getUser: '/promo/userapi/currentuser'
