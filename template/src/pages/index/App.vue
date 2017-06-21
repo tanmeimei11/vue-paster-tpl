@@ -10,11 +10,15 @@
   import {
     track
   } from 'iMixins/inPromo'
+  import {
+    api 
+  } from 'mixins/api'
+
   export default {
-    mixins: [diary, track],
+    mixins: [diary, track, api],
     created () {
-      this.$utils.track('aa')
       this.$track('aaa111aa')
+      this.$api.getUser()
     }
   }
 

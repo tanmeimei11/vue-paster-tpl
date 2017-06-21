@@ -19,7 +19,7 @@ export const env = {
   port: 8018,
   autoOpenBrowser: true,
   proxyTable: {
-    '/promo': {
+    '/promo1': {
       target: 'http://58.215.141.112',
       secure: false,
       changeOrigin: true,

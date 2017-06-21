@@ -1,7 +1,7 @@
 import {
   buildGetParam,
   buildPostParam
-} from './build'
+} from '../units/params'
 import {
   U_IN,
   U_IN_QA
@@ -74,14 +74,59 @@ const error = error => {
 
 // 通用参数
 const baseParam = {
-  promo_name: '{{ name }}'
+  // promo_name: '{{ name }}'
 }
 
-/**
- *  请求地址
- */
-const API = FetchApi(baseParam, {
-  getUser: '/promo/userapi/currentuser'
-}, error)
+export const api = {
+  created: function () {
+    // this.$api.getUser({page: 1, page_size: 3})
+    this.$api = FetchApi(baseParam, {
+      getUser: '/promo/userapi/currentuser'
+    }, error)
 
-export default API
+    // this.$apiPromise({name: 'getUser', params: {page: 1, page_size: 3}}).then(() => {
+    //   console.log(0)   
+    // }, () => {
+    //   console.log(11)   
+    // })
+    this.$apiPromise = (options) => {
+      options.params = options.params || {}
+      return new Promise((resolve, reject) => {
+        this.$api[options.name](options.params).then(res => {
+          if (res.succ) {
+            resolve(res) 
+          } else {
+            reject(res)
+          }
+        })
+      })
+    }
+  },
+  methods: {
+    // this.polling({
+    //   name: 'getUser', 
+    //   params: {page: 1, page_size: 3}, 
+    //   succ: () => {
+    //     console.log(123)
+    //   },
+    //   isStop: () => {
+    //     return false
+    //   }
+    // })
+    polling (options) {
+      let timeOut = setTimeout(() => {
+        this.$apiPromise(options).then(
+          (result) => {
+            if (timeOut) { clearTimeout(timeOut) }
+            options.succ && options.succ(result) 
+            if (!(options.isStop && options.isStop()) || !options.isStop) {
+              this.polling(options) 
+            }
+          }, 
+          (err) => {
+            console.log(err) 
+          })
+      }, options.interval || 2000)    
+    }
+  } 
+}
