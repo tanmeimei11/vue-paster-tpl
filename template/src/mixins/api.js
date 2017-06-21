@@ -74,7 +74,7 @@ const error = error => {
 
 // 通用参数
 const baseParam = {
-  // promo_name: '{{ name }}'
+  promo_name: '{{ name }}'
 }
 
 export const api = {
