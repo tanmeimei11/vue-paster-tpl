@@ -35,6 +35,9 @@ new InVue({
     shareImg: SHARE_CONFIG.shareImg,
     shareTrack: SHARE_CONFIG.shareTrack
   },
+  api: {
+    getUser: '/promo/userapi/currentuser'
+  },
   render: h => h(App)
 }).$mount('#app')
 

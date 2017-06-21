@@ -80,9 +80,8 @@ const baseParam = {
 export const api = {
   created: function () {
     // this.$api.getUser({page: 1, page_size: 3})
-    this.$api = FetchApi(baseParam, {
-      getUser: '/promo/userapi/currentuser'
-    }, error)
+    let apiMap = this.$root.$options.api || {}
+    this.$api = FetchApi(baseParam, apiMap, error)
 
     // this.$apiPromise({name: 'getUser', params: {page: 1, page_size: 3}}).then(() => {
     //   console.log(0)   
