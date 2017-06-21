@@ -17,7 +17,7 @@ import { initMethod, SHARE_CONFIG, TRACK_PREFIX } from 'units/common'
 {{#if_eq vuex "yes"}}
 import store from 'stores'
 {{/if_eq}}
-// import 'mocks'
+import 'mocks'
 
 // 设置埋点的公共前缀
 window._trackPrefix = TRACK_PREFIX
