@@ -5,19 +5,16 @@ import 'iScss/base.scss'
 import 'assets/libs/web-analytics'
 // 微信分享sdk
 import 'assets/libs/jweixin-1.0.0.js' 
-
 {{#if_eq growingIO "yes"}}
 // 活动必须的growingio埋点
 import 'assets/libs/growingio.js'
 {{/if_eq}}
-
 {{#if_eq vuex "yes"}}
 import store from 'stores'
 {{/if_eq}}
 
 import InVue from 'extends/inVue'
 import App from './App.vue'
-
 import 'mocks'
 
 new InVue({
