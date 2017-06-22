@@ -1,3 +1,4 @@
+import { mock } from 'config' 
 let mockMap = {}
 /**
  * 解析url
@@ -95,7 +96,7 @@ const injectFetch = oldFetch => (url, options) => {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' && mock) {
   mockMap = require('./config.js').default
   window.fetch = injectFetch(window.fetch)
 }

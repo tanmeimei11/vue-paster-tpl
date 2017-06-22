@@ -8,20 +8,14 @@
     diary
   } from 'iMixins/inProtocol'
   import {
-    track
-  } from 'iMixins/inPromo'
-  import {
     api 
   } from 'mixins/api'
 
-  import { mapActions } from 'vuex'
+  // import { mapActions } from 'vuex'
   export default {
-    mixins: [diary, track, api],
-    methods: mapActions([
-      'getUser'
-    ]),
+    mixins: [api, diary],
     created () {
-      this.$track('aaa111aa')
+      this.$track('Hello world!')
       // this.$api.getUser({page: 1, page_size: 3})
       // this.polling({name: 'getUser'})
       // this.getUser()
