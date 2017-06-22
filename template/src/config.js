@@ -1,6 +1,3 @@
-// mock 测试数据 
-export const mock = true 
-
 // api map
 export const apiMap = {
   getUser: '/promo/userapi/currentuser'
@@ -17,15 +14,16 @@ export const shareMap = (location) => {
   }
 }
 
+// 设置页面打开埋点
+export const track = 'enter'
 // 设置埋点的公共前缀
 export const trackPrefix = (location) => {
   return `h5_promo_{{ name }}_${(location.pathname.split('/').slice(-1)[0].replace(/.html$/, '') || 'index')}_`
 }
 
-// 设置页面打开埋点
-export const track = 'enter'
-
-// 设置热加载，需重启 
+// 使用mock  
+export const mock = true 
+// 修改代理设置，需重启 
 export const proxyTable = {
   '/promo': {
     target: 'http://58.215.141.112',
