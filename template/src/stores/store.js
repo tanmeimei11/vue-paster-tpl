@@ -15,7 +15,7 @@ const actions = {
     commit
   }) => commit('decrement'),
   getUser ({
-    commit, a
+    commit 
   }) {
     api.getUser()
       .then((res) => {
