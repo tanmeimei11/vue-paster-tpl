@@ -7,7 +7,8 @@ Modify `hosts`
 10.10.105.86 npm.dot.com
 ```
 ``` bash 
-$ npm i in-cli -g --registry http://10.10.105.86
+$ npm i in-cli -g --registry http://npm.dot.com
+& npm run test
 ```
 
 
