@@ -10,7 +10,7 @@
     "multipage"
   ],
   "scripts": {
-    "test": "node ./scripts/initTpl.js"
+    "test": "in-create tests ../"
   },
   "repository": {
     "type": "git",
