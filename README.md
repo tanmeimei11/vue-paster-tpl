@@ -1,7 +1,7 @@
 vue-paster-tpl
 ==
 
-## 模版测试 (in-cli版本必须大于0.0.8)
+## 模版测试 (in-cli版本必须>=0.0.8)
 Modify `hosts`
 ``` vim
 10.10.105.86 npm.dot.com
