@@ -1,3 +1,7 @@
+// 0 - mounted 挂载时隐藏 
+// 1 - manual 手动隐藏 this.$hide
+export const hideGlobalLoading = 0 
+
 // api map
 export const apiMap = {
   getUser: '/promo/userapi/currentuser'
@@ -23,6 +27,19 @@ export const trackPrefix = (location) => {
 
 // 使用mock  
 export const mock = true 
+// mock的配置
+export const mockMap = () => {
+  return {
+    '/promo/userapi/currentuser': require('mocks/json/user.json')
+  // '/promo/userapi/currentuser': [{
+  //   params: {
+  //     'promo_name': '{{ name }}'
+  //   },
+  //   data: require('./json/user.json')
+  // }]
+  }
+}
+
 // 修改代理设置，需重启 
 export const proxyTable = {
   '/promo': {

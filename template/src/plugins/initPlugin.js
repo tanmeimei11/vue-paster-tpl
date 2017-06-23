@@ -7,11 +7,16 @@ import common from 'iUtil/common'
 import share from 'iUtil/share'
 import awake from 'iUtil/jsBridge' 
 import { trackParam } from 'iUtil/track'
-import { inpromo } from 'mixins/inPromo'
 
 export const initPlugin = Vue => {
   let eventHub = new Vue()
   Object.defineProperties(Vue.prototype, {
+    $hide: {
+      get () {
+        document.getElementById('global-loading').style.display = 'none'
+        return true
+      }
+    },
     $eventHub: {
       get () {
         return eventHub
@@ -43,12 +48,12 @@ export const initPlugin = Vue => {
       }
     }
   })
-  Vue.mixin({
-    created: function () {
-      if (this.isInVue) {
-        inpromo.created.call(this)
-      }
-    }
-  })
+  // Vue.mixin({
+  //   created: function () {
+  //     if (this.isInVue) {
+  //       inpromo.created.call(this)
+  //     }
+  //   },
+  // })
 }
 

@@ -15,8 +15,8 @@
   export default {
     mixins: [api, diary],
     created () {
-      this.$track('Hello world!')
-      // this.$api.getUser({page: 1, page_size: 3})
+      this.$track('helloWorld!')
+      this.$api.getUser({page: 1, page_size: 3})
       // this.polling({name: 'getUser'})
       // this.getUser()
     }

@@ -1,5 +1,5 @@
-import { mock } from 'config' 
-let mockMap = {}
+import { mock, mockMap } from 'config' 
+let mockMapData = {}
 /**
  * 解析url
  * @param {String} url 请求地址
@@ -55,8 +55,8 @@ const isObjectValueEqual = (a, b) => {
  * 判断是否包含
  */
 const mockRegex = parseData => {
-  if (parseData.pathname in mockMap) {
-    let info = mockMap[`${parseData.pathname}`]
+  if (parseData.pathname in mockMapData) {
+    let info = mockMapData[`${parseData.pathname}`]
     if (!~Object.prototype.toString.call(info).indexOf('Array')) {
       return {
         succ: true,
@@ -97,6 +97,6 @@ const injectFetch = oldFetch => (url, options) => {
 }
 
 if (process.env.NODE_ENV !== 'production' && mock) {
-  mockMap = require('./config.js').default
+  mockMapData = mockMap()
   window.fetch = injectFetch(window.fetch)
 }

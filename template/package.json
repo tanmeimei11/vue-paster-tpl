@@ -1,8 +1,4 @@
 {
-  "name": "{{ name }}",
-  "version": "1.0.0",
-  "description": "{{ description }}",
-  "author": "{{ author }}",
   "private": true,
   "scripts": {
     "dstart": "docker run -it --rm -v ${PWD}:/usr/src/app -p 8018:8018  jiuyan/vuetpl:0.0.2 npm run start",
