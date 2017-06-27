@@ -1,4 +1,4 @@
-import { buildGetParam, buildPostParam } from './build'
+import { buildGetParam, buildPostParam } from './params'
 import { U_IN, U_IN_QA } from 'iConfig'
 /**
  * 如果是线上则访问 www.in66.com
