@@ -11,27 +11,23 @@ const isArray = val => Object.prototype.toString.call(val) === '[object Array]'
 
 /**
  * 遍历请求参数
- * @param {object} param 
- * @param {function} append 
+ * @param {object} param 参数
+ * @param {function} append 回调方法
  */
 const analyseParam = (param, append) => buildParam('', param, append)
 
 /**
  * 构建参数 
- * @param {string} prefix 
- * @param {object} param
- * @param {function} append 
+ * @param {string} prefix key的前缀
+ * @param {object} param  参数
+ * @param {function} append 回调方法
  */
 const buildParam = (prefix, param, append) => {
-  if (isObj(param)) {
+  if (isObj(param) || isArray(param)) {
     Object.keys(param).forEach(key => {
-      let _prefix = prefix === '' ? key : `${prefix}[${key}]`
-      buildParam(_prefix, param[`${key}`], append)
-    })
-  } else if (isArray(param)) {
-    param.forEach((key, idx) => {
-      let _idx = isObj(key) || isArray(key) ? idx : ``
-      buildParam(`${prefix}[${_idx}]`, key, append)
+      let val = param[`${key}`]
+      let _key = isObj(val) || isArray(val) || isObj(param) ? key : ``
+      buildParam(prefix === '' ? key : `${prefix}[${_key}]`, val, append)
     })
   } else {
     append(`${prefix}`, param)
