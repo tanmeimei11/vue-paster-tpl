@@ -1,5 +1,15 @@
 import { mock, mockMap } from 'config' 
 let mockMapData = {}
+
+const parseData = (key, val, refData) => {
+  if (/\[\]$/.test(key)) {
+    key = key.replace(/\[\]$/, '')
+    refData[`${key}`] = refData[`${key}`] || []
+    refData[`${key}`].push(val)
+  } else {
+    refData[`${key}`] = val
+  }
+}
 /**
  * 解析url
  * @param {String} url 请求地址
@@ -13,12 +23,12 @@ const parseUrl = (url, options = {}) => {
   if (querys) {
     querys.split('&').forEach(query => {
       let item = query.split('=')
-      params[`${decodeURIComponent(item[0])}`] = decodeURIComponent(item[1])
+      parseData(`${decodeURIComponent(item[0])}`, `${decodeURIComponent(item[1])}`, params)
     })   
   }
   if (options.body instanceof FormData) {
     [...options.body.keys()].forEach(key => {
-      params[`${key}`] = options.body.get(key)
+      parseData(key, options.body.get(key), params)
     })
   }
   return {
