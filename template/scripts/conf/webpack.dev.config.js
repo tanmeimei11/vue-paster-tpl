@@ -19,7 +19,6 @@ export default new Config().extend({
   entry: {
     vendor: ['vue', 'core-js/fn/promise', 'whatwg-fetch', env.assetsPath('scripts/es/dev-client.es.js')]
   },
-  devtool: '#source-map',
   plugins: [
     new webpack.EnvironmentPlugin({
       NODE_ENV: JSON.stringify('development'),
@@ -30,6 +29,10 @@ export default new Config().extend({
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity
+    }),
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[name].js.map',
+      exclude: ['vendor.js']
     })
   ]
 })
