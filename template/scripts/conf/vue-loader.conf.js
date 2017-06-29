@@ -21,11 +21,11 @@ const generateLoaders = loader => {
   if (loader) {
     loaders.push({
       loader: loader + '-loader',
-      options: {
+      options: loader === 'sass' ? {
         sourceMap: !isProduction,
         includePaths: [env.assetsPath('src')],
-        data: "@import 'config/mixin';"
-      }
+        data: "@import 'config/mixin';" 
+      } : {}
     })
   }
   if (isProduction) {
