@@ -33,7 +33,7 @@ module.exports = {
     },
     "analytics": {
       "type": "list",
-      "message": "添加灰灰的网络监控",
+      "message": "灰灰的网络监控",
       "choices": [
         "yes",
         "no"
