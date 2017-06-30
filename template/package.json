@@ -22,6 +22,9 @@
     {{#if_eq vuex "yes"}}
     "vuex": "^2.2.1",
     {{/if_eq}}
+    {{#if_eq analytics "yes"}}
+    "analytics": "git+ssh://git@githost.in66.cc/unpkg/analytics",
+    {{/if_eq}}
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {

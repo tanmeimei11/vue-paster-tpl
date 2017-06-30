@@ -30,6 +30,14 @@ module.exports = {
         "yes",
         "no"
       ]
+    },
+    "analytics": {
+      "type": "list",
+      "message": "添加灰灰的网络监控",
+      "choices": [
+        "yes",
+        "no"
+      ]
     }
   },
   "filters": {

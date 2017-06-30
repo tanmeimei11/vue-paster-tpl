@@ -1,8 +1,10 @@
 import 'core-js/fn/promise'
 import 'whatwg-fetch'
 import 'iScss/base.scss'
+{{#if_eq analytics "yes"}}
 // 网页监控sdk
-import 'assets/libs/web-analytics'
+import 'analytics'
+{{/if_eq}}
 // 微信分享sdk
 import 'assets/libs/jweixin-1.0.0.js' 
 {{#if_eq growingIO "yes"}}
