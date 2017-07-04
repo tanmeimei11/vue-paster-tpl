@@ -1,6 +1,3 @@
-import { mock, mockMap } from 'config' 
-let mockMapData = {}
-
 const parseData = (key, val, refData) => {
   if (/\[\]$/.test(key)) {
     key = key.replace(/\[\]$/, '')
@@ -64,9 +61,9 @@ const isObjectValueEqual = (a, b) => {
 /**
  * 判断是否包含
  */
-const mockRegex = parseData => {
-  if (parseData.pathname in mockMapData) {
-    let info = mockMapData[`${parseData.pathname}`]
+const mockRegex = (parseData, mockMap) => {
+  if (parseData.pathname in mockMap) {
+    let info = mockMap[`${parseData.pathname}`]
     if (!~Object.prototype.toString.call(info).indexOf('Array')) {
       return {
         succ: true,
@@ -88,9 +85,9 @@ const mockRegex = parseData => {
  * @param {String} url 请求地址
  * @param {Object} options 参数
  */
-const injectFetch = oldFetch => (url, options) => {
+export default (oldFetch, mockMap) => (url, options) => {
   let parseData = parseUrl(url, options)
-  let result = mockRegex(parseData)
+  let result = mockRegex(parseData, mockMap)
   if (result && result.succ) {
     console.group(url)
     console.log(parseData)
@@ -104,9 +101,4 @@ const injectFetch = oldFetch => (url, options) => {
   } else {
     return oldFetch(url, options)
   }
-}
-
-if (process.env.NODE_ENV !== 'production' && mock) {
-  mockMapData = mockMap()
-  window.fetch = injectFetch(window.fetch)
 }

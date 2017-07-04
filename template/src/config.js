@@ -1,13 +1,17 @@
-// 0 - mounted 挂载时隐藏 
-// 1 - manual 手动隐藏 this.$hide
+/**
+ * ------------------------------------------------------------------
+ * 全局loading
+ * 0表示挂载时隐藏(mounted)
+ * 1表示手动隐藏(manual) 使用this.$hide
+ * ------------------------------------------------------------------
+ */
 export const hideGlobalLoading = 0 
 
-// api map
-export const apiMap = {
-  getUser: '/promo/userapi/currentuser'
-}
-
-// 分享设置
+/**
+ * ------------------------------------------------------------------
+ * 分享设置
+ * ------------------------------------------------------------------
+ */
 export const shareMap = (location) => {
   return {
     shareTitle: 'shareTitle', // 分享标题
@@ -18,29 +22,42 @@ export const shareMap = (location) => {
   }
 }
 
-// 设置页面打开埋点
+/**
+ * ------------------------------------------------------------------
+ * 埋点设置
+ * track:设置页面打开埋点 
+ * trackPrefix: 设置埋点的公共前缀 
+ * ------------------------------------------------------------------
+ */
 export const track = 'enter'
-// 设置埋点的公共前缀
 export const trackPrefix = (location) => {
   return `h5_promo_{{ name }}_${(location.pathname.split('/').slice(-1)[0].replace(/.html$/, '') || 'index')}_`
 }
 
-// 使用mock  
+/**
+ * ------------------------------------------------------------------
+ * mock设置
+ * mock:开启mock 
+ * mockMap:mock时读取的文件映射 
+ * apiMap:api名和api地址映射
+ * ------------------------------------------------------------------
+ */
 export const mock = true 
-// mock的配置
 export const mockMap = () => {
-  return {
-    '/promo/userapi/currentuser': require('mocks/json/user.json')
-  // '/promo/userapi/currentuser': [{
-  //   params: {
-  //     'promo_name': '{{ name }}'
-  //   },
-  //   data: require('./json/user.json')
-  // }]
-  }
+  return require.ensure([], () => {
+    return {
+      '/promo/userapi/currentuser': require('./mocks/json/user.json')
+    }
+  })
 }
-
-// 修改代理设置，需重启 
+export const apiMap = {
+  getUser: '/promo/userapi/currentuser'
+}
+/**
+ * ------------------------------------------------------------------
+ * 代理设置mock为false时生效
+ * ------------------------------------------------------------------
+ */
 export const proxyTable = {
   '/promo': {
     target: 'http://58.215.141.112',
@@ -48,9 +65,8 @@ export const proxyTable = {
     changeOrigin: true,
     onProxyReq (proxyReq, req, res) {
       proxyReq.setHeader('host', 'www.in66.com')
-        // add custom header to request
-        // proxyReq.setHeader('cookie', '_aries=7ca3bf90aa13bda853b4cd256e0463ff;tg_auth=e507305b87de478592707f80982cd551');
-        // or log the req
+      // webtest token
+      // proxyReq.setHeader('cookie', '_aries=7ca3bf90aa13bda853b4cd256e0463ff;tg_auth=e507305b87de478592707f80982cd551');
     }
   }
 }
