@@ -1,4 +1,3 @@
-/* globals cat */
 import px2rem from 'postcss-px2rem'
 import autoprefixer from 'autoprefixer'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'

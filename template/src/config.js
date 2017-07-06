@@ -39,6 +39,7 @@ export const trackPrefix = (location) => {
  * mock设置
  * mock:开启mock 
  * mockMap:mock时读取的文件映射 
+ * apiCommonParam:api请求的公共参数
  * apiMap:api名和api地址映射
  * ------------------------------------------------------------------
  */
@@ -49,6 +50,9 @@ export const mockMap = () => {
       '/promo/userapi/currentuser': require('./mocks/json/user.json')
     }
   })
+}
+export const apiCommonParam = {
+  promo_name: '{{name}}'
 }
 export const apiMap = {
   getUser: '/promo/userapi/currentuser'
