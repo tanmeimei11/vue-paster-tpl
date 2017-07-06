@@ -7,7 +7,7 @@ export const iuiAlias = {
   'iScss': 'i-ui/src/scss',
   'iFiters': 'i-ui/src/fiters',
   'iExtends': 'i-ui/src/extends',
-  'iProtocols': 'i-ui/src/iProtocols',
+  'iProtocols': 'i-ui/src/iprotocols',
   'iUtil': 'i-ui/src/utils'
 }
 

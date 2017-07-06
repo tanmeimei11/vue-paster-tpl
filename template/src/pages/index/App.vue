@@ -1,19 +1,23 @@
 <template>
   <div class="page">
-    <button @click="diaryOpen('1aVMwEbE')">in记</button>
+    <button v-iLinkUser="`1aVMwEbE`" >in记</button>
   </div>
 </template>
 <script>
-  import {
-    diary
-  } from 'iMixins/inProtocol'
+  // api 通过mixin的方式引用
   import {
     api 
   } from 'mixins/api'
+  // 协议通过指令的方式引用
+  import {
+    iLinkUser 
+  } from 'iProtocols/User'
 
-  // import { mapActions } from 'vuex'
   export default {
-    mixins: [api, diary],
+    mixins: [api],
+    directives: { 
+      iLinkUser
+    },
     created () {
       this.$track('helloWorld!')
       this.$api.getUser({page: 1, page_size: 3})
