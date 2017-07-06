@@ -11,11 +11,92 @@ import {
   apiCommonParam
 } from 'config'
 /**
+ * ------------------------------------------------------------------
+ * 如果在请求中，再次调用则返回reject
+ * ------------------------------------------------------------------
+ */
+const loadingPromise = () => new Promise((resolve, reject) => {
+  reject(new Error('fetch loading'))
+})
+
+/**
+ * 停止请求
+ * @param {*} _fecth 
+ */
+const buildAbortPromise = (_fecth) => new Promise((resolve, reject) => {
+  _fecth.abort = err => {
+    _fecth.loading = false
+    if (_fecth.xmlhttp instanceof XMLHttpRequest) {
+      _fecth.xmlhttp.abort()
+    }
+    if (!(err instanceof Error)) {
+      err = new Error(err)
+    }
+    reject(err)
+  }
+})
+
+/**
+ * 构建fetch请求
+ * @param {*} _fecth 
+ * @param {*} url 
+ * @param {*} options 
+ * @param {*} timeoutId 
+ */
+const buildFetchPromise = (_fecth, url, options, timeoutId) => fetch(url, options).then(res => {
+  clearTimeout(timeoutId)
+  _fecth.loading = false
+  return res
+}, err => {
+  clearTimeout(timeoutId)
+  _fecth.loading = false
+  throw err
+}).then(res => res.json()).then(res => {
+  // 授权重定向
+  if (!res.succ && res.data && res.data.status === 302) {
+    location.href = res.data.location
+    throw res
+  }
+  return res
+})
+
+/**
+ * 构建XMLHTTP请求
+ * @param {*} _fecth 
+ * @param {*} url 
+ * @param {*} options 
+ * @param {*} timeoutId 
+ */
+const buildXMLHTTPPromise = (_fecth, url, options, timeoutId) => new Promise((resolve, reject) => {
+  let xmlhttp = new XMLHttpRequest()
+  xmlhttp.onreadystatechange = () => {
+    if (xmlhttp.readyState === 4) {
+      clearTimeout(timeoutId)
+      _fecth.loading = false
+      if ((xmlhttp.status >= 200 && xmlhttp.status < 300)) {
+        let result = (xmlhttp.responseType === 'arraybuffer' || xmlhttp.responseType === 'blob') ? xmlhttp.response : xmlhttp.responseText
+        try {
+          if (xmlhttp.getResponseHeader('content-type') === 'application/json') {
+            result = JSON.parse(result)
+          }
+        } catch (e) {}
+        resolve(result)
+      } else {
+        resolve(xmlhttp.statusText || null)
+      }
+    }
+  }
+  xmlhttp.open(options.method, url, true)
+  xmlhttp.send(options.body)
+  _fecth.xmlhttp = xmlhttp
+})
+
+/**
  * 构建请求方法（每个请求每次只能执行一次）
- * @param {Object} baseParam
+ * @param {Object} commonParam 公共参数
  * @param {String} urls 请求地址
  */
-const FetchApi = (baseParam, urls) => {
+const FetchApi = (commonParam, urls) => {
   /**
    * 如果是线上则访问 www.in66.com
    */
@@ -36,82 +117,21 @@ const FetchApi = (baseParam, urls) => {
           // 'X-Requested-With': 'XMLHttpRequest'
         }
       }
-      if (type === 'get') {
-        options.method = 'GET'
-        options.body = null
-        url = buildGetParam(url, baseParam, param)
-      } else {
-        options.method = 'POST'
-        options.body = buildPostParam(baseParam, param)
-      }
-      if (urlObj[`${urlKey}`].loading) {
-        return new Promise((resolve, reject) => {
-          reject(new Error('fetch loading'))
-        })
-      }
+      let isGet = /get/i.test(type)
+      options.method = isGet ? 'GET' : 'POST'
+      options.body = isGet ? null : buildPostParam(commonParam, param)
+      if (isGet) url = buildGetParam(url, commonParam, param)
+      if (urlObj[`${urlKey}`].loading) return loadingPromise()
       urlObj[`${urlKey}`].loading = true
       let timeout = urlObj[`${urlKey}`].timeout
       let timeoutId = 0
-      /* abort */
-      let abortPromise = new Promise((resolve, reject) => {
-        urlObj[`${urlKey}`].abort = err => {
-          urlObj[`${urlKey}`].loading = false
-          if (urlObj[`${urlKey}`].xmlhttp instanceof XMLHttpRequest) {
-            urlObj[`${urlKey}`].xmlhttp.abort()
-          }
-          if (!(err instanceof Error)) {
-            err = new Error(err)
-          }
-          reject(err)
-        }
-      })
-      /* normal */
-      let fetchPromise = new Promise((resolve, reject) => {
+      return Promise.race([buildAbortPromise(urlObj[`${urlKey}`]), new Promise((resolve, reject) => {
         if (timeout !== undefined) {
           timeoutId = setTimeout(() => reject(new Error('fetch timeout')), timeout)
         }
-        if (useFetch) {
-          resolve(fetch(url, options).then(res => {
-            clearTimeout(timeoutId)
-            urlObj[`${urlKey}`].loading = false
-            return res
-          }, err => {
-            clearTimeout(timeoutId)
-            urlObj[`${urlKey}`].loading = false
-            throw err
-          }).then(res => res.json()).then(res => {
-            // 授权重定向
-            if (!res.succ && res.data && res.data.status === 302) {
-              location.href = res.data.location
-              throw res
-            }
-            return res
-          }))
-        } else {
-          let xmlhttp = new XMLHttpRequest()
-          xmlhttp.onreadystatechange = () => {
-            if (xmlhttp.readyState === 4) {
-              clearTimeout(timeoutId)
-              urlObj[`${urlKey}`].loading = false
-              if ((xmlhttp.status >= 200 && xmlhttp.status < 300)) {
-                let result = (xmlhttp.responseType === 'arraybuffer' || xmlhttp.responseType === 'blob') ? xmlhttp.response : xmlhttp.responseText
-                try {
-                  if (xmlhttp.getResponseHeader('content-type') === 'application/json') {
-                    result = JSON.parse(result)
-                  }
-                } catch (e) {}
-                resolve(result)
-              } else {
-                resolve(xmlhttp.statusText || null)
-              }
-            }
-          }
-          xmlhttp.open(options.method, url, true)
-          xmlhttp.send(options.body)
-          urlObj[`${urlKey}`].xmlhttp = xmlhttp
-        }
-      })
-      return Promise.race([abortPromise, fetchPromise])
+        let requestPromise = useFetch ? buildFetchPromise : buildXMLHTTPPromise
+        resolve(requestPromise(urlObj[`${urlKey}`], url, options, timeoutId))
+      })])
     }
   })
   return urlObj
