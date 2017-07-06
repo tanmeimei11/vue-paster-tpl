@@ -48,12 +48,5 @@ export const initPlugin = Vue => {
       }
     }
   })
-  // Vue.mixin({
-  //   created: function () {
-  //     if (this.isInVue) {
-  //       inpromo.created.call(this)
-  //     }
-  //   },
-  // })
 }
 
