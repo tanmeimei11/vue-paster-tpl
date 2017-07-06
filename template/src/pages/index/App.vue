@@ -9,9 +9,7 @@
     api 
   } from 'mixins/api'
   // 协议通过指令的方式引用
-  import {
-    iLinkUser 
-  } from 'iProtocols/User'
+  import iLinkUser from 'iProtocols/User'
 
   export default {
     mixins: [api],
