@@ -8,6 +8,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import httpProxyMiddleware from 'http-proxy-middleware'
 import contextMatcher from 'http-proxy-middleware/lib/context-matcher'
+import logger from 'http-proxy-middleware/lib/logger'
 import cfg from '../conf/webpack.dev.config'
 import {
   env
@@ -48,6 +49,7 @@ let showProxyInfo = (stats = 'init') => {
     console.log(`${blue(`[HPM] Proxy ${stats}`)} : ${context}  ->  ${options.target}`)
   })
 }
+logger.getInstance().setLevel('warn')
 showProxyInfo()
 watchFile(configJs, () => {
   console.log(`${blue(`[ProxyConfig]`)} 改变`)
