@@ -31,5 +31,3 @@ promise.then(() => new InVue({
   {{/if_eq}}
   render: h => h(App)
 }).$mount('#app'))
-
-
