@@ -13,8 +13,7 @@ export const initPlugin = Vue => {
   Object.defineProperties(Vue.prototype, {
     $hide: {
       get () {
-        document.getElementById('global-loading').style.display = 'none'
-        return true
+        Vue.$hideGlobalLoading()
       }
     },
     $eventHub: {
