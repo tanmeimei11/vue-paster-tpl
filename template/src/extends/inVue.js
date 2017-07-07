@@ -3,35 +3,43 @@ import { initPlugin } from 'plugins/initPlugin'
 import { iTrack } from 'i-ui'
 import { inpromo } from 'mixins/inPromo'
 import * as config from 'config' 
+import injectFetch from 'mocks'
 
 window._trackPrefix = config.trackPrefix(location) 
 
-const basePlugins = [
-  // directives
-  iTrack, 
-  // 初始化插件 
-  initPlugin
-]
-
 class InVue extends Vue {
+
+  static isMock = process.env.NODE_ENV !== 'production' && config.mock  
+  static basePlugins = [
+    // directives
+    iTrack, 
+    // 初始化插件 
+    initPlugin
+  ]
+
   constructor (options) {
     options.track = config.track 
     options.hideGlobalLoading = config.hideGlobalLoading 
     options.share = config.shareMap(location) 
     options.plugins = options.plugins || []
-    basePlugins.concat(options.plugins).forEach(plugin => Vue.use(plugin))
+    InVue.basePlugins.concat(options.plugins).forEach(plugin => Vue.use(plugin))
     super(options)
   }
 
-  get isInVue () {
-    return true 
+  static get beforeCreatePromise () {
+    let promise = Promise.resolve()
+    if (InVue.isMock) {
+      promise = promise.then(() => config.mockMap())
+        .then(map => { window.fetch = injectFetch(window.fetch, map) })
+    } 
+    return promise
   }
-}
 
-InVue.batchMixin = (mixins) => {
-  mixins.forEach((mixin) => {
-    InVue.mixin(mixin)  
-  })
+  static batchMixin (mixins) {
+    mixins.forEach((mixin) => {
+      InVue.mixin(mixin)  
+    })
+  }
 }
 
 InVue.mixin(inpromo)
