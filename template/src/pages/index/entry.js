@@ -20,19 +20,16 @@ import App from './App.vue'
 import { mock, mockMap } from 'config' 
 import injectFetch from 'mocks'
 
-let inVue = new InVue({
+let promise = Promise.resolve()
+if (process.env.NODE_ENV !== 'production' && mock) {
+  promise = promise.then(() => mockMap())
+  .then(map => { window.fetch = injectFetch(window.fetch, map) })
+} 
+promise.then(() => new InVue({
   {{#if_eq vuex "yes"}}
   store,
   {{/if_eq}}
   render: h => h(App)
-})
+}).$mount('#app'))
 
-if (process.env.NODE_ENV !== 'production' && mock) {
-  mockMap().then((map) => {
-    window.fetch = injectFetch(window.fetch, map)
-    inVue.$mount('#app')
-  })
-} else {
-  inVue.$mount('#app')
-}
 
