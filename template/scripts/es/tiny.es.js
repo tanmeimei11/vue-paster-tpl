@@ -8,7 +8,8 @@ import {
   basename
 } from 'path'
 import {
-  blue
+  blue,
+  red
 } from 'chalk'
 import {
   createReadStream,
@@ -45,25 +46,32 @@ const compress = (path, name, hash) => {
     console.log(`StartUpload '${blue(relativeName)}'.....`)
     createReadStream(`${prefixDir}/${name}`).pipe(request(option, (res) => {
       res.on('data', resInfo => {
-        resInfo = JSON.parse(resInfo.toString())
-        var oldSize = (resInfo.input.size / 1024).toFixed(2)
-        var newSize = (resInfo.output.size / 1024).toFixed(2)
-        get(resInfo.output.url, imgRes => {
-          let writeS = createWriteStream(`${prefixDir}/${name}`)
-          imgRes.pipe(writeS)
-          imgRes.on('end', () => {
-            console.log(`CompressSize ${blue(`${oldSize}KB ==> ${newSize}KB -${Math.floor(((oldSize - newSize) / oldSize * 100))}% `)}`)
-            console.log(`CompressDone '${blue(relativeName)}'.....`)
-          })
-          writeS.on('close', () => {
-            let compressHash = getEtag(`${prefixDir}/${name}`)
-            let _tinyData = JSON.parse(cat(tinyPath))
-            _tinyData[`${relativeName}`] = compressHash
-            appendFileSync(tinyPath, JSON.stringify(_tinyData, null, '\t'), {
-              flag: 'w'
+        try {
+          resInfo = JSON.parse(resInfo.toString())
+          if (resInfo.error) {
+            return console.log(`CompressError '${red(relativeName)}'.....${resInfo.message}`)
+          }
+          var oldSize = (resInfo.input.size / 1024).toFixed(2)
+          var newSize = (resInfo.output.size / 1024).toFixed(2)
+          get(resInfo.output.url, imgRes => {
+            let writeS = createWriteStream(`${prefixDir}/${name}`)
+            imgRes.pipe(writeS)
+            imgRes.on('end', () => {
+              console.log(`CompressSize ${blue(`${oldSize}KB ==> ${newSize}KB -${Math.floor(((oldSize - newSize) / oldSize * 100))}% `)}`)
+              console.log(`CompressDone '${blue(relativeName)}'.....`)
+            })
+            writeS.on('close', () => {
+              let compressHash = getEtag(`${prefixDir}/${name}`)
+              let _tinyData = JSON.parse(cat(tinyPath))
+              _tinyData[`${relativeName}`] = compressHash
+              appendFileSync(tinyPath, JSON.stringify(_tinyData, null, '\t'), {
+                flag: 'w'
+              })
             })
           })
-        })
+        } catch (error) {
+          return console.log(`CompressError '${red(relativeName)}'.....${resInfo.message}`)
+        }
       })
     }))
   }
