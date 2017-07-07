@@ -15,6 +15,9 @@ import 'assets/libs/growingio.js'
 import store from 'stores'
 {{/if_eq}}
 
+import InVue from 'extends/inVue'
+import App from './App.vue'
+
 InVue.beforeCreatePromise.then(() =>
   new InVue({
     {{#if_eq vuex "yes"}}
