@@ -1,6 +1,8 @@
 import {
   buildGetParam,
-  buildPostParam
+  buildPostParam,
+  loadingPromise,
+  timeoutPromise
 } from './params'
 import {
   U_IN,
@@ -10,20 +12,12 @@ import {
   apiMap,
   apiCommonParam
 } from 'config'
-/**
- * ------------------------------------------------------------------
- * 如果在请求中，再次调用则返回reject
- * ------------------------------------------------------------------
- */
-const loadingPromise = () => new Promise((resolve, reject) => {
-  reject(new Error('fetch loading'))
-})
 
 /**
  * 停止请求
  * @param {*} _fecth 
  */
-const buildAbortPromise = (_fecth) => new Promise((resolve, reject) => {
+const buildAbortPromise = _fecth => new Promise((resolve, reject) => {
   _fecth.abort = err => {
     _fecth.loading = false
     if (_fecth.xmlhttp instanceof XMLHttpRequest) {
@@ -38,18 +32,15 @@ const buildAbortPromise = (_fecth) => new Promise((resolve, reject) => {
 
 /**
  * 构建fetch请求
- * @param {*} _fecth 
- * @param {*} url 
- * @param {*} options 
- * @param {*} timeoutId 
+ * @param {string} url 
+ * @param {object} options 
+ * @param {function} done 
  */
-const buildFetchPromise = (_fecth, url, options, timeoutId) => fetch(url, options).then(res => {
-  clearTimeout(timeoutId)
-  _fecth.loading = false
+const buildFetchPromise = (url, options, done = () => {}) => fetch(url, options).then(res => {
+  done()
   return res
 }, err => {
-  clearTimeout(timeoutId)
-  _fecth.loading = false
+  done()
   throw err
 }).then(res => res.json()).then(res => {
   // 授权重定向
@@ -62,17 +53,16 @@ const buildFetchPromise = (_fecth, url, options, timeoutId) => fetch(url, option
 
 /**
  * 构建XMLHTTP请求
- * @param {*} _fecth 
- * @param {*} url 
- * @param {*} options 
- * @param {*} timeoutId 
+ * @param {object} _fetch 
+ * @param {string} url 
+ * @param {object} options 
+ * @param {function} done 
  */
-const buildXMLHTTPPromise = (_fecth, url, options, timeoutId) => new Promise((resolve, reject) => {
+const buildXMLHTTPPromise = (_fetch, url, options, done = () => {}) => new Promise((resolve, reject) => {
   let xmlhttp = new XMLHttpRequest()
   xmlhttp.onreadystatechange = () => {
     if (xmlhttp.readyState === 4) {
-      clearTimeout(timeoutId)
-      _fecth.loading = false
+      done()
       if ((xmlhttp.status >= 200 && xmlhttp.status < 300)) {
         let result = (xmlhttp.responseType === 'arraybuffer' || xmlhttp.responseType === 'blob') ? xmlhttp.response : xmlhttp.responseText
         try {
@@ -82,62 +72,75 @@ const buildXMLHTTPPromise = (_fecth, url, options, timeoutId) => new Promise((re
         } catch (e) {}
         resolve(result)
       } else {
-        resolve(xmlhttp.statusText || null)
+        reject(new Error(xmlhttp.statusText || null))
       }
     }
   }
+  xmlhttp.onabort = xmlhttp.onerror = () => {
+    done()
+    reject(new Error(xmlhttp.status))
+  }
   xmlhttp.open(options.method, url, true)
   xmlhttp.send(options.body)
-  _fecth.xmlhttp = xmlhttp
+  _fetch.xmlhttp = xmlhttp
 })
 
 /**
  * 构建请求方法（每个请求每次只能执行一次）
  * @param {Object} commonParam 公共参数
  * @param {String} urls 请求地址
+ * @param {Object} opt 关于请求的配置
  */
-const FetchApi = (commonParam, urls) => {
+const FetchApi = (commonParam, urls, opt) => {
   /**
-   * 如果是线上则访问 www.in66.com
+   *  如果是qa访问 qa.in66.com 如果是线上则访问 www.in66.com 否则是本地
    */
-  let host = process.env.NODE_ENV === 'production' ? U_IN : ''
-  /**
-   * 如果是qa访问 qa.in66.com
-   */
-  if (/^qa/.test(location.host)) {
-    host = U_IN_QA
-  }
+  let host = /^qa/.test(location.host) ? U_IN_QA : (process.env.NODE_ENV === 'production' ? U_IN : '')
   let urlObj = {}
   Object.keys(urls).forEach(urlKey => {
     urlObj[`${urlKey}`] = (param = {}, type = 'get', useFetch = true) => {
       let url = `${host}${urls[`${urlKey}`]}`
+      let isGet = /get/i.test(type)
+      let _fetch = urlObj[`${urlKey}`]
       let options = {
         credentials: 'include',
+        method: isGet ? 'GET' : 'POST',
+        body: isGet ? null : buildPostParam(commonParam, param),
         headers: {
-          // 'X-Requested-With': 'XMLHttpRequest'
+          // 'X-Requested-With': 'XMLHttpRequest' 当后端需要判断是否为ajax的时候添加
         }
       }
-      let isGet = /get/i.test(type)
-      options.method = isGet ? 'GET' : 'POST'
-      options.body = isGet ? null : buildPostParam(commonParam, param)
       if (isGet) url = buildGetParam(url, commonParam, param)
-      if (urlObj[`${urlKey}`].loading) return loadingPromise()
-      urlObj[`${urlKey}`].loading = true
-      let timeout = urlObj[`${urlKey}`].timeout
+      if (_fetch.loading) return loadingPromise()
+      _fetch.loading = true
+      let timeout = _fetch.timeout
       let timeoutId = 0
-      return Promise.race([buildAbortPromise(urlObj[`${urlKey}`]), new Promise((resolve, reject) => {
-        if (timeout !== undefined) {
-          timeoutId = setTimeout(() => reject(new Error('fetch timeout')), timeout)
+      let doneFetch = () => { clearTimeout(timeoutId); _fetch.loading = false }
+      let promiseArr = [new Promise((resolve, reject) => {
+        if (timeout !== undefined && opt.needTimeOut) { 
+          timeoutId = setTimeout(() => { doneFetch(); resolve(timeoutPromise()) }, timeout)
         }
-        let requestPromise = useFetch ? buildFetchPromise : buildXMLHTTPPromise
-        resolve(requestPromise(urlObj[`${urlKey}`], url, options, timeoutId))
-      })])
+        if (useFetch) {
+          resolve(buildFetchPromise(url, options, doneFetch))
+        } else {
+          resolve(buildXMLHTTPPromise(_fetch, url, options, doneFetch))
+        }
+      })]
+      if (opt.needAbort) promiseArr.push(buildAbortPromise(_fetch))
+      return Promise.race(promiseArr)
     }
   })
   return urlObj
 }
 
-export const api = FetchApi(apiCommonParam, apiMap)
+/**
+ * 导出 api ，默认不需要abort和timeout 
+ */
+export const api = FetchApi(apiCommonParam, apiMap, {
+  needAbort: false,
+  needTimeOut: false
+})
+
 export const apiPromise = (options) => {
   options.params = options.params || {}
   return new Promise((resolve, reject) => {
@@ -152,18 +155,10 @@ export const apiPromise = (options) => {
 }
 export const polling = (options) => {
   let timeOut = setTimeout(() => {
-    apiPromise(options).then(
-      (result) => {
-        if (timeOut) {
-          clearTimeout(timeOut)
-        }
-        options.succ && options.succ(result)
-        if (!(options.isStop && options.isStop()) || !options.isStop) {
-          polling(options)
-        }
-      },
-      (err) => {
-        console.log(err)
-      })
+    apiPromise(options).then((result) => {
+      if (timeOut) clearTimeout(timeOut)
+      options.succ && options.succ(result)
+      if (!(options.isStop && options.isStop()) || !options.isStop) polling(options)
+    }, err => console.log(err))
   }, options.interval || 2000)
 }

@@ -10,6 +10,20 @@ export const hideGlobalLoading = 0
 /**
  * ------------------------------------------------------------------
  * 分享设置
+ * 设置分享图的方法 如果本地方法
+ * shareImg : `{{ name }}/${require('./assets/img/share.jpg')}`
+ * 
+ * vue内部修改分享设置
+ * this.$share.config.xxx = ????
+ * 
+ * vue外部分享设置 方法1:
+ * import { share } from 'iMixins/inPromo'
+ * 修改分享的方法 mixin ,可以直接修改某个字段 this.$utils.share.???=???
+ * 
+ * vue外部分享设置 方法2:
+ * import share  from 'iUtil/share' 
+ * 修改分享的方法  share.config.??? = ???
+ * 
  * ------------------------------------------------------------------
  */
 export const shareMap = (location) => {
@@ -74,10 +88,3 @@ export const proxyTable = {
     }
   }
 }
-
-// 设置分享图的方法 如果本地方法
-// shareImg : `{{ name }}/${require('../../assets/img/share.jpg')}`
-// 修改分享的方法 mixin ,可以直接修改某个字段 this.$utils.share.???=???
-// import { share } from 'iMixins/inPromo'
-// 修改分享的方法  share.config.??? = ???
-// import share  from 'iUtil/share' 

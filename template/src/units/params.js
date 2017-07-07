@@ -59,3 +59,17 @@ export const buildPostParam = (...params) => {
   }))
   return data
 }
+
+/**
+ * 如果在请求中，再次调用则返回reject
+ */
+export const loadingPromise = () => new Promise((resolve, reject) => {
+  reject(new Error('fetch loading'))
+})
+
+/**
+ * 设置返回超时的Promise
+ */
+export const timeoutPromise = () => new Promise((resolve, reject) => {
+  reject(new Error('fetch timeout'))
+})
