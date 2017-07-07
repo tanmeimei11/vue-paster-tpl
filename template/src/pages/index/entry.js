@@ -18,11 +18,12 @@ import store from 'stores'
 import InVue from 'extends/inVue'
 import App from './App.vue'
 
-InVue.beforeCreatePromise.then(() =>
+InVue.mockPromise.then(() => {
   new InVue({
     {{#if_eq vuex "yes"}}
     store,
     {{/if_eq}}
     render: h => h(App)
   }).$mount('#app')
-)
+})
+

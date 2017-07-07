@@ -7,6 +7,15 @@ import injectFetch from 'mocks'
 
 window._trackPrefix = config.trackPrefix(location) 
 
+Vue.$hideGlobalLoading = () => {
+  document.getElementById('global-loading').style.display = 'none'
+}
+if (config.hideGlobalLoading === 0) {
+  window.onload = () => {
+    Vue.$hideGlobalLoading()
+  }
+}
+
 class InVue extends Vue {
 
   static isMock = process.env.NODE_ENV !== 'production' && config.mock  
@@ -26,7 +35,7 @@ class InVue extends Vue {
     super(options)
   }
 
-  static get beforeCreatePromise () {
+  static get mockPromise () {
     let promise = Promise.resolve()
     if (InVue.isMock) {
       promise = promise.then(() => config.mockMap())

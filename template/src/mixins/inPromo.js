@@ -69,11 +69,6 @@ export const inpromo = {
     if (this.$share) {
       this.$share.config = this.$root.$options.share
     }
-  },
-  mounted () {
-    if (this.$root.$options.hideGlobalLoading === 0) {
-      this.$hide 
-    } 
   }
 }
 export default [toast, awake, track, common, share] 
