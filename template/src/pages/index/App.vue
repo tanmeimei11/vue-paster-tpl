@@ -23,11 +23,9 @@
       // this.getUser()
     }
   }
-
 </script>
 <style lang="scss">
   .page {
     background: #fff;
   }
-
 </style>

@@ -15,19 +15,11 @@ import 'assets/libs/growingio.js'
 import store from 'stores'
 {{/if_eq}}
 
-import InVue from 'extends/inVue'
-import App from './App.vue'
-import { mock, mockMap } from 'config' 
-import injectFetch from 'mocks'
-
-let promise = Promise.resolve()
-if (process.env.NODE_ENV !== 'production' && mock) {
-  promise = promise.then(() => mockMap())
-  .then(map => { window.fetch = injectFetch(window.fetch, map) })
-} 
-promise.then(() => new InVue({
-  {{#if_eq vuex "yes"}}
-  store,
-  {{/if_eq}}
-  render: h => h(App)
-}).$mount('#app'))
+InVue.beforeCreatePromise.then(() =>
+  new InVue({
+    {{#if_eq vuex "yes"}}
+    store,
+    {{/if_eq}}
+    render: h => h(App)
+  }).$mount('#app')
+)
