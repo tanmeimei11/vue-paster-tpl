@@ -30,7 +30,7 @@ export default new Config().extend({
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity
-    }),
+    })
     // new webpack.SourceMapDevToolPlugin({
     //   filename: '[name].js.map',
     //   exclude: ['vendor.js']

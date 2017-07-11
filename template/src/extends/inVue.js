@@ -17,7 +17,6 @@ if (config.hideGlobalLoading === 0) {
 }
 
 class InVue extends Vue {
-
   static isMock = process.env.NODE_ENV !== 'production' && config.mock  
   static basePlugins = [
     // directives
