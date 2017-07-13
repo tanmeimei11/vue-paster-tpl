@@ -16,7 +16,7 @@ export default new Config().extend({
     return config
   }
 }).merge({
-  devtool: '#source-map',
+  devtool: 'cheap-source-map',
   entry: {
     vendor: ['vue', 'core-js/fn/promise', 'whatwg-fetch', env.assetsPath('scripts/es/dev-client.es.js')]
   },
