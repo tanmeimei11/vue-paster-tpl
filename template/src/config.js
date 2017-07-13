@@ -59,7 +59,7 @@ export const trackPrefix = (location) => {
  */
 export const mock = true 
 export const mockMap = () => {
-  return require.ensure([], () => {
+  return require.ensure([], process.env.NODE_ENV !== 'production' ? () => {} : () => {
     return {
       '/promo/userapi/currentuser': require('./mocks/json/user.json')
     }
