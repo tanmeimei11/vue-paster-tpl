@@ -38,7 +38,7 @@ const cfg = new Config().extend({
       minChunks: function (module, count) {
         let res = module.resource
         // any required modules inside node_modules are extracted to vendor
-        return res && /\.js$/.test(res) && (~res.indexOf(env.assetsPath('node_modules')) || ~res.indexOf(env.assetsPath('/src/assets/libs')))
+        return res && /\.js$/.test(res) && (~res.indexOf(env.assetsPath('node_modules')) || ~res.indexOf(env.assetsPath('src/assets/libs')))
       }
     }),
     // extract webpack runtime and module manifest to its own file in order to
