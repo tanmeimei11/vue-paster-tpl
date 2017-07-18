@@ -11,7 +11,7 @@ const cfg = new Config().extend({
     Object.keys(config.entry).forEach(entry => {
       config.plugins.push(
         new HtmlWebpackPlugin({
-          chunks: [entry],
+          chunks: [entry, 'vendor', 'manifest'],
           filename: `${entry}.html`,
           template: `./src/pages/${entry}/${build.entryTpl}`
         }))
