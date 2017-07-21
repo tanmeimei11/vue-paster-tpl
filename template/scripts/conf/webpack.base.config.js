@@ -80,7 +80,7 @@ export default {
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      include: [env.assetsPath('src'), env.assetsPath('node_modules/i-ui')]
+      include: [env.assetsPath('src'), env.assetsPath('node_modules')]
     },
     {
       // css文件引用方式， 
