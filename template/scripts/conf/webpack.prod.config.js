@@ -5,9 +5,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import {
   BundleAnalyzerPlugin
 } from 'webpack-bundle-analyzer'
-import {
-  build
-} from '../../config'
+import { env, build } from '../../config'
 
 const cfg = new Config().extend({
   'scripts/conf/webpack.base.config.js': config => {
@@ -15,7 +13,7 @@ const cfg = new Config().extend({
     Object.keys(config.entry).forEach(entry => {
       config.plugins.push(
         new HtmlWebpackPlugin({
-          chunks: [entry],
+          chunks: [entry, 'vendor', 'manifest'],
           filename: `${entry}.html`,
           template: `./src/pages/${entry}/${build.entryTpl}`
         }))
@@ -36,17 +34,26 @@ const cfg = new Config().extend({
       minimize: true,
       debug: false
     }),
+    // split vendor js into its own file
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: function (module, count) {
+        let res = module.resource
+        // any required modules inside node_modules are extracted to vendor
+        return res && /\.js$/.test(res) && (~res.indexOf(env.assetsPath('node_modules')) || ~res.indexOf(env.assetsPath('src/assets/libs')))
+      }
+    }),
+    // extract webpack runtime and module manifest to its own file in order to
+    // prevent vendor hash from being updated whenever app bundle is updated
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      chunks: ['vendor']
+    }),
     new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true
-      },
       compress: {
-        screw_ie8: true,
         warnings: false
       },
-      comments: false
+      sourceMap: true
     }),
     new ExtractTextPlugin({
       filename: 'css/[name].[contenthash:7].css'

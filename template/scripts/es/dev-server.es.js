@@ -4,7 +4,7 @@ import express from 'express'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
-import httpProxyMiddleware from 'http-proxy-middleware'
+import webpackHotProxyMiddleware from './proxy.es'
 import cfg from '../conf/webpack.dev.config'
 import {
   env
@@ -31,14 +31,7 @@ compiler.plugin('compilation', function (compilation) {
 
 /* S - Express */
 const app = express()
-Object.keys(env.proxyTable).forEach(function (context) {
-  var options = env.proxyTable[context]
-  if (typeof options === 'string') {
-    options = { target: options }
-  }
-  app.use(httpProxyMiddleware(context, options))
-})
-
+app.use(webpackHotProxyMiddleware)
 app.use(koaDevMiddleware)
 app.use(koaHotMiddleware)
 
