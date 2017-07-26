@@ -60,6 +60,7 @@ const buildFetchPromise = (url, options, done = () => {}) => fetch(url, options)
  */
 const buildXMLHTTPPromise = (_fetch, url, options, done = () => {}) => new Promise((resolve, reject) => {
   let xmlhttp = new XMLHttpRequest()
+  xmlhttp.withCredentials = true
   xmlhttp.onreadystatechange = () => {
     if (xmlhttp.readyState === 4) {
       done()
