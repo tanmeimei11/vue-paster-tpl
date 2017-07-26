@@ -61,7 +61,7 @@ export default {
       test: /\.(js|vue)$/,
       loader: 'eslint-loader',
       enforce: 'pre',
-      include: [env.assetsPath('src'), env.assetsPath('test')],
+      include: [env.assetsPath('src')],
       exclude: [env.assetsPath('src/assets/libs')],
       options: {
         formatter: require('eslint-friendly-formatter')
@@ -80,7 +80,7 @@ export default {
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      include: [env.assetsPath('src'), env.assetsPath('test'), env.assetsPath('node_modules')]
+      include: [env.assetsPath('src'), env.assetsPath('node_modules')]
     },
     {
       // css文件引用方式， 
