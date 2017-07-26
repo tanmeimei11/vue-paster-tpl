@@ -42,6 +42,7 @@ if (invalidEntry.length) {
 }
 export default {
   entry: entryObj,
+  profile: false,
   output: {
     path: env.assetsPath('dist'),
     filename: '[name].js',
