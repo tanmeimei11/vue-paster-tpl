@@ -16,7 +16,7 @@ export default new Config().extend({
     return config
   }
 }).merge({
-  devtool: 'cheap-source-map',
+  devtool: '#source-map',
   entry: {
     vendor: ['vue', 'core-js/fn/promise', 'whatwg-fetch', env.assetsPath('scripts/es/dev-client.es.js')]
   },
@@ -30,7 +30,7 @@ export default new Config().extend({
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity
-    })
+    }),
     // new webpack.SourceMapDevToolPlugin({
     //   filename: '[name].js.map',
     //   exclude: ['vendor.js']
