@@ -1,29 +1,29 @@
 /**
  * ------------------------------------------------------------------
  * 全局loading
- * 0:挂载时隐藏(window.onload)
+ * 0:挂载时隐藏(window.contentLoaded)
  * 1:手动隐藏(manual) 使用this.$hide
  * ------------------------------------------------------------------
  */
-export const hideGlobalLoading = 0 
+export const hideGlobalLoading = 0
 
 /**
  * ------------------------------------------------------------------
  * 分享设置
  * 设置分享图的方法 如果本地方法
  * shareImg : `{{ name }}/${require('./assets/img/share.jpg')}`
- * 
+ *
  * vue内部修改分享设置
  * this.$share.config.xxx = ????
- * 
+ *
  * vue外部分享设置 方法1:
  * import { share } from 'iMixins/inPromo'
  * 修改分享的方法 mixin ,可以直接修改某个字段 this.$utils.share.???=???
- * 
+ *
  * vue外部分享设置 方法2:
- * import share  from 'iUtil/share' 
+ * import share  from 'iUtil/share'
  * 修改分享的方法  share.config.??? = ???
- * 
+ *
  * ------------------------------------------------------------------
  */
 export const shareMap = (location) => {
@@ -39,8 +39,8 @@ export const shareMap = (location) => {
 /**
  * ------------------------------------------------------------------
  * 埋点设置
- * track:设置页面打开埋点 
- * trackPrefix: 设置埋点的公共前缀 
+ * track:设置页面打开埋点
+ * trackPrefix: 设置埋点的公共前缀
  * ------------------------------------------------------------------
  */
 export const track = 'enter'
@@ -51,13 +51,13 @@ export const trackPrefix = (location) => {
 /**
  * ------------------------------------------------------------------
  * mock设置
- * mock:开启mock 
- * mockMap:mock时读取的文件映射 
+ * mock:开启mock
+ * mockMap:mock时读取的文件映射
  * apiCommonParam:api请求的公共参数
  * apiMap:api名和api地址映射
  * ------------------------------------------------------------------
  */
-export const mock = true 
+export const mock = true
 export const mockMap = () => {
   return require.ensure([], () => {
     return {
@@ -82,9 +82,9 @@ export const proxyTable = {
     secure: false,
     changeOrigin: true,
     onProxyReq (proxyReq, req, res) {
-      proxyReq.setHeader('host', 'www.in66.com')
       // webtest token
-      // proxyReq.setHeader('cookie', '_aries=7ca3bf90aa13bda853b4cd256e0463ff;tg_auth=e507305b87de478592707f80982cd551');
+      proxyReq.setHeader('host', 'www.in66.com')
+      proxyReq.setHeader('cookie', '_aries=414a78d7341953c137b69b445fbd8e5b;tg_auth=be3b20507b8fed99645640c9a053dee6')
     }
   }
 }
