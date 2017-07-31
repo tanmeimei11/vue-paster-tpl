@@ -1,23 +1,23 @@
 import Vue from 'vue'
-import { initPlugin } from 'plugins/initPlugin' 
+import { initPlugin } from 'plugins/initPlugin'
 import { iTrack } from 'i-ui'
 import { inpromo } from 'mixins/inPromo'
-import * as config from 'config' 
+import * as config from 'config'
 import injectFetch from 'mocks'
+import 'assets/libs/content-loaded'
 
-window._trackPrefix = config.trackPrefix(location) 
+window._trackPrefix = config.trackPrefix(location)
 
 Vue.$hideGlobalLoading = () => {
   document.getElementById('global-loading').style.display = 'none'
 }
 if (config.hideGlobalLoading === 0) {
-  window.onload = () => {
+  window.contentLoaded(() => {
     Vue.$hideGlobalLoading()
-  }
+  })
 }
 
 class InVue extends Vue {
-
   static isMock = process.env.NODE_ENV !== 'production' && config.mock  
   static basePlugins = [
     // directives
