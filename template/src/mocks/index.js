@@ -80,25 +80,63 @@ const mockRegex = (parseData, mockMap) => {
     }
   }
 }
+
+const MockXMLHttpRequest = mockMap => () => {
+  let _url = null
+  let xhr = null
+  return {
+    open (method, url, async) {
+      xhr = new window._XMLHttpRequest()
+      xhr.open(method, url, async)
+      _url = url
+    },
+    send (body) {
+      let parseData = parseUrl(_url)
+      let result = mockRegex(parseData, mockMap)
+      if (result && result.succ) {
+        console.group(_url)
+        console.log(parseData)
+        console.log(result.data)
+        console.groupEnd()
+        this.readyState = 4
+        this.status = 200
+        this.responseText = result.data
+        this.onreadystatechange()
+      } else {
+        xhr.onreadystatechange = () => {
+          this.readyState = xhr.readyState
+          this.status = xhr.status
+          this.responseText = xhr.responseText
+          this.onreadystatechange()
+        }
+        xhr.send(body)
+      }
+    }
+  }
+}
 /** 
  * 注入fetch请求
  * @param {String} url 请求地址
  * @param {Object} options 参数
  */
-export default (oldFetch, mockMap) => (url, options) => {
-  let parseData = parseUrl(url, options)
-  let result = mockRegex(parseData, mockMap)
-  if (result && result.succ) {
-    console.group(url)
-    console.log(parseData)
-    console.log(result.data)
-    console.groupEnd()
-    return Promise.resolve({
-      json () {
-        return result.data
-      } 
-    })    
-  } else {
-    return oldFetch(url, options)
+export default (oldFetch, mockMap) => {
+  window._XMLHttpRequest = window.XMLHttpRequest
+  window.XMLHttpRequest = MockXMLHttpRequest(mockMap)
+  return (url, options) => {
+    let parseData = parseUrl(url, options)
+    let result = mockRegex(parseData, mockMap)
+    if (result && result.succ) {
+      console.group(url)
+      console.log(parseData)
+      console.log(result.data)
+      console.groupEnd()
+      return Promise.resolve({
+        json () {
+          return result.data
+        } 
+      })    
+    } else {
+      return oldFetch(url, options)
+    }
   }
 }
