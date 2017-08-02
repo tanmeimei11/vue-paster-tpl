@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import { initPlugin } from 'plugins/initPlugin'
+import injectObj from 'iPlugins/injectObj'
 import { iTrack } from 'i-ui'
-import { inpromo } from 'mixins/inPromo'
+import inpromo from 'iMixins/inPromo'
 import * as config from 'config'
 import injectFetch from 'mocks'
 import 'assets/libs/content-loaded'
@@ -23,7 +23,17 @@ class InVue extends Vue {
     // directives
     iTrack, 
     // 初始化插件 
-    initPlugin
+    injectObj,
+    // 隐藏loading
+    (config.hideGlobalLoading === 0 ? () => {} : (Vue) => {
+      Object.defineProperties(Vue.prototype, {
+        $hide: {
+          get () {
+            return Vue.$hideGlobalLoading
+          }
+        }
+      })
+    })
   ]
 
   constructor (options) {

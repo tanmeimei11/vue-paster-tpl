@@ -1,9 +1,18 @@
 {
   "presets": [
-    ["es2015", { "modules": false }],"stage-0"
+    ["es2015", {
+      "modules": false
+    }], "stage-0"
   ],
-  "plugins": [ ["./scripts/plugins/iui-component",{
-    "libDir":"packages",
-    "libraryName":"i-ui"
-  }]]
+  "plugins": [
+    ["transform-runtime", {
+      "helpers": false,
+      "polyfill": false,
+      "regenerator": true
+    }],
+    ["./scripts/plugins/iui-component", {
+      "libDir": "packages",
+      "libraryName": "i-ui"
+    }]
+  ]
 }

@@ -40,6 +40,7 @@ if (invalidEntry.length) {
     `
   ))
 }
+const isFontFile = url => /\.(woff2?|eot|ttf|otf)(\?.*)?$/.test(url)
 export default {
   entry: entryObj,
   profile: false,
@@ -63,14 +64,14 @@ export default {
       loader: 'eslint-loader',
       enforce: 'pre',
       include: [env.assetsPath('src'), env.assetsPath('test')],
-      exclude: [env.assetsPath('src/assets/libs')],
+      exclude: [env.assetsPath('src', 'assets', 'libs')],
       options: {
         formatter: require('eslint-friendly-formatter')
       }
     },
     {
       test: /\.js$/,
-      include: [env.assetsPath('src/assets/libs')],
+      include: [env.assetsPath('src', 'assets', 'libs')],
       use: 'imports-loader?this=>window&define=>false'
     },
     {
@@ -81,11 +82,13 @@ export default {
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      include: [env.assetsPath('src'), env.assetsPath('test'), env.assetsPath('node_modules')]
+      include: [env.assetsPath('src'), env.assetsPath('test'), env.assetsPath('node_modules')],
+      exclude: [
+        env.assetsPath('src', 'assets', 'libs'), 
+        env.assetsPath('node_modules', 'core-js')
+      ]
     },
     {
-      // css文件引用方式， 
-      // 在js中引用使用require('!url-loader?limit=10000!../../assets/images/a1.png')
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
       loader: 'url-loader',
       query: {
@@ -95,19 +98,12 @@ export default {
       }
     },
     {
-      test: /\.(mp3|mp4)(\?.*)?$/,
+      test: /\.(woff2?|eot|ttf|otf|mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
       loader: 'file-loader',
-      query: {
-        name: 'media/[name].[hash:7].[ext]',
-        publicPath: './'
-      }
-    },
-    {
-      test: /\.(eot|woff|ttf|eot)$/,
-      loader: 'file-loader',
-      query: {
-        name: 'fonts/[name].[hash:7].[ext]',
-        publicPath: '../'
+      options: {
+        name: '[name].[hash:7].[ext]',
+        outputPath: url => `${isFontFile(url) ? 'fonts' : 'media'}/${url}`,
+        publicPath: url => `${isFontFile(url) ? '../' : './'}${url}`
       }
     },
     {
