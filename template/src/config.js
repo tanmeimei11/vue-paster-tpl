@@ -30,7 +30,7 @@ export const hideGlobalLoading = 0
  * 修改分享的方法 mixin ,可以直接修改某个字段 this.$utils.share.???=???
  *
  * vue外部分享设置 方法2:
- * import share  from 'iUtil/share'
+ * import share  from 'iUtils/share'
  * 修改分享的方法  share.config.??? = ???
  *
  * ------------------------------------------------------------------

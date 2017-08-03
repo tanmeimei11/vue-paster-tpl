@@ -18,6 +18,6 @@
     "iExtends": "${workspaceRoot}/node_modules/i-ui/src/extends",
     "iProtocols": "${workspaceRoot}/node_modules/i-ui/src/protocols",
     "iPlugins": "${workspaceRoot}/node_modules/i-ui/src/plugins",
-    "iUtil": "${workspaceRoot}/node_modules/i-ui/src/utils"
+    "iUtils": "${workspaceRoot}/node_modules/i-ui/src/utils"
   }
 }

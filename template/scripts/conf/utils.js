@@ -9,14 +9,13 @@
  const src = (...url) => env.assetsPath('src', ...url)
  const iuiPath = [
    'mixins', 'scss', 'fiters', 'extends',
-   'protocols', 'plugins'
+   'protocols', 'plugins', 'utils'
  ]
  const srcPath = [
    'assets', 'actions', 'components', 'units', 'stores', 
    'directives', 'mixins', 'extends', 'mocks', 'config'
  ]
  const iuiAlias = {
-   'iUtil': iuiSrc('utils'),
    'iConfig': src('config')
  }
  const aliasObject = Object.assign(iuiAlias, {
