@@ -1,6 +1,6 @@
 import * as fetch from '../units/fetchApi'
 export const api = {
-  created: function () {
+  beforeCreate: function () {
     this.$api = fetch.api
     this.$apiPromise = fetch.apiPromise
   },
