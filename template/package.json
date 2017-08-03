@@ -25,6 +25,9 @@
     {{#if_eq analytics "yes"}}
     "analytics": "git+ssh://git@githost.in66.cc/unpkg/analytics",
     {{/if_eq}}
+    {{#if_eq extends.swiper true}}
+    "vue-awesome-swiper": "^2.5.4",
+    {{/if_eq}}
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {

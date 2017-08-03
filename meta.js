@@ -38,6 +38,13 @@ module.exports = {
         "yes",
         "no"
       ]
+    },
+    "extends":{
+      "type": "checkbox",
+      "message": "选择您需要的扩展",
+      "choices": [
+        "swiper"
+      ]
     }
   },
   "filters": {

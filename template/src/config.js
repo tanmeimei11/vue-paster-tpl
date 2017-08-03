@@ -59,21 +59,10 @@ export const trackPrefix = (location) => {
 
 /**
  * ------------------------------------------------------------------
- * mock设置
- * mock:开启mock
- * mockMap:mock时读取的文件映射
  * apiCommonParam:api请求的公共参数
  * apiMap:api名和api地址映射
  * ------------------------------------------------------------------
  */
-export const mock = true
-export const mockMap = () => {
-  return require.ensure([], process.env.NODE_ENV === 'production' ? () => {} : () => {
-    return {
-      '/promo/userapi/currentuser': require('./mocks/json/user.json')
-    }
-  })
-}
 export const apiCommonParam = {
   promo_name: '{{name}}'
 }
@@ -82,17 +71,24 @@ export const apiMap = {
 }
 /**
  * ------------------------------------------------------------------
- * 代理设置mock为false时生效
+ * mock设置
+ * mock:开启mock 只是mock文件的开关
+ * mockMap:mock时读取的文件映射
+ * proxyTable:代理设置
  * ------------------------------------------------------------------
  */
-export const proxyTable = {
+export const mock = true
+export const mockMap = process.env.NODE_ENV === 'production' ? {} : {
+  '/promo/userapi/currentuser': 'mocks/json/user.json'
+}
+export const proxyTable = process.env.NODE_ENV === 'production' ? {} : {
   '/promo': {
     target: 'http://58.215.141.112',
     secure: false,
     changeOrigin: true,
     onProxyReq (proxyReq, req, res) {
       // webtest token
-      proxyReq.setHeader('host', 'www.in66.com')
+      proxyReq.setHeader('host', 'promo.in66.com')
       proxyReq.setHeader('cookie', '_aries=414a78d7341953c137b69b445fbd8e5b;tg_auth=be3b20507b8fed99645640c9a053dee6')
     }
   }

@@ -1,9 +1,22 @@
 import Vue from 'vue'
-import injectObj from 'iPlugins/injectObj'
+import 'core-js/fn/promise'
+import 'whatwg-fetch'
+import 'iScss/base.scss'
+{{#if_eq analytics "yes"}}
+// 网页监控sdk
+import 'analytics'
+{{/if_eq}}
+// 微信分享sdk
+import 'assets/libs/jweixin-1.0.0.js' 
+{{#if_eq growingIO "yes"}}
+// 活动必须的growingio埋点
+import 'assets/libs/growingio.js'
+{{/if_eq}}
+// 活动必须的growingio埋点
 import { iTrack } from 'i-ui'
+import injectObj from 'iPlugins/injectObj'
 import inpromo from 'iMixins/inPromo'
 import * as config from 'config'
-import injectFetch from 'mocks'
 import 'assets/libs/content-loaded'
 
 window._trackPrefix = config.trackPrefix(location)
@@ -43,15 +56,6 @@ class InVue extends Vue {
     options.plugins = options.plugins || []
     InVue.basePlugins.concat(options.plugins).forEach(plugin => Vue.use(plugin))
     super(options)
-  }
-
-  static get mockPromise () {
-    let promise = Promise.resolve()
-    if (InVue.isMock) {
-      promise = promise.then(() => config.mockMap())
-        .then(map => { window.fetch = injectFetch(window.fetch, map) })
-    } 
-    return promise
   }
 
   static batchMixin (mixins) {
