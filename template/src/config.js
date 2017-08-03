@@ -1,6 +1,8 @@
 /**
  * 基础的url配置
  */
+// export const U_IN = '//love.in66.com'
+// export const U_IN_QA = '//qainlove.in66.com'
 export const U_IN = '//promo.in66.com'
 export const U_IN_QA = '//qapromo.in66.com'
 export const U_IN_APPLINKS = '//m.in66.com/applinks'
