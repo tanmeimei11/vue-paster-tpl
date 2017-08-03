@@ -13,11 +13,10 @@ export const U_IN_WXSDK = '//www.in66.com/promo/commonapi/getweixinjssdkconfig'
  * ------------------------------------------------------------------
  * 全局loading
  * 0:挂载时隐藏(window.contentLoaded)
- * 1:手动隐藏(manual) 使用this.$hide
+ * 1:手动隐藏(manual) 使用this.$hide()
  * ------------------------------------------------------------------
  */
 export const hideGlobalLoading = 0
-
 /**
  * ------------------------------------------------------------------
  * 分享设置
@@ -26,6 +25,7 @@ export const hideGlobalLoading = 0
  *
  * vue内部修改分享设置
  * this.$share.config.xxx = ????
+ * 
  * vue外部分享设置 
  * import share  from 'iUtils/share'
  * 修改分享的方法  share.config.??? = ???
@@ -41,7 +41,6 @@ export const shareMap = (location) => {
     shareTrack: 'share'
   }
 }
-
 /**
  * ------------------------------------------------------------------
  * 埋点设置
@@ -53,7 +52,6 @@ export const track = 'enter'
 export const trackPrefix = (location) => {
   return `h5_promo_{{ name }}_${(location.pathname.split('/').slice(-1)[0].replace(/.html$/, '') || 'index')}_`
 }
-
 /**
  * ------------------------------------------------------------------
  * apiCommonParam:api请求的公共参数
