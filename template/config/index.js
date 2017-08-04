@@ -1,5 +1,5 @@
 import {
-  posix
+  join
 } from 'path'
 import { proxyTable } from '../src/config'
 
@@ -16,7 +16,7 @@ export const build = {
 }
 
 export const env = {
-  assetsPath: (...relativePath) => posix.join(__dirname, '..', ...relativePath),
+  assetsPath: (...relativePath) => join(__dirname, '..', ...relativePath),
   port: 8018,
   autoOpenBrowser: true,
   proxyTable: proxyTable 
