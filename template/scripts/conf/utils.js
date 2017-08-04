@@ -1,11 +1,11 @@
  import {
-  posix
+  join
 } from 'path'
  import {
   env
 } from '../../config'
  const upfirlet = word => word.replace(/^\w{1}/, letter => letter.toUpperCase())
- const iuiSrc = (...url) => posix.join('i-ui', 'src', ...url)
+ const iuiSrc = (...url) => join('i-ui', 'src', ...url)
  const src = (...url) => env.assetsPath('src', ...url)
  const iuiPath = [
    'mixins', 'scss', 'fiters', 'extends',
