@@ -3,7 +3,8 @@ import httpProxyMiddleware from 'http-proxy-middleware'
 import contextMatcher from 'http-proxy-middleware/lib/context-matcher'
 import logger from 'http-proxy-middleware/lib/logger'
 import {
-  blue
+  blue,
+  green
 } from 'chalk'
 import {
   env
@@ -12,9 +13,14 @@ import {
 let configJs = env.assetsPath('src/config.js')
 let proxyTable = require(configJs).proxyTable
 let mockMap = require(configJs).mockMap
+const parseUrl = context => {
+  let ctxSplit = context.split(':')
+  return `${(ctxSplit.length === 1 ? `GET:` : ``)}${context}`.split(':')
+}
 let showProxyInfo = (stats = 'init') => {
   Object.keys(mockMap).forEach(function (context) {
-    console.log(`${blue(`[HPM] Proxy ${stats}`)} : ${context}  ->  ${mockMap[context]}`)
+    let [method, url] = parseUrl(context)
+    console.log(`${blue(`[HPM] Proxy ${stats}`)} : ${green(method)} ${url} ->  ${mockMap[context]}`)
   })
   Object.keys(proxyTable).forEach(function (context) {
     var options = proxyTable[context]
@@ -25,17 +31,20 @@ logger.getInstance().setLevel('warn')
 showProxyInfo()
 watchFile(configJs, () => {
   delete require.cache[require.resolve(configJs)]
-  let cfg = require(configJs)
-  proxyTable = cfg.proxyTable
-  mockMap = cfg.mock ? cfg.mockMap : {}
-  showProxyInfo('modify')
+  try {
+    let cfg = require(configJs)
+    proxyTable = cfg.proxyTable
+    mockMap = cfg.mock ? cfg.mockMap : {}
+    showProxyInfo('modify')
+  } catch (err) {}
 })
 export default (req, res, next) => {
   let shouldProxy = false
-  var path = (req.originalUrl || req.url)
+  let path = (req.originalUrl || req.url)
   Object.keys(mockMap).forEach(function (context) {
+    let [method, url] = parseUrl(context)
     if (!shouldProxy) {
-      shouldProxy = contextMatcher.match(context, path, req)
+      shouldProxy = contextMatcher.match(url, path, req) && req.method === method
       if (shouldProxy) {
         res.sendFile(env.assetsPath('src', mockMap[context]))
       }

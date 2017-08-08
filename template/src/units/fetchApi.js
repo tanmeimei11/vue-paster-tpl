@@ -80,16 +80,15 @@ const FetchApi = (commonParam, urls, opt) => {
       let isFetch = /fetch/i.test(type || reqUrlInfo.type || 'fetch')
       // 判断是不是get方法
       let isGet = /get/i.test(method || reqUrlInfo.method || 'get')
-      let options = {
+      if (urlObj[`${urlKey}`].loading) return loadingPromise(`${reqUrl} RequsetIng`)
+      urlObj[`${urlKey}`].loading = true
+      return (isFetch ? buildFetchPromise : buildXMLHTTPPromise)({
         url: isGet ? buildGetParam(reqUrl, commonParam, param) : reqUrl,
         credentials: 'include',
         method: isGet ? 'GET' : 'POST',
         body: isGet ? null : buildPostParam(commonParam, param),
         headers: {}// 'X-Requested-With': 'XMLHttpRequest' 当后端需要判断是否为ajax的时候添加
-      }
-      if (urlObj[`${urlKey}`].loading) return loadingPromise(`${reqUrl} RequsetIng`)
-      urlObj[`${urlKey}`].loading = true
-      return (isFetch ? buildFetchPromise : buildXMLHTTPPromise)(options).then(res => requestDone(res), err => requestDone(err))
+      }).then(res => requestDone(res), err => requestDone(err))
     }
   })
   return urlObj

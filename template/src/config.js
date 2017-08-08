@@ -68,19 +68,21 @@ export const apiCommonParam = {
   promo_name: '{{name}}'
 }
 export const apiMap = {
-  getUser: '/promo/userapi/currentuser'
+  getUser: '/promo/userapi/currentuser',
+  getUserPost: '/promo/userapi/currentuser'
 }
 /**
  * ------------------------------------------------------------------
  * mock设置
  * mock:开启mock 只是mock文件的开关
- * mockMap:mock时读取的文件映射
+ * mockMap:mock时读取的文件映射 （包含同样的地址 url 前面可以添加 GET: 或者 POST: 区分）
  * proxyTable:代理设置
  * ------------------------------------------------------------------
  */
 export const mock = true
 export const mockMap = process.env.NODE_ENV === 'production' ? {} : {
-  '/promo/userapi/currentuser': 'mocks/json/user.json'
+  '/promo/userapi/currentuser': 'mocks/json/user.json',
+  'POST:/promo/userapi/currentuser': 'mocks/json/post.json'
 }
 export const proxyTable = process.env.NODE_ENV === 'production' ? {} : {
   '/promo': {

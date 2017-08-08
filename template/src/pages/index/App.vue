@@ -19,6 +19,7 @@
     created () {
       this.$track('helloWorld!')
       this.$api.getUser({page: 1, page_size: 3})
+      this.$api.getUserPost({page: 1, page_size: 3}, {method: 'post'})
       // this.polling({name: 'getUser'})
       // this.getUser()
     }
