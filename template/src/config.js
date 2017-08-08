@@ -69,7 +69,11 @@ export const apiCommonParam = {
 }
 export const apiMap = {
   getUser: '/promo/userapi/currentuser',
-  getUserPost: '/promo/userapi/currentuser'
+  getUserPost: {
+    url: '/promo/userapi/currentuser',
+    method: 'post',
+    type: 'xhr'
+  }
 }
 /**
  * ------------------------------------------------------------------
