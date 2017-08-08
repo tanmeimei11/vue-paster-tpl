@@ -11,8 +11,9 @@ import {
 } from '../../config'
 /** proxy  */
 let configJs = env.assetsPath('src/config.js')
+let enableMockJs = require(configJs).mock
 let proxyTable = require(configJs).proxyTable
-let mockMap = require(configJs).mockMap
+let mockMap = enableMockJs ? require(configJs).mockMap : {}
 const parseUrl = context => {
   let ctxSplit = context.split(':')
   return `${(ctxSplit.length === 1 ? `GET:` : ``)}${context}`.split(':')
