@@ -1,8 +1,7 @@
 import {
   buildGetParam,
   buildPostParam,
-  loadingPromise,
-  timeoutPromise
+  loadingPromise
 } from './params'
 import {
   U_IN,
@@ -14,77 +13,49 @@ import {
 } from 'config'
 
 /**
- * 停止请求
- * @param {*} _fecth 
+ * 授权重定向
+ * @param {*} json 返回json
  */
-const buildAbortPromise = _fecth => new Promise((resolve, reject) => {
-  _fecth.abort = err => {
-    _fecth.loading = false
-    if (_fecth.xmlhttp instanceof XMLHttpRequest) {
-      _fecth.xmlhttp.abort()
-    }
-    if (!(err instanceof Error)) {
-      err = new Error(err)
-    }
-    reject(err)
+const authorized = json => {
+  if (!json.succ && json.data && json.data.status === 302) {
+    location.href = json.data.location
+    throw json
   }
-})
-
+  return json
+}
 /**
  * 构建fetch请求
- * @param {string} url 
  * @param {object} options 
- * @param {function} done 
  */
-const buildFetchPromise = (url, options, done = () => {}) => fetch(url, options).then(res => {
-  done()
-  return res
-}, err => {
-  done()
-  throw err
-}).then(res => res.json()).then(res => {
-  // 授权重定向
-  if (!res.succ && res.data && res.data.status === 302) {
-    location.href = res.data.location
-    throw res
-  }
-  return res
-})
+const buildFetchPromise = options => fetch(options.url, options).then(res => res.json()).then(authorized)
 
 /**
  * 构建XMLHTTP请求
- * @param {object} _fetch 
- * @param {string} url 
  * @param {object} options 
- * @param {function} done 
  */
-const buildXMLHTTPPromise = (_fetch, url, options, done = () => {}) => new Promise((resolve, reject) => {
+const buildXMLHTTPPromise = options => new Promise((resolve, reject) => {
   let xmlhttp = new XMLHttpRequest()
   xmlhttp.withCredentials = true
   xmlhttp.onreadystatechange = () => {
-    if (xmlhttp.readyState === 4) {
-      done()
-      if ((xmlhttp.status >= 200 && xmlhttp.status < 300)) {
-        let result = (xmlhttp.responseType === 'arraybuffer' || xmlhttp.responseType === 'blob') ? xmlhttp.response : xmlhttp.responseText
-        try {
-          if (xmlhttp.getResponseHeader('content-type') === 'application/json') {
-            result = JSON.parse(result)
-          }
-        } catch (e) {}
-        resolve(result)
-      } else {
-        reject(new Error(xmlhttp.statusText || null))
-      }
+    if (xmlhttp.readyState !== 4) return
+    if ((xmlhttp.status >= 200 && xmlhttp.status < 300)) {
+      let result = (xmlhttp.responseType === 'arraybuffer' || xmlhttp.responseType === 'blob') ? xmlhttp.response : xmlhttp.responseText
+      try {
+        if (xmlhttp.getResponseHeader('content-type') === 'application/json') {
+          result = JSON.parse(result)
+        }
+      } catch (e) {}
+      resolve(result)
+    } else {
+      reject(new Error(xmlhttp.statusText || null))
     }
   }
   xmlhttp.onabort = xmlhttp.onerror = () => {
-    done()
     reject(new Error(xmlhttp.status))
   }
-  xmlhttp.open(options.method, url, true)
+  xmlhttp.open(options.method, options.url, true)
   xmlhttp.send(options.body)
-  _fetch.xmlhttp = xmlhttp
-})
+}).then(authorized)
 
 /**
  * 构建请求方法（每个请求每次只能执行一次）
@@ -93,54 +64,38 @@ const buildXMLHTTPPromise = (_fetch, url, options, done = () => {}) => new Promi
  * @param {Object} opt 关于请求的配置
  */
 const FetchApi = (commonParam, urls, opt) => {
-  /**
-   *  如果是qa访问 qa.in66.com 如果是线上则访问 www.in66.com 否则是本地
-   */
+  // 如果是qa访问 {{U_IN_QA}} 如果是线上则访问 {{U_IN}} 否则是本地
   let host = /^qa/.test(location.host) ? U_IN_QA : (process.env.NODE_ENV === 'production' ? U_IN : '')
   let urlObj = {}
+
   Object.keys(urls).forEach(urlKey => {
-    urlObj[`${urlKey}`] = (param = {}, type = 'get', useFetch = true) => {
-      let url = `${host}${urls[`${urlKey}`]}`
-      let isGet = /get/i.test(type)
-      let _fetch = urlObj[`${urlKey}`]
+    let reqUrlInfo = urls[`${urlKey}`]
+    let reqUrl = `${host}${reqUrlInfo.url || reqUrlInfo}`
+    let requestDone = (res) => {
+      urlObj[`${urlKey}`].loading = false
+      return res
+    }
+    urlObj[`${urlKey}`] = (param = {}, { method, type } = {}) => {
+      // 判断是不是使用fetch
+      let isFetch = /fetch/i.test(type || reqUrlInfo.type || 'fetch')
+      // 判断是不是get方法
+      let isGet = /get/i.test(method || reqUrlInfo.method || 'get')
       let options = {
+        url: isGet ? buildGetParam(reqUrl, commonParam, param) : reqUrl,
         credentials: 'include',
         method: isGet ? 'GET' : 'POST',
         body: isGet ? null : buildPostParam(commonParam, param),
-        headers: {
-          // 'X-Requested-With': 'XMLHttpRequest' 当后端需要判断是否为ajax的时候添加
-        }
+        headers: {}// 'X-Requested-With': 'XMLHttpRequest' 当后端需要判断是否为ajax的时候添加
       }
-      if (isGet) url = buildGetParam(url, commonParam, param)
-      if (_fetch.loading) return loadingPromise()
-      _fetch.loading = true
-      let timeout = _fetch.timeout
-      let timeoutId = 0
-      let doneFetch = () => { clearTimeout(timeoutId); _fetch.loading = false }
-      let promiseArr = [new Promise((resolve, reject) => {
-        if (timeout !== undefined && opt.needTimeOut) { 
-          timeoutId = setTimeout(() => { doneFetch(); resolve(timeoutPromise()) }, timeout)
-        }
-        if (useFetch) {
-          resolve(buildFetchPromise(url, options, doneFetch))
-        } else {
-          resolve(buildXMLHTTPPromise(_fetch, url, options, doneFetch))
-        }
-      })]
-      if (opt.needAbort) promiseArr.push(buildAbortPromise(_fetch))
-      return Promise.race(promiseArr)
+      if (urlObj[`${urlKey}`].loading) return loadingPromise(`${reqUrl} RequsetIng`)
+      urlObj[`${urlKey}`].loading = true
+      return (isFetch ? buildFetchPromise : buildXMLHTTPPromise)(options).then(res => requestDone(res), err => requestDone(err))
     }
   })
   return urlObj
 }
 
-/**
- * 导出 api ，默认不需要abort和timeout 
- */
-export const api = FetchApi(apiCommonParam, apiMap, {
-  needAbort: false,
-  needTimeOut: false
-})
+export const api = FetchApi(apiCommonParam, apiMap)
 
 export const apiPromise = (options) => {
   options.params = options.params || {}

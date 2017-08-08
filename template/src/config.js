@@ -56,6 +56,12 @@ export const trackPrefix = (location) => {
  * ------------------------------------------------------------------
  * apiCommonParam:api请求的公共参数
  * apiMap:api名和api地址映射
+ * 
+ * apiMap 的值可以是对象或者字符串 
+ * 1. 字符串的时候就是请求地址 xxxx
+ * 2. 对象的时候 例如:{ url:'xxx',type:'xhr',method:'post' } 
+ *    默认值为 { url:'xxx',type:'fetch',method:'get' }
+ * 使用的时候 api.xxx({},{method:'post',type:'xhr'}) 优先级最高
  * ------------------------------------------------------------------
  */
 export const apiCommonParam = {
