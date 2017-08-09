@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import 'core-js/fn/promise'
 import 'whatwg-fetch'
 import 'iScss/base.scss'
 {{#if_eq analytics "yes"}}
