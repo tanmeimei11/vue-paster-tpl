@@ -3,8 +3,10 @@
  */
 // export const U_IN = '//love.in66.com'
 // export const U_IN_QA = '//qainlove.in66.com'
-export const U_IN = '//promo.in66.com'
-export const U_IN_QA = '//qapromo.in66.com'
+// export const U_IN = '//promo.in66.com'
+// export const U_IN_QA = '//qapromo.in66.com'
+export const U_IN = '//www.in66.com'
+export const U_IN_QA = '//qa.in66.com'
 export const U_IN_APPLINKS = '//m.in66.com/applinks'
 export const U_CHAT_APPLINKS = '//chat.in66.com/applinks'
 export const U_TRACK = '//stats1.jiuyan.info/onepiece/router.html'
