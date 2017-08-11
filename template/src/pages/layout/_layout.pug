@@ -7,9 +7,10 @@ html
     include ./_script.pug
   body
     block body
-    div.global-loading#global-loading
-      div.global-loading-logo
-      div.global-loading-shadow
+    #global-loading
+      div.global-loading
+        div.global-loading-logo
+        div.global-loading-shadow
     div#app
     script(type="text/javascript",src="/inpromo/lib/js/common.89bedd2.js")
     block script
