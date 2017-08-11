@@ -1,4 +1,5 @@
 /* globals ls */
+import webpack from 'webpack'
 import {
   dirname,
   basename,
@@ -58,6 +59,9 @@ export default {
     ],
     alias: aliasObject
   },
+  plugins: [
+    new webpack.HashedModuleIdsPlugin()
+  ],
   module: {
     rules: [{
       test: /\.(js|vue)$/,

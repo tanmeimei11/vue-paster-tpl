@@ -5,9 +5,7 @@ import {
 } from './params'
 import {
   U_IN,
-  U_IN_QA
-} from 'iConfig'
-import {
+  U_IN_QA,
   apiMap,
   apiCommonParam
 } from 'config'

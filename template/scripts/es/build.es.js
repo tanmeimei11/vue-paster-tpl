@@ -3,7 +3,7 @@ import webpack from 'webpack'
 import {
   cyan
 } from 'chalk'
-import cfg from '../conf/webpack.prod.config'
+import cfg from '../conf/webpack.prod.conf'
 // console.log(process.env.npm_config_dir)
 if (test('-e', cfg.output.path)) {
   rm('-rf', cfg.output.path)

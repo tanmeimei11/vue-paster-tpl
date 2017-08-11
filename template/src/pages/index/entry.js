@@ -1,4 +1,3 @@
-import 'core-js/fn/promise'
 {{#if_eq vuex "yes"}}
 import store from 'stores'
 {{/if_eq}}
