@@ -12,5 +12,7 @@ html
         div.global-loading-logo
         div.global-loading-shadow
     div#app
+    {{#if_eq cdn "yes"}}
     script(type="text/javascript",src="/inpromo/lib/js/common.89bedd2.js")
+    {{/if_eq}}
     block script

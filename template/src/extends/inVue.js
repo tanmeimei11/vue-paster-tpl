@@ -1,4 +1,9 @@
 import Vue from 'vue'
+{{#if_eq cdn "no"}}
+import 'whatwg-fetch'
+import 'iScss/base.scss'
+import 'assets/libs/jweixin-1.0.0.js' 
+{{/if_eq}}
 {{#if_eq analytics "yes"}}
 // 网页监控sdk
 import 'analytics'

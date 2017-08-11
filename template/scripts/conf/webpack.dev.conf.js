@@ -18,7 +18,7 @@ export default new Config().extend({
 }).merge({
   devtool: 'source-map',
   entry: {
-    vendor: ['vue', env.assetsPath('scripts/es/dev-client.es.js')]
+    vendor: ['vue', {{#if_eq cdn "no"}} 'core-js/fn/promise', 'whatwg-fetch', {{/if_eq}} env.assetsPath('scripts/es/dev-client.es.js')]
   },
   plugins: [
     new webpack.EnvironmentPlugin({

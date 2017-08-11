@@ -15,6 +15,14 @@ module.exports = {
       "type": "string",
       "message": "作者"
     },
+    "cdn": {
+      "type": "list",
+      "message": "使用cdn资源",
+      "choices": [
+        "yes",
+        "no"
+      ]
+    },
     "vuex": {
       "type": "list",
       "message": "状态管理机(vuex)",
