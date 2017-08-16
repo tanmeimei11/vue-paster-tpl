@@ -1,7 +1,6 @@
 import {
   buildGetParam,
-  buildPostParam,
-  loadingPromise
+  buildPostParam
 } from './params'
 import {
   U_IN,
@@ -25,7 +24,7 @@ const authorized = json => {
  * 构建fetch请求
  * @param {object} options 
  */
-const buildFetchPromise = options => fetch(options.url, options).then(res => res.json()).then(authorized)
+const buildFetchPromise = options => fetch(options.url, options).then(res => res.json())
 
 /**
  * 构建XMLHTTP请求
@@ -53,7 +52,7 @@ const buildXMLHTTPPromise = options => new Promise((resolve, reject) => {
   }
   xmlhttp.open(options.method, options.url, true)
   xmlhttp.send(options.body)
-}).then(authorized)
+})
 
 /**
  * 构建请求方法（每个请求每次只能执行一次）
@@ -62,37 +61,40 @@ const buildXMLHTTPPromise = options => new Promise((resolve, reject) => {
  * @param {Object} opt 关于请求的配置
  */
 const FetchApi = (commonParam, urls, opt) => {
-  // 如果是qa访问 {{U_IN_QA}} 如果是线上则访问 {{U_IN}} 否则是本地
-  let host = /^qa/.test(location.host) ? U_IN_QA : (process.env.NODE_ENV === 'production' ? U_IN : '')
+  let _host = opt.host 
   let urlObj = {}
 
   Object.keys(urls).forEach(urlKey => {
     let reqUrlInfo = urls[`${urlKey}`]
-    let reqUrl = `${host}${reqUrlInfo.url || reqUrlInfo}`
     let requestDone = (res) => {
       urlObj[`${urlKey}`].loading = false
       return res
     }
-    urlObj[`${urlKey}`] = (param = {}, { method, type } = {}) => {
+    urlObj[`${urlKey}`] = (param = {}, { method, type, host } = {}) => {
+      if (urlObj[`${urlKey}`].loading) return 
+      urlObj[`${urlKey}`].loading = true
+      // 获取请求地址
+      let reqUrl = `${(reqUrlInfo.host || host || _host)}${(reqUrlInfo.url || reqUrlInfo)}`
       // 判断是不是使用fetch
       let isFetch = /fetch/i.test(type || reqUrlInfo.type || 'fetch')
       // 判断是不是get方法
       let isGet = /get/i.test(method || reqUrlInfo.method || 'get')
-      if (urlObj[`${urlKey}`].loading) return loadingPromise(`${reqUrl} RequsetIng`)
-      urlObj[`${urlKey}`].loading = true
       return (isFetch ? buildFetchPromise : buildXMLHTTPPromise)({
         url: isGet ? buildGetParam(reqUrl, commonParam, param) : reqUrl,
         credentials: 'include',
         method: isGet ? 'GET' : 'POST',
         body: isGet ? null : buildPostParam(commonParam, param),
         headers: {}// 'X-Requested-With': 'XMLHttpRequest' 当后端需要判断是否为ajax的时候添加
-      }).then(res => requestDone(res), err => requestDone(err))
+      }).then(authorized).then(res => requestDone(res), err => requestDone(err))
     }
   })
   return urlObj
 }
 
-export const api = FetchApi(apiCommonParam, apiMap)
+export const api = FetchApi(apiCommonParam, apiMap, {
+  // 如果是qa访问 {{U_IN_QA}} 如果是线上则访问 {{U_IN}} 否则是本地
+  host: /^qa/.test(location.host) ? U_IN_QA : (process.env.NODE_ENV === 'production' ? U_IN : '')
+})
 
 export const apiPromise = (options) => {
   options.params = options.params || {}
