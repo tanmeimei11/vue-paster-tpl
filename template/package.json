@@ -26,6 +26,9 @@
     {{#if_eq extends.swiper true}}
     "vue-awesome-swiper": "^2.5.4",
     {{/if_eq}}
+    {{#if_eq extends.pixi true}}
+    "pixi.js": "^4.5.4",
+    {{/if_eq}}
     {{#if_eq cdn "no"}}
     "whatwg-fetch": "^2.0.3",
     "core-js": "^2.4.1",
