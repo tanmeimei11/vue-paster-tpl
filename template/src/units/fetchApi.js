@@ -1,6 +1,7 @@
 import {
   buildGetParam,
-  buildPostParam
+  buildPostParam,
+  loadingPromise
 } from './params'
 import {
   U_IN,
@@ -71,10 +72,10 @@ const FetchApi = (commonParam, urls, opt) => {
       return res
     }
     urlObj[`${urlKey}`] = (param = {}, { method, type, host } = {}) => {
-      if (urlObj[`${urlKey}`].loading) return 
-      urlObj[`${urlKey}`].loading = true
       // 获取请求地址
       let reqUrl = `${(reqUrlInfo.host || host || _host)}${(reqUrlInfo.url || reqUrlInfo)}`
+      if (urlObj[`${urlKey}`].loading) return loadingPromise(`${reqUrl} RequsetIng`)
+      urlObj[`${urlKey}`].loading = true
       // 判断是不是使用fetch
       let isFetch = /fetch/i.test(type || reqUrlInfo.type || 'fetch')
       // 判断是不是get方法

@@ -59,3 +59,8 @@ export const buildPostParam = (...params) => {
   }))
   return data
 }
+
+/**
+ * 如果在请求中，让方法无效
+ */
+export const loadingPromise = (errInfo) => new Promise((resolve, reject) => console.warn(errInfo))
