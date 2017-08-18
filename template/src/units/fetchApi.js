@@ -39,7 +39,7 @@ const buildXMLHTTPPromise = options => new Promise((resolve, reject) => {
     if ((xmlhttp.status >= 200 && xmlhttp.status < 300)) {
       let result = (xmlhttp.responseType === 'arraybuffer' || xmlhttp.responseType === 'blob') ? xmlhttp.response : xmlhttp.responseText
       try {
-        if (xmlhttp.getResponseHeader('content-type') === 'application/json') {
+        if (~xmlhttp.getResponseHeader('content-type').indexOf('application/json')) {
           result = JSON.parse(result)
         }
       } catch (e) {}
