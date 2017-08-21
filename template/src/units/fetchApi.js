@@ -92,7 +92,7 @@ const FetchApi = (commonParam, urls, opt) => {
   return urlObj
 }
 
-export const api = FetchApi(apiCommonParam, apiMap, {
+export const api = FetchApi(apiCommonParam, apiMap(location), {
   // 如果是qa访问 {{U_IN_QA}} 如果是线上则访问 {{U_IN}} 否则是本地
   host: /^qa/.test(location.host) ? U_IN_QA : (process.env.NODE_ENV === 'production' ? U_IN : '')
 })

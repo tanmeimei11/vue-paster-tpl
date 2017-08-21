@@ -36,15 +36,13 @@ export const hideGlobalLoading = 0
  *
  * ------------------------------------------------------------------
  */
-export const shareMap = (location) => {
-  return {
-    shareTitle: 'shareTitle', // 分享标题
-    shareDesc: 'shareDesc', // 分享描述
-    shareLink: location.protocol + `//${location.host}/inpromo/2017/{{ name }}/index.html?_ig=share`,
-    shareImg: location.protocol + '//inimg02.jiuyan.info/in/2017/02/27/307746C7-A0AC-4D21-4D92-B480A77ADFA2.jpg',
-    shareTrack: 'share'
-  }
-}
+export const shareMap = location => ({
+  shareTitle: 'shareTitle', // 分享标题
+  shareDesc: 'shareDesc', // 分享描述
+  shareLink: location.protocol + `//${location.host}/inpromo/2017/{{ name }}/index.html?_ig=share`,
+  shareImg: location.protocol + '//inimg02.jiuyan.info/in/2017/02/27/307746C7-A0AC-4D21-4D92-B480A77ADFA2.jpg',
+  shareTrack: 'share'
+})
 /**
  * ------------------------------------------------------------------
  * 埋点设置
@@ -53,9 +51,9 @@ export const shareMap = (location) => {
  * ------------------------------------------------------------------
  */
 export const track = 'enter'
-export const trackPrefix = (location) => {
-  return `h5_promo_{{ name }}_${(location.pathname.split('/').slice(-1)[0].replace(/.html$/, '') || 'index')}_`
-}
+export const trackPrefix = location => (
+   `h5_promo_{{ name }}_${(location.pathname.split('/').slice(-1)[0].replace(/.html$/, '') || 'index')}_`
+)
 /**
  * ------------------------------------------------------------------
  * apiCommonParam:api请求的公共参数
@@ -71,14 +69,14 @@ export const trackPrefix = (location) => {
 export const apiCommonParam = {
   promo_name: '{{name}}'
 }
-export const apiMap = {
+export const apiMap = location => ({
   getUser: '/promo/userapi/currentuser',
   getUserPost: {
     url: '/promo/userapi/currentuser',
     method: 'post',
     type: 'xhr'
   }
-}
+})
 /**
  * ------------------------------------------------------------------
  * mock设置
@@ -99,7 +97,7 @@ export const proxyTable = process.env.NODE_ENV === 'production' ? {} : {
     changeOrigin: true,
     onProxyReq (proxyReq, req, res) {
       // webtest token
-      proxyReq.setHeader('host', 'promo.in66.com')
+      proxyReq.setHeader('host', U_IN.slice(2))
       proxyReq.setHeader('cookie', '_aries=414a78d7341953c137b69b445fbd8e5b;tg_auth=be3b20507b8fed99645640c9a053dee6')
     }
   }
