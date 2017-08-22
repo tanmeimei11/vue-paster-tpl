@@ -28,7 +28,7 @@ export const hideGlobalLoading = 0
  * shareImg : `{{ name }}/${require('./assets/img/share.jpg')}`
  *
  * vue内部修改分享设置
- * this.$share.config.xxx = ????
+ * this.$share.xxx = ????
  * 
  * vue外部分享设置 
  * import share  from 'iUtils/share'
