@@ -100,7 +100,7 @@ export const proxyTable = process.env.NODE_ENV === 'production' ? {} : {
       proxyReq.setHeader('host', U_IN.slice(2))
 
       proxyReq.setHeader('cookie', '_aries=414a78d7341953c137b69b445fbd8e5b;tg_auth=be3b20507b8fed99645640c9a053dee6')
-      // papei qa caicai5 token
+      // papei qa caicai08 token {"id":"1WjnJ","nick":"caicai08","avatar":"http:\/\/inimg01.jiuyan.info\/in\/2016\/09\/21\/331FCF3A-6657-EB52-9C6A-DD2E5A14918A-1WjnJ.jpg?imageMogr2\/format\/jpg\/thumbnail\/180x%3E\/quality\/80!"}
       // proxyReq.setHeader('cookie', 'tg_auth=13a61aec16317b01318fe728b069e9c6; _token=13a61aec16317b01318fe728b069e9c6;')
     }
   }
