@@ -98,7 +98,10 @@ export const proxyTable = process.env.NODE_ENV === 'production' ? {} : {
     onProxyReq (proxyReq, req, res) {
       // webtest token
       proxyReq.setHeader('host', U_IN.slice(2))
+
       proxyReq.setHeader('cookie', '_aries=414a78d7341953c137b69b445fbd8e5b;tg_auth=be3b20507b8fed99645640c9a053dee6')
+      // papei qa caicai5 token
+      // proxyReq.setHeader('cookie', 'tg_auth=13a61aec16317b01318fe728b069e9c6; _token=13a61aec16317b01318fe728b069e9c6;')
     }
   }
 }
