@@ -23,7 +23,7 @@ import {
 const option = {
   hostname: 'tinypng.com',
   port: 443,
-  path: '/site/shrink',
+  path: '/web/shrink',
   method: 'POST',
   headers: {
     'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1'
@@ -70,7 +70,7 @@ const compress = (path, name, hash) => {
             })
           })
         } catch (error) {
-          return console.log(`CompressError '${red(relativeName)}'.....${resInfo.message}`)
+          return console.log(`CompressError '${red(relativeName)}'.....${error}`)
         }
       })
     }))
