@@ -20,9 +20,6 @@ let post = (options, fun = () => {}) => {
     })
   })
 }
-// curl - X POST http: //10.10.106.240:8001/jenkins/view/InPromo/job/InPromo_onekey_deploy/build\
-//   --user diandi: bdc9e35667a993f74838e0022f8fPUT /projects/:id/merge_request/:merge_request_id/merge1d73\
-//   --data - urlencode json = '{"parameter": [{"name": "BRANCH", "value": "develop"}, {"name": "deploy_env", "value": "QA"}]}'
 let jenkisPost = body => new Promise((resolve, reject) => {
   var bodyString = `json=${encodeURIComponent(JSON.stringify(body))}`
   let req = post({
