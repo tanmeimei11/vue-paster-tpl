@@ -5,6 +5,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import {
   BundleAnalyzerPlugin
 } from 'webpack-bundle-analyzer'
+import ImageMinPlugin from 'image-min-plugin'
 import { env, build } from '../../config'
 
 const cfg = new Config().extend({
@@ -26,6 +27,7 @@ const cfg = new Config().extend({
     filename: 'js/[name].[chunkhash:7].js'
   },
   plugins: [
+    new ImageMinPlugin(),
     new webpack.EnvironmentPlugin({
       NODE_ENV: JSON.stringify('production'),
       DEBUG: false
