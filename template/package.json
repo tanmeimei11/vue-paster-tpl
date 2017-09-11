@@ -33,7 +33,8 @@
     "whatwg-fetch": "^2.0.3",
     "core-js": "^2.4.1",
     {{/if_eq}}
-    "i-ui": "0.1.36"
+    "i-ui": "0.1.36",
+    "image-min-plugin": "^1.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.3",
