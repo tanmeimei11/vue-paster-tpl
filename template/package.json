@@ -34,7 +34,7 @@
     "core-js": "^2.4.1",
     {{/if_eq}}
     "i-ui": "0.1.36",
-    "image-min-plugin": "^1.0.2"
+    "image-min-plugin": "^1.1.3"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.3",
