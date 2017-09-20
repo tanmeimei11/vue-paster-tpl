@@ -12,7 +12,7 @@ export default {
   output: {
     path: assetsPath('dist'),
     filename: '[name].js',
-    chunkFilename: '[name].chunk.[chunkhash:7].js',
+    chunkFilename: '[name].chunk.js',
     publicPath: '/'
   },
   resolve: {
