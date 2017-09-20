@@ -1,18 +1,18 @@
 {
   "presets": [
-    ["es2015", {
-      "modules": false
-    }], "stage-0"
+    ["env",{
+      "modules": false,
+       "targets": {
+         "browsers": ["last 2 versions", "safari >= 7"]
+       }
+     }], "stage-0"
   ],
   "plugins": [
+    "transform-decorators-legacy",
     ["transform-runtime", {
       "helpers": false,
       "polyfill": false,
       "regenerator": true
-    }],
-    ["./scripts/plugins/iui-component", {
-      "libDir": "packages",
-      "libraryName": "i-ui"
     }]
   ]
 }
