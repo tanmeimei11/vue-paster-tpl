@@ -6,5 +6,6 @@
 <script>
     import {connect} from 'dva-vue'
     export default connect(({share}) => ({share}))({
+        
     })
 </script>

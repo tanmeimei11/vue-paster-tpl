@@ -4,7 +4,7 @@ import postcss from 'postcss'
 export const px2rem = postcss.plugin('postcss-px2rem', function (options) {
   return function (root, result) {
     var oldCssText = root.toString()
-    var newCssText = oldCssText.replace(/(\d+)px/, (reg, num) => 
+    var newCssText = oldCssText.replace(/(\d+)px/g, (reg, num) => 
       `${Math.ceil((num / options.remUnit) * 1000) / 1000}rem`)
     result.root = postcss.parse(newCssText)
   }

@@ -5,14 +5,14 @@
     </div>
 </template>
 <script>
-    import {connect} from 'dva-vue'
-    export default connect(({index}) => ({index}))({
+    export default {
+      connect: true,
       methods: {
         down () {
           this.dispatch({type: 'index/getUser', payload: 'aa'}).then(() => console.log('done'))
         }
       }
-    })
+    }
 </script>
 <style lang="scss">
  .page {
