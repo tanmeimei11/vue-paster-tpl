@@ -34,12 +34,6 @@ const app = express()
 app.use(webpackHotProxyMiddleware)
 app.use(koaDevMiddleware)
 app.use(koaHotMiddleware)
-// 线上cdn资源
-app.get(/inpromo\/lib/, (req, res) => {
-  let path = (req.originalUrl || req.url)
-  res.sendFile(assetsPath(path.replace('inpromo/lib', 'libs')))
-})
-
 /* E - Express */
 app.listen(port, function (err) {
   if (err) {

@@ -7,7 +7,8 @@ var isProduction = process.env.NODE_ENV === 'production'
 const isFontFile = url => /\.(woff2?|eot|ttf|otf)(\?.*)?$/.test(url)
 export default {
   entry: {
-    'app': [assetsPath('src/entry.js')]
+    'app': [assetsPath('src/entry.js')],
+    'vendor': ['dva-vue', 'core-js/fn/promise', 'whatwg-fetch']
   },
   output: {
     path: assetsPath('dist'),

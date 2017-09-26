@@ -1,3 +1,7 @@
+import 'core-js/fn/promise'
+import 'whatwg-fetch'
+import 'assets/libs/jweixin-1.0.0.js' 
+import 'assets/scss/common.scss'
 import app from './units/InDva'
 {{#if_eq analytics "yes"}}
 // 网页监控sdk
