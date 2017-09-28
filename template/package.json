@@ -27,7 +27,7 @@
     "vue-awesome-swiper": "^2.5.4",
     {{/if_eq}}
     "vue": "^2.4.4",
-    "dva-vue": "^0.0.3"
+    "dva-vue": "^0.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
