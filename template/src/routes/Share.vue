@@ -1,6 +1,6 @@
 <template>
     <div>aaa
-        <dva-link to="/?c=b">home</dva-link>
+        <router-link to="/?c=b">home</router-link>
     </div>
 </template>
 <script>

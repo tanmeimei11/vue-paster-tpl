@@ -1,7 +1,7 @@
 <template>
     <div>
         <div @click="down">aa {{index.nickName}}</div>
-         <dva-link to="share?c=b" replace>share</dva-link>
+         <router-link to="share?c=b" replace>share</router-link>
     </div>
 </template>
 <script>
