@@ -2,11 +2,8 @@ import { shareMap, C_IN, U_IN_WXSDK, U_TRACK, QNTokenUrl, apiCommonParam, apiMap
 import { Share, buildtrack, FetchApi, buildUploadQiniu } from 'common-utils'
 export { awake, app, common, is } from 'common-utils'
 
-export const shareApi = () => {
-  let share = new Share({sdkUrl: U_IN_WXSDK, trackUrl: U_TRACK})
-  share.config = shareMap
-  return share.config
-}
+let share = new Share({sdkUrl: U_IN_WXSDK, trackUrl: U_TRACK})
+export const shareApi = (share.config = shareMap, share) 
 
 export const serverApi = FetchApi(apiCommonParam, apiMap, {
   host: C_IN
