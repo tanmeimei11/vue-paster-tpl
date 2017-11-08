@@ -27,7 +27,7 @@
     "vue-awesome-swiper": "^2.5.4",
     {{/if_eq}}
     "vue": "^2.5.2",
-    "dva-vue": "^0.0.8",
+    "dva-vue": "^0.0.10",
     "core-js": "^2.5.1",
     "whatwg-fetch": "^2.0.3"
   },
